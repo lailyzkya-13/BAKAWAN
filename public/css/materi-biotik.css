@@ -1,0 +1,1286 @@
+/* =========================================
+   DETAIL MATERI BAKAWAN
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #31564d;
+    background: #fffaf4;
+}
+
+
+/* =========================================
+   LAYOUT UTAMA
+========================================= */
+
+.materi-detail {
+    width: 100%;
+    height: calc(100vh - 92px);
+
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+
+    overflow: hidden;
+
+    background: #fffaf4;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar-materi {
+    width: 300px;
+    height: 100%;
+
+    background: #dcecdf;
+
+    border-right: 1px solid #cddfd1;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-content {
+    min-height: 100%;
+
+    padding: 28px 22px 40px;
+}
+
+
+/* =========================================
+   TOMBOL KEMBALI
+========================================= */
+
+.btn-kembali-materi {
+    width: 100%;
+    min-height: 48px;
+
+    margin-bottom: 28px;
+
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    background: #ffffff;
+
+    color: #31564d;
+
+    border: 1px solid #c8dbcd;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-kembali-materi:hover {
+    background: #f7fbf8;
+    color: #174f3f;
+}
+
+.back-arrow {
+    font-size: 19px;
+}
+
+
+/* =========================================
+   JUDUL SIDEBAR
+========================================= */
+
+.sidebar-title {
+    margin-bottom: 27px;
+
+    padding: 0 5px;
+}
+
+.sidebar-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #2d725c;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+}
+
+.sidebar-title h2 {
+    margin: 0;
+
+    color: #174f3f;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================
+   MENU SIDEBAR
+========================================= */
+
+.sidebar-menu {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.menu-group {
+    width: 100%;
+}
+
+
+/* =========================================
+   MENU UTAMA
+========================================= */
+
+.menu-item {
+    width: 100%;
+    min-height: 52px;
+
+    padding: 0 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    background: transparent;
+
+    color: #4f665e;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.55);
+
+    color: #174f3f;
+}
+
+
+/* =========================================
+   MENU AKTIF
+========================================= */
+
+.menu-item.active {
+    background: #ed7e96;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 14px
+        rgba(237, 126, 150, 0.18);
+}
+
+
+/* =========================================
+   PANAH MATERI
+========================================= */
+
+.menu-arrow {
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition: transform 0.25s ease;
+}
+
+.menu-arrow.open {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================
+   SUBMENU MATERI
+========================================= */
+
+.submenu-materi {
+    max-height: 0;
+
+    margin: 0 0 0 18px;
+
+    padding-left: 13px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    border-left: 2px solid transparent;
+
+    transition:
+        max-height 0.3s ease,
+        opacity 0.25s ease,
+        margin-top 0.25s ease,
+        margin-bottom 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* SUBMENU TERBUKA */
+
+.submenu-materi.show {
+    max-height: 430px;
+
+    margin-top: 10px;
+    margin-bottom: 13px;
+
+    opacity: 1;
+
+    border-left-color: #ed9aad;
+}
+
+
+/* =========================================
+   ITEM SUBBAB
+========================================= */
+
+.submenu-item {
+    width: 100%;
+    min-height: 43px;
+
+    padding: 8px 10px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    background: transparent;
+
+    color: #4f665e;
+
+    border: none;
+
+    border-radius: 9px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.submenu-item:hover {
+    background: rgba(255, 255, 255, 0.55);
+
+    color: #174f3f;
+}
+
+
+/* =========================================
+   SUBBAB AKTIF
+========================================= */
+
+.submenu-item.active {
+    background: #f7cbd5;
+
+    color: #c94e69;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   NOMOR SUBBAB
+========================================= */
+
+.submenu-number {
+    width: 27px;
+    height: 27px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    color: #d85d77;
+
+    border: 1px solid #efb9c5;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.submenu-item.active .submenu-number {
+    background: #ed6480;
+
+    color: #ffffff;
+
+    border-color: #ed6480;
+}
+
+
+/* =========================================
+   AREA KONTEN
+========================================= */
+
+.materi-content {
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: #fffaf4;
+
+    scroll-behavior: smooth;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 55px 60px 75px;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.content-section {
+    display: none;
+
+    width: 100%;
+}
+
+.content-section.active {
+    display: block;
+
+    animation: sectionMasuk 0.25s ease;
+}
+
+@keyframes sectionMasuk {
+
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   LABEL BAGIAN
+========================================= */
+
+.materi-label {
+    display: inline-flex;
+
+    margin-bottom: 15px;
+
+    padding: 7px 15px;
+
+    background: #fbe0e6;
+
+    color: #d95672;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   JUDUL KONTEN
+========================================= */
+
+.content-section h1 {
+    max-width: 780px;
+
+    margin: 0 0 18px;
+
+    color: #174f3f;
+
+    font-size: 40px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+.content-section h1 span {
+    color: #ed6480;
+}
+
+.materi-description {
+    max-width: 800px;
+
+    margin: 0 0 31px;
+
+    color: #61756e;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   BOX MATERI
+========================================= */
+
+.materi-box {
+    width: 100%;
+
+    margin-bottom: 22px;
+
+    padding: 26px 27px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e4df;
+
+    border-left: 5px solid #72aa88;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(60, 70, 65, 0.05);
+}
+
+.materi-box h2 {
+    margin: 0 0 9px;
+
+    color: #205a47;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.materi-box p {
+    margin: 0;
+
+    color: #60756d;
+
+    font-size: 16px;
+
+    line-height: 1.85;
+}
+
+
+/* =========================================
+   CONTOH BOX
+========================================= */
+
+.contoh-box {
+    margin-bottom: 22px;
+
+    padding: 21px 23px;
+
+    background: #f8eee9;
+
+    border: 1px solid #eadfd8;
+
+    border-radius: 16px;
+}
+
+.contoh-box strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #245d4a;
+
+    font-size: 16px;
+}
+
+.contoh-box p {
+    margin: 0;
+
+    color: #68756f;
+
+    font-size: 16px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   GRID CONTOH
+========================================= */
+
+.contoh-grid {
+    margin-bottom: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.contoh-card {
+    min-width: 0;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce5df;
+
+    border-top: 4px solid #77ad8c;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(40, 70, 60, 0.04);
+}
+
+.contoh-card strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #245d4a;
+
+    font-size: 17px;
+}
+
+.contoh-card p {
+    margin: 0;
+
+    color: #697c75;
+
+    font-size: 15px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   HUBUNGAN BIOTIK ABIOTIK
+========================================= */
+
+.hubungan-box {
+    margin-bottom: 25px;
+
+    padding: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 18px;
+}
+
+.hubungan-item {
+    min-height: 120px;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3ec;
+
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+.hubungan-item strong {
+    color: #205a47;
+
+    font-size: 16px;
+}
+
+.hubungan-item p {
+    margin: 6px 0 0;
+
+    color: #65776f;
+
+    font-size: 15px;
+}
+
+.hubungan-panah {
+    color: #ed6480;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   RINGKASAN
+========================================= */
+
+.ringkasan-box {
+    margin-bottom: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.ringkasan-item {
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce5df;
+
+    border-left: 4px solid #72aa88;
+
+    border-radius: 15px;
+}
+
+.ringkasan-item strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #205a47;
+
+    font-size: 16px;
+}
+
+.ringkasan-item p {
+    margin: 0;
+
+    color: #697a74;
+
+    font-size: 15px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   LATIHAN
+========================================= */
+
+.latihan-card {
+    max-width: 650px;
+
+    margin: 20px auto 30px;
+
+    padding: 37px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce5df;
+
+    border-top: 5px solid #72aa88;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 24px
+        rgba(60, 70, 65, 0.06);
+}
+
+.latihan-label {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #d95672;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.latihan-card h2 {
+    margin: 0 0 11px;
+
+    color: #205a47;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.latihan-card p {
+    max-width: 500px;
+
+    margin: 0 auto 22px;
+
+    color: #687b74;
+
+    font-size: 16px;
+
+    line-height: 1.75;
+}
+
+.btn-mulai-latihan {
+    min-height: 51px;
+
+    padding: 0 23px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    background: #ed6480;
+
+    color: #ffffff;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-mulai-latihan:hover {
+    background: #d95772;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   NAVIGASI BAWAH
+========================================= */
+
+.navigasi-materi {
+    width: 100%;
+
+    margin-top: 36px;
+
+    padding-top: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-top: 1px solid #e2dfda;
+}
+
+.btn-sebelumnya,
+.btn-selanjutnya {
+    min-height: 50px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 11px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-sebelumnya {
+    background: #ffffff;
+
+    color: #d6536f;
+
+    border: 1.5px solid #efa7b7;
+}
+
+.btn-sebelumnya:hover {
+    background: #fff2f5;
+}
+
+.btn-selanjutnya {
+    background: #ed6480;
+
+    color: #ffffff;
+
+    border: none;
+}
+
+.btn-selanjutnya:hover {
+    background: #d95772;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.sidebar-materi::-webkit-scrollbar,
+.materi-content::-webkit-scrollbar {
+    width: 7px;
+}
+
+.sidebar-materi::-webkit-scrollbar-track,
+.materi-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-materi::-webkit-scrollbar-thumb {
+    background: rgba(49, 86, 77, 0.2);
+
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   LAPTOP KECIL
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .materi-detail {
+        grid-template-columns:
+            275px
+            minmax(0, 1fr);
+    }
+
+    .sidebar-materi {
+        width: 275px;
+    }
+
+    .content-wrapper {
+        padding:
+            45px
+            42px
+            65px;
+    }
+
+    .content-section h1 {
+        font-size: 36px;
+    }
+
+    .materi-description {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    html,
+    body {
+        height: auto;
+
+        overflow-x: hidden;
+    }
+
+    .materi-detail {
+        width: 100%;
+        height: auto;
+
+        min-height: calc(100vh - 78px);
+
+        display: block;
+
+        overflow: visible;
+    }
+
+
+    /* SIDEBAR */
+
+    .sidebar-materi {
+        width: 100%;
+        height: auto;
+
+        overflow: visible;
+
+        border-right: none;
+
+        border-bottom: 1px solid #cddfd1;
+    }
+
+    .sidebar-content {
+        padding:
+            20px
+            25px
+            24px;
+    }
+
+    .btn-kembali-materi {
+        width: auto;
+
+        display: inline-flex;
+
+        margin-bottom: 18px;
+    }
+
+    .sidebar-title {
+        margin-bottom: 18px;
+    }
+
+    .sidebar-menu {
+        max-width: 650px;
+    }
+
+
+    /* CONTENT */
+
+    .materi-content {
+        height: auto;
+
+        overflow: visible;
+    }
+
+    .content-wrapper {
+        max-width: 850px;
+
+        padding:
+            40px
+            30px
+            60px;
+    }
+
+    .content-section h1 {
+        font-size: 34px;
+    }
+
+}
+
+
+/* =========================================
+   HP
+========================================= */
+
+@media (max-width: 767px) {
+
+    .materi-detail {
+        min-height: calc(100vh - 72px);
+    }
+
+
+    /* SIDEBAR */
+
+    .sidebar-content {
+        padding:
+            17px
+            16px
+            21px;
+    }
+
+    .btn-kembali-materi {
+        min-height: 45px;
+
+        font-size: 15px;
+    }
+
+    .sidebar-label {
+        font-size: 12px;
+    }
+
+    .sidebar-title h2 {
+        font-size: 20px;
+    }
+
+    .menu-item {
+        min-height: 50px;
+
+        font-size: 15px;
+    }
+
+    .submenu-item {
+        min-height: 44px;
+
+        font-size: 14px;
+    }
+
+    .submenu-number {
+        width: 27px;
+        height: 27px;
+
+        font-size: 12px;
+    }
+
+
+    /* CONTENT */
+
+    .content-wrapper {
+        padding:
+            32px
+            18px
+            50px;
+    }
+
+    .materi-label {
+        font-size: 13px;
+    }
+
+    .content-section h1 {
+        font-size: 30px;
+
+        line-height: 1.3;
+    }
+
+    .materi-description {
+        margin-bottom: 24px;
+
+        font-size: 16px;
+
+        line-height: 1.8;
+    }
+
+
+    /* BOX */
+
+    .materi-box {
+        padding: 21px;
+    }
+
+    .materi-box h2 {
+        font-size: 21px;
+    }
+
+    .materi-box p {
+        font-size: 15px;
+    }
+
+    .contoh-box {
+        padding: 20px;
+    }
+
+    .contoh-box strong {
+        font-size: 16px;
+    }
+
+    .contoh-box p {
+        font-size: 15px;
+    }
+
+
+    /* GRID */
+
+    .contoh-grid,
+    .ringkasan-box {
+        grid-template-columns: 1fr;
+    }
+
+    .contoh-card strong,
+    .ringkasan-item strong {
+        font-size: 16px;
+    }
+
+    .contoh-card p,
+    .ringkasan-item p {
+        font-size: 15px;
+    }
+
+
+    /* HUBUNGAN */
+
+    .hubungan-box {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .hubungan-panah {
+        transform: rotate(90deg);
+
+        text-align: center;
+    }
+
+
+    /* LATIHAN */
+
+    .latihan-card {
+        padding:
+            28px
+            20px;
+    }
+
+    .latihan-card h2 {
+        font-size: 22px;
+    }
+
+    .latihan-card p {
+        font-size: 15px;
+    }
+
+
+    /* NAVIGASI */
+
+    .navigasi-materi {
+        gap: 10px;
+    }
+
+    .btn-sebelumnya,
+    .btn-selanjutnya {
+        min-height: 49px;
+
+        padding:
+            0
+            16px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   HP KECIL
+========================================= */
+
+@media (max-width: 480px) {
+
+    .content-wrapper {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .content-section h1 {
+        font-size: 28px;
+    }
+
+    .materi-description {
+        font-size: 15px;
+    }
+
+    .contoh-box {
+        padding: 18px;
+    }
+
+    .contoh-box p {
+        font-size: 15px;
+    }
+
+    .navigasi-materi {
+        flex-wrap: wrap;
+    }
+
+    .btn-sebelumnya,
+    .btn-selanjutnya {
+        flex: 1;
+
+        min-width: 130px;
+    }
+
+}
+
+
+/* =========================================
+   HP SANGAT KECIL
+========================================= */
+
+@media (max-width: 360px) {
+
+    .sidebar-content {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .content-section h1 {
+        font-size: 26px;
+    }
+
+    .materi-description,
+    .materi-box p,
+    .contoh-box p,
+    .contoh-card p,
+    .ringkasan-item p,
+    .latihan-card p {
+        font-size: 15px;
+    }
+
+}

@@ -1,0 +1,578 @@
+/* =========================================
+   HALAMAN MATERI - BAKAWAN
+   public/css/materi.css
+========================================= */
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: 'Poppins', sans-serif;
+
+    background: #fffaf4;
+    color: #31564d;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   HALAMAN MATERI
+========================================= */
+
+.materi-page {
+    width: 100%;
+
+    min-height: calc(100vh - 92px);
+
+    padding: 58px 20px 75px;
+
+    /* SAMA DENGAN BACKGROUND BERANDA */
+    background: #fffaf4;
+}
+
+
+/* =========================================
+   JUDUL HALAMAN
+========================================= */
+
+.materi-heading {
+    margin: 0 auto 55px;
+
+    text-align: center;
+}
+
+.materi-heading h1 {
+    margin: 0 0 10px;
+
+    color: #175342;
+
+    font-size: 38px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+.materi-heading h1 span {
+    color: #ed6480;
+}
+
+.materi-heading p {
+    margin: 0;
+
+    color: #687c75;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   ROW CARD
+========================================= */
+
+.materi-row {
+    row-gap: 28px;
+}
+
+
+/* =========================================
+   CARD MATERI
+========================================= */
+
+.materi-card {
+    width: 100%;
+    min-height: 390px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #dceee2;
+
+    border-radius: 20px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.materi-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(39, 90, 72, 0.10);
+}
+
+
+/* =========================================
+   GAMBAR CARD
+========================================= */
+
+.materi-card-image {
+    width: 100%;
+    height: 200px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+}
+
+.materi-card-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* =========================================
+   CONTENT CARD
+========================================= */
+
+.materi-card-content {
+    width: 100%;
+
+    flex: 1;
+
+    padding: 22px 38px 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+/* =========================================
+   NOMOR
+========================================= */
+
+.nomor {
+    width: 38px;
+    height: 38px;
+
+    margin-bottom: 12px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+.nomor-hijau {
+    background: #28745b;
+}
+
+.nomor-pink {
+    background: #ed6480;
+}
+
+
+/* =========================================
+   JUDUL CARD
+========================================= */
+
+.materi-card-content h2 {
+    margin: 0 0 9px;
+
+    color: #17604a;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   DESKRIPSI CARD
+========================================= */
+
+.materi-card-content p {
+    margin: 0 0 18px;
+
+    color: #61776f;
+
+    font-size: 15px;
+    font-weight: 400;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================
+   AREA BUTTON
+========================================= */
+
+.button-area {
+    width: 100%;
+
+    margin-top: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================================
+   BUTTON PELAJARI
+========================================= */
+
+.btn-pelajari {
+    min-width: 155px;
+    min-height: 45px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ed5f7d;
+
+    color: #ffffff;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-pelajari:hover {
+    color: #ffffff;
+
+    background: #dc526e;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 15px
+        rgba(237, 95, 125, 0.18);
+}
+
+
+/* =========================================
+   LAPTOP KECIL
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .materi-page {
+        padding: 55px 25px 70px;
+    }
+
+    .materi-heading {
+        margin-bottom: 48px;
+    }
+
+    .materi-heading h1 {
+        font-size: 36px;
+    }
+
+    .materi-card {
+        min-height: 385px;
+    }
+
+    .materi-card-image {
+        height: 195px;
+    }
+
+    .materi-card-content {
+        padding: 22px 30px 25px;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .materi-page {
+        min-height: calc(100vh - 78px);
+
+        padding: 50px 20px 65px;
+    }
+
+    .materi-heading {
+        margin-bottom: 42px;
+    }
+
+    .materi-heading h1 {
+        font-size: 34px;
+    }
+
+    .materi-heading p {
+        font-size: 16px;
+    }
+
+    .materi-card {
+        min-height: 400px;
+    }
+
+    .materi-card-image {
+        height: 190px;
+    }
+
+    .materi-card-content {
+        padding: 22px 24px 25px;
+    }
+
+    .materi-card-content h2 {
+        font-size: 20px;
+    }
+
+    .materi-card-content p {
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767.98px) {
+
+    .materi-page {
+        min-height: calc(100vh - 72px);
+
+        padding: 40px 18px 55px;
+    }
+
+
+    /* JUDUL */
+
+    .materi-heading {
+        margin-bottom: 32px;
+    }
+
+    .materi-heading h1 {
+        font-size: 30px;
+
+        line-height: 1.3;
+    }
+
+    .materi-heading p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    /* CARD */
+
+    .materi-row {
+        row-gap: 22px;
+    }
+
+    .materi-card {
+        width: 100%;
+        max-width: 500px;
+
+        min-height: 0;
+
+        margin: 0 auto;
+
+        border-radius: 18px;
+    }
+
+    .materi-card-image {
+        height: 220px;
+    }
+
+    .materi-card-content {
+        padding: 22px 24px 25px;
+    }
+
+
+    /* NOMOR */
+
+    .nomor {
+        width: 38px;
+        height: 38px;
+
+        margin-bottom: 12px;
+
+        font-size: 15px;
+    }
+
+
+    /* TEKS */
+
+    .materi-card-content h2 {
+        font-size: 21px;
+
+        line-height: 1.4;
+    }
+
+    .materi-card-content p {
+        margin-bottom: 20px;
+
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    /* BUTTON */
+
+    .btn-pelajari {
+        min-width: 160px;
+        min-height: 47px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   HP KECIL
+========================================= */
+
+@media (max-width: 575.98px) {
+
+    .materi-page {
+        padding: 35px 16px 50px;
+    }
+
+    .materi-heading {
+        margin-bottom: 28px;
+    }
+
+    .materi-heading h1 {
+        font-size: 28px;
+    }
+
+    .materi-heading p {
+        font-size: 15px;
+    }
+
+
+    /* CARD */
+
+    .materi-card {
+        max-width: 420px;
+    }
+
+    .materi-card-image {
+        height: 190px;
+    }
+
+    .materi-card-content {
+        padding: 21px 20px 23px;
+    }
+
+    .materi-card-content h2 {
+        font-size: 20px;
+    }
+
+    .materi-card-content p {
+        font-size: 15px;
+    }
+
+    .btn-pelajari {
+        min-width: 155px;
+        min-height: 45px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   HP SANGAT KECIL
+========================================= */
+
+@media (max-width: 380px) {
+
+    .materi-page {
+        padding: 32px 13px 45px;
+    }
+
+    .materi-heading h1 {
+        font-size: 26px;
+    }
+
+    .materi-heading p {
+        font-size: 15px;
+    }
+
+    .materi-card-image {
+        height: 175px;
+    }
+
+    .materi-card-content {
+        padding: 20px 18px 22px;
+    }
+
+    .materi-card-content h2 {
+        font-size: 19px;
+    }
+
+    .materi-card-content p {
+        font-size: 15px;
+    }
+
+    .nomor {
+        width: 36px;
+        height: 36px;
+
+        font-size: 14px;
+    }
+
+    .btn-pelajari {
+        width: 100%;
+
+        min-height: 46px;
+    }
+
+}

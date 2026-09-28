@@ -1,0 +1,764 @@
+/* =========================================
+   HALAMAN AKTIVITAS - BAKAWAN
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #31564d;
+
+    /* SAMA DENGAN BERANDA & MATERI */
+    background: #fffaf4;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   HALAMAN UTAMA
+========================================= */
+
+.aktivitas-page {
+    position: relative;
+
+    width: 100%;
+    min-height: calc(100vh - 92px);
+
+    padding: 55px 30px 70px;
+
+    overflow: hidden;
+
+    /* BACKGROUND CREAM */
+    background: #fffaf4;
+}
+
+
+/* =========================================
+   HILANGKAN DEKORASI BACKGROUND
+========================================= */
+
+.dekorasi,
+.dekorasi-kiri,
+.dekorasi-kanan {
+    display: none !important;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container-aktivitas {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   JUDUL
+========================================= */
+
+.aktivitas-heading {
+    max-width: 760px;
+
+    margin: 0 auto 42px;
+
+    text-align: center;
+}
+
+.label-halaman {
+    display: inline-block;
+
+    margin-bottom: 12px;
+    padding: 8px 18px;
+
+    background: #fce7ec;
+
+    color: #e95d79;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.aktivitas-heading h1 {
+    margin: 0;
+
+    color: #175342;
+
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.aktivitas-heading h1 span {
+    color: #ed6480;
+}
+
+.aktivitas-heading p {
+    max-width: 650px;
+
+    margin: 11px auto 0;
+
+    color: #667b73;
+
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.aktivitas-grid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.aktivitas-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 470px;
+
+    padding: 30px 27px 27px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: #ffffff;
+
+    border-radius: 23px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(34, 80, 64, 0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.aktivitas-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 13px 30px rgba(34, 80, 64, 0.12);
+}
+
+
+/* =========================================
+   WARNA CARD
+========================================= */
+
+.card-hijau {
+    border: 1px solid #dcece2;
+    border-top: 5px solid #68ad89;
+}
+
+.card-biru {
+    border: 1px solid #dcebf0;
+    border-top: 5px solid #69aec5;
+}
+
+.card-pink {
+    border: 1px solid #f2dfe4;
+    border-top: 5px solid #ed7891;
+}
+
+
+/* =========================================
+   NOMOR CARD
+========================================= */
+
+.nomor-card {
+    position: absolute;
+
+    top: 22px;
+    right: 23px;
+
+    color: #d5dfdb;
+
+    font-size: 26px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.icon-card {
+    width: 66px;
+    height: 66px;
+
+    margin-bottom: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 18px;
+
+    font-size: 31px;
+}
+
+.icon-hijau {
+    background: #e4f4e9;
+}
+
+.icon-biru {
+    background: #e5f3f7;
+}
+
+.icon-pink {
+    background: #fce9ed;
+}
+
+
+/* =========================================
+   JENIS AKTIVITAS
+========================================= */
+
+.jenis-aktivitas {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: #728980;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+/* =========================================
+   JUDUL CARD
+========================================= */
+
+.aktivitas-card h2 {
+    margin: 0 0 12px;
+
+    color: #184f40;
+
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   DESKRIPSI CARD
+========================================= */
+
+.aktivitas-card p {
+    margin: 0;
+
+    color: #647a72;
+
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   CONTOH MINI
+========================================= */
+
+.contoh-mini {
+    width: 100%;
+
+    margin: 23px 0;
+
+    padding: 14px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    background: #f8faf8;
+
+    border-radius: 13px;
+
+    font-size: 22px;
+}
+
+.contoh-mini span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.btn-aktivitas {
+    width: 100%;
+    min-height: 50px;
+
+    margin-top: auto;
+    padding: 0 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border: none;
+    border-radius: 12px;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.btn-aktivitas span {
+    font-size: 19px;
+}
+
+.btn-aktivitas:hover {
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    opacity: 0.92;
+}
+
+.btn-hijau {
+    background: #29755c;
+}
+
+.btn-biru {
+    background: #4d9eb8;
+}
+
+.btn-pink {
+    background: #ed6480;
+}
+
+
+/* =========================================
+   PETUNJUK
+========================================= */
+
+.petunjuk-section {
+    max-width: 760px;
+
+    margin: 35px auto 0;
+    padding: 19px 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    background: #fff8e7;
+
+    border: 1px solid #f0e0b5;
+    border-radius: 16px;
+}
+
+.petunjuk-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    border-radius: 13px;
+
+    font-size: 23px;
+}
+
+.petunjuk-section strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #6d603b;
+
+    font-size: 15px;
+}
+
+.petunjuk-section p {
+    margin: 0;
+
+    color: #7b7154;
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-bakawan {
+    border: none;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.modal-bakawan .modal-body {
+    padding: 35px;
+}
+
+.modal-icon {
+    margin-bottom: 10px;
+
+    font-size: 42px;
+}
+
+.modal-bakawan h3 {
+    margin: 0 0 8px;
+
+    color: #18513f;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.modal-bakawan p {
+    margin: 0 0 20px;
+
+    color: #687b74;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.btn-modal {
+    min-width: 115px;
+    height: 45px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #ed6480;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   LAPTOP KECIL
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .aktivitas-page {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .aktivitas-grid {
+        gap: 20px;
+    }
+
+    .aktivitas-card {
+        min-height: 465px;
+
+        padding: 27px 23px 24px;
+    }
+
+    .aktivitas-card h2 {
+        font-size: 21px;
+    }
+
+    .aktivitas-card p {
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .aktivitas-page {
+        min-height: calc(100vh - 78px);
+
+        padding: 48px 28px 60px;
+    }
+
+    .aktivitas-heading {
+        margin-bottom: 35px;
+    }
+
+    .aktivitas-heading h1 {
+        font-size: 34px;
+    }
+
+    .aktivitas-heading p {
+        font-size: 16px;
+    }
+
+    .aktivitas-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+    .aktivitas-card {
+        min-height: 450px;
+
+        padding: 27px;
+    }
+}
+
+
+/* =========================================
+   HP
+========================================= */
+
+@media (max-width: 767px) {
+
+    .aktivitas-page {
+        min-height: calc(100vh - 72px);
+
+        padding: 40px 20px 55px;
+    }
+
+
+    /* HEADING */
+
+    .aktivitas-heading {
+        margin-bottom: 30px;
+    }
+
+    .label-halaman {
+        padding: 7px 15px;
+
+        font-size: 13px;
+    }
+
+    .aktivitas-heading h1 {
+        font-size: 30px;
+    }
+
+    .aktivitas-heading p {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+
+    /* SATU CARD PER BARIS */
+
+    .aktivitas-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .aktivitas-card {
+        width: 100%;
+
+        min-height: 420px;
+
+        padding: 25px;
+
+        border-radius: 20px;
+    }
+
+    .nomor-card {
+        top: 22px;
+        right: 22px;
+
+        font-size: 24px;
+    }
+
+    .icon-card {
+        width: 62px;
+        height: 62px;
+
+        margin-bottom: 17px;
+
+        font-size: 29px;
+    }
+
+    .jenis-aktivitas {
+        font-size: 12px;
+    }
+
+    .aktivitas-card h2 {
+        font-size: 22px;
+    }
+
+    .aktivitas-card p {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .contoh-mini {
+        margin: 20px 0;
+
+        min-height: 57px;
+
+        font-size: 21px;
+    }
+
+    .btn-aktivitas {
+        min-height: 50px;
+
+        font-size: 14px;
+    }
+
+
+    /* PETUNJUK */
+
+    .petunjuk-section {
+        margin-top: 25px;
+
+        padding: 18px;
+
+        align-items: flex-start;
+    }
+
+    .petunjuk-section strong {
+        font-size: 15px;
+    }
+
+    .petunjuk-section p {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================
+   HP KECIL
+========================================= */
+
+@media (max-width: 480px) {
+
+    .aktivitas-page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .aktivitas-heading h1 {
+        font-size: 28px;
+    }
+
+    .aktivitas-heading p {
+        font-size: 15px;
+    }
+
+    .aktivitas-card {
+        min-height: 415px;
+
+        padding: 22px;
+    }
+
+    .aktivitas-card h2 {
+        font-size: 21px;
+    }
+
+    .aktivitas-card p {
+        font-size: 15px;
+    }
+
+    .contoh-mini {
+        gap: 10px;
+    }
+}
+
+
+/* =========================================
+   HP SANGAT KECIL
+========================================= */
+
+@media (max-width: 360px) {
+
+    .aktivitas-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .aktivitas-heading h1 {
+        font-size: 26px;
+    }
+
+    .aktivitas-heading p,
+    .aktivitas-card p {
+        font-size: 15px;
+    }
+
+    .aktivitas-card {
+        min-height: 410px;
+
+        padding: 20px;
+    }
+
+    .btn-aktivitas {
+        width: 100%;
+    }
+}

@@ -1,0 +1,931 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Poppins', sans-serif;
+
+    color: #174f3f;
+    background: #fffaf4;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    position: relative;
+
+    width: 100%;
+    min-height: 385px;
+
+    display: flex;
+    align-items: center;
+
+    background-image: url('../images/background-beranda.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   HERO OVERLAY
+========================================= */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.80) 0%,
+            rgba(255, 255, 255, 0.58) 20%,
+            rgba(255, 255, 255, 0.18) 40%,
+            rgba(255, 255, 255, 0) 60%
+        );
+}
+
+
+/* =========================================
+   HERO CONTAINER
+========================================= */
+
+.hero-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    min-height: 385px;
+
+    display: flex;
+    align-items: center;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.hero-content {
+    width: 100%;
+    max-width: 560px;
+
+    margin-left: 35px;
+}
+
+.hero-content h1 {
+    margin: 0;
+
+    color: #174f3f;
+
+    font-size: 41px;
+    font-weight: 800;
+
+    line-height: 1.27;
+
+    letter-spacing: -0.8px;
+}
+
+.hero-content h1 span {
+    display: block;
+
+    color: #ed5f7d;
+}
+
+.hero-content p {
+    margin: 26px 0 27px;
+
+    color: #527168;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   BUTTON MULAI BELAJAR
+========================================= */
+
+.btn-mulai {
+    min-width: 182px;
+    min-height: 56px;
+
+    padding: 0 19px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    background: #ed5f7d;
+
+    color: #ffffff;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 18px
+        rgba(237, 95, 125, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-mulai:hover {
+    color: #ffffff;
+
+    background: #dd526f;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px
+        rgba(237, 95, 125, 0.25);
+}
+
+.panah {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+/* =========================================
+   MATERI SECTION
+========================================= */
+
+.materi-section {
+    position: relative;
+
+    width: 100%;
+
+    padding: 38px 0 55px;
+
+    background: #fffaf4;
+
+    flex: 1;
+}
+
+.materi-container {
+    width: 100%;
+}
+
+
+/* =========================================
+   JUDUL SECTION
+========================================= */
+
+.judul-section {
+    margin-bottom: 33px;
+
+    text-align: center;
+}
+
+.judul-section h2 {
+    margin: 0 0 10px;
+
+    color: #174f3f;
+
+    font-size: 31px;
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+.judul-section p {
+    margin: 0;
+
+    color: #71827d;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   ROW MATERI
+========================================= */
+
+.materi-row {
+    align-items: stretch;
+}
+
+
+/* =========================================
+   CARD MATERI
+========================================= */
+
+.materi-card {
+    width: 100%;
+    min-height: 230px;
+
+    display: grid;
+
+    grid-template-columns: 46% 54%;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.materi-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(34, 73, 59, 0.10);
+}
+
+
+/* =========================================
+   WARNA CARD
+========================================= */
+
+.card-hijau {
+    background: #dceee2;
+}
+
+.card-pink {
+    background: #f7d9df;
+}
+
+
+/* =========================================
+   GAMBAR CARD
+========================================= */
+
+.materi-image {
+    width: 100%;
+    height: 100%;
+
+    min-height: 230px;
+
+    overflow: hidden;
+}
+
+.materi-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* =========================================
+   CONTENT CARD
+========================================= */
+
+.materi-content {
+    min-width: 0;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: center;
+}
+
+
+/* =========================================
+   NOMOR MATERI
+========================================= */
+
+.nomor {
+    width: 32px;
+    height: 29px;
+
+    margin-bottom: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nomor-hijau {
+    background: #28735b;
+}
+
+.nomor-pink {
+    background: #ed5f7d;
+}
+
+
+/* =========================================
+   JUDUL CARD
+========================================= */
+
+.materi-content h3 {
+    margin: 0 0 9px;
+
+    color: #17604a;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   PARAGRAF CARD
+========================================= */
+
+.materi-content p {
+    margin: 0 0 15px;
+
+    color: #62776f;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================
+   BUTTON PELAJARI MATERI
+========================================= */
+
+.btn-materi {
+    min-width: 140px;
+    min-height: 39px;
+
+    margin-top: auto;
+
+    padding: 0 16px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ed5f7d;
+
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-materi:hover {
+    color: #ffffff;
+
+    background: #db526f;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding: 20px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* FOOTER PUTIH */
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+}
+
+.footer .container {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer p {
+    width: 100%;
+
+    margin: 0;
+
+    color: #315f53;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   LAPTOP KECIL
+   MAX 1200PX
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .hero {
+        min-height: 370px;
+    }
+
+    .hero-container {
+        min-height: 370px;
+    }
+
+    .hero-content {
+        max-width: 500px;
+
+        margin-left: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 37px;
+    }
+
+    .materi-card {
+        grid-template-columns: 43% 57%;
+    }
+
+    .materi-content {
+        padding: 20px 18px;
+    }
+
+    .materi-content h3 {
+        font-size: 17px;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+   MAX 991PX
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .hero {
+        min-height: 430px;
+
+        background-position: 58% center;
+    }
+
+    .hero-container {
+        min-height: 430px;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.90) 0%,
+                rgba(255, 255, 255, 0.68) 42%,
+                rgba(255, 255, 255, 0.10) 78%
+            );
+    }
+
+    .hero-content {
+        max-width: 470px;
+
+        margin-left: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 37px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+
+    /* MATERI */
+
+    .materi-section {
+        padding: 42px 0 50px;
+    }
+
+    .judul-section h2 {
+        font-size: 29px;
+    }
+
+    .judul-section p {
+        font-size: 15px;
+    }
+
+    .materi-card {
+        min-height: 100%;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .materi-image {
+        width: 100%;
+        height: 190px;
+        min-height: 190px;
+    }
+
+    .materi-content {
+        flex: 1;
+
+        padding: 22px 20px;
+    }
+
+    .materi-content h3 {
+        font-size: 19px;
+    }
+
+    .materi-content p {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   HP / MOBILE
+   MAX 767PX
+========================================= */
+
+@media (max-width: 767.98px) {
+
+    .hero {
+        min-height: 500px;
+
+        align-items: flex-start;
+
+        background-position: 57% center;
+    }
+
+    .hero-container {
+        min-height: 500px;
+
+        align-items: flex-start;
+
+        padding-top: 58px;
+        padding-bottom: 40px;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.94) 0%,
+                rgba(255, 255, 255, 0.82) 55%,
+                rgba(255, 255, 255, 0.18) 100%
+            );
+    }
+
+    .hero-content {
+        max-width: 390px;
+
+        margin-left: 0;
+    }
+
+    .hero-content h1 {
+        font-size: 35px;
+
+        line-height: 1.25;
+    }
+
+    .hero-content p {
+        margin: 22px 0 25px;
+
+        font-size: 16px;
+
+        line-height: 1.75;
+    }
+
+    .btn-mulai {
+        min-width: 180px;
+        min-height: 52px;
+
+        font-size: 14px;
+    }
+
+
+    /* MATERI */
+
+    .materi-section {
+        padding: 38px 0 45px;
+    }
+
+    .judul-section {
+        margin-bottom: 28px;
+    }
+
+    .judul-section h2 {
+        font-size: 28px;
+    }
+
+    .judul-section p {
+        max-width: 500px;
+
+        margin: 0 auto;
+
+        padding: 0 15px;
+
+        font-size: 15px;
+    }
+
+    .materi-card {
+        max-width: 520px;
+
+        margin: 0 auto;
+
+        display: grid;
+
+        grid-template-columns: 42% 58%;
+
+        min-height: 235px;
+    }
+
+    .materi-image {
+        height: 100%;
+        min-height: 235px;
+    }
+
+    .materi-content {
+        padding: 20px 18px;
+    }
+
+    .materi-content h3 {
+        font-size: 18px;
+    }
+
+    .materi-content p {
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+    .btn-materi {
+        min-height: 42px;
+
+        font-size: 13px;
+    }
+
+    .footer {
+        padding: 18px 15px;
+    }
+
+}
+
+
+/* =========================================
+   HP KECIL
+   MAX 575PX
+========================================= */
+
+@media (max-width: 575.98px) {
+
+    .hero {
+        min-height: 470px;
+
+        background-position: 55% center;
+    }
+
+    .hero-container {
+        min-height: 470px;
+
+        padding:
+            48px
+            20px
+            35px;
+    }
+
+    .hero-content {
+        max-width: 330px;
+    }
+
+    .hero-content h1 {
+        font-size: 31px;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+    }
+
+    .btn-mulai {
+        min-width: 170px;
+        min-height: 50px;
+    }
+
+
+    /* JUDUL */
+
+    .judul-section h2 {
+        font-size: 26px;
+
+        line-height: 1.35;
+    }
+
+    .judul-section p {
+        padding: 0 10px;
+
+        font-size: 15px;
+    }
+
+
+    /* CARD */
+
+    .materi-card {
+        width: 100%;
+        max-width: 400px;
+
+        display: flex;
+        flex-direction: column;
+
+        border-radius: 18px;
+    }
+
+    .materi-image {
+        width: 100%;
+        height: 190px;
+        min-height: 190px;
+    }
+
+    .materi-content {
+        width: 100%;
+
+        padding:
+            22px
+            20px
+            24px;
+    }
+
+    .nomor {
+        width: 32px;
+        height: 30px;
+    }
+
+    .materi-content h3 {
+        font-size: 20px;
+    }
+
+    .materi-content p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+    .btn-materi {
+        min-width: 145px;
+        min-height: 44px;
+
+        margin-top: 4px;
+
+        font-size: 13px;
+    }
+
+
+    /* FOOTER */
+
+    .footer {
+        width: 100%;
+
+        padding: 18px 15px;
+
+        background: #ffffff;
+    }
+
+    .footer p {
+        font-size: 13px;
+
+        text-align: center;
+    }
+
+}
+
+
+/* =========================================
+   HP SANGAT KECIL
+   MAX 380PX
+========================================= */
+
+@media (max-width: 380px) {
+
+    .hero {
+        min-height: 450px;
+    }
+
+    .hero-container {
+        min-height: 450px;
+
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero-content {
+        max-width: 300px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+    }
+
+    .judul-section h2 {
+        font-size: 24px;
+    }
+
+    .judul-section p {
+        font-size: 15px;
+    }
+
+    .materi-content h3 {
+        font-size: 19px;
+    }
+
+    .materi-content p {
+        font-size: 15px;
+    }
+
+    .footer {
+        background: #ffffff;
+    }
+
+    .footer p {
+        font-size: 12px;
+    }
+
+}
