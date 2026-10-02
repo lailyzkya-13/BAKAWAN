@@ -101,9 +101,10 @@ body {
 
 .hero-content {
     width: 100%;
-    max-width: 560px;
+    max-width: 600px;
 
-    margin-left: 35px;
+    /* DIGESER SEDIKIT KE KANAN */
+    margin-left: 70px;
 }
 
 .hero-content h1 {
@@ -111,10 +112,11 @@ body {
 
     color: #174f3f;
 
-    font-size: 41px;
+    /* DIPERBESAR SEDIKIT */
+    font-size: 45px;
     font-weight: 800;
 
-    line-height: 1.27;
+    line-height: 1.25;
 
     letter-spacing: -0.8px;
 }
@@ -126,11 +128,12 @@ body {
 }
 
 .hero-content p {
-    margin: 26px 0 27px;
+    margin: 27px 0 29px;
 
     color: #527168;
 
-    font-size: 16px;
+    /* DIPERBESAR SEDIKIT */
+    font-size: 17px;
     font-weight: 400;
 
     line-height: 1.8;
@@ -142,10 +145,10 @@ body {
 ========================================= */
 
 .btn-mulai {
-    min-width: 182px;
-    min-height: 56px;
+    min-width: 192px;
+    min-height: 58px;
 
-    padding: 0 19px;
+    padding: 0 20px;
 
     display: inline-flex;
     align-items: center;
@@ -159,7 +162,7 @@ body {
 
     border-radius: 12px;
 
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
 
     text-decoration: none;
@@ -187,7 +190,7 @@ body {
 }
 
 .panah {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 400;
 }
 
@@ -458,7 +461,6 @@ body {
     align-items: center;
     justify-content: center;
 
-    /* FOOTER PUTIH */
     background: #ffffff;
 
     border-top: 1px solid #eeeeee;
@@ -508,13 +510,18 @@ body {
     }
 
     .hero-content {
-        max-width: 500px;
+        max-width: 540px;
 
-        margin-left: 20px;
+        /* TETAP AGAK KE KANAN */
+        margin-left: 50px;
     }
 
     .hero-content h1 {
-        font-size: 37px;
+        font-size: 42px;
+    }
+
+    .hero-content p {
+        font-size: 17px;
     }
 
     .materi-card {
@@ -528,7 +535,6 @@ body {
     .materi-content h3 {
         font-size: 17px;
     }
-
 }
 
 
@@ -560,13 +566,13 @@ body {
     }
 
     .hero-content {
-        max-width: 470px;
+        max-width: 490px;
 
-        margin-left: 10px;
+        margin-left: 25px;
     }
 
     .hero-content h1 {
-        font-size: 37px;
+        font-size: 40px;
     }
 
     .hero-content p {
@@ -614,7 +620,6 @@ body {
     .materi-content p {
         font-size: 14px;
     }
-
 }
 
 
@@ -653,13 +658,13 @@ body {
     }
 
     .hero-content {
-        max-width: 390px;
+        max-width: 410px;
 
-        margin-left: 0;
+        margin-left: 10px;
     }
 
     .hero-content h1 {
-        font-size: 35px;
+        font-size: 37px;
 
         line-height: 1.25;
     }
@@ -673,8 +678,8 @@ body {
     }
 
     .btn-mulai {
-        min-width: 180px;
-        min-height: 52px;
+        min-width: 185px;
+        min-height: 53px;
 
         font-size: 14px;
     }
@@ -744,7 +749,6 @@ body {
     .footer {
         padding: 18px 15px;
     }
-
 }
 
 
@@ -771,11 +775,13 @@ body {
     }
 
     .hero-content {
-        max-width: 330px;
+        max-width: 340px;
+
+        margin-left: 0;
     }
 
     .hero-content h1 {
-        font-size: 31px;
+        font-size: 33px;
     }
 
     .hero-content p {
@@ -783,8 +789,8 @@ body {
     }
 
     .btn-mulai {
-        min-width: 170px;
-        min-height: 50px;
+        min-width: 175px;
+        min-height: 51px;
     }
 
 
@@ -870,7 +876,6 @@ body {
 
         text-align: center;
     }
-
 }
 
 
@@ -893,11 +898,11 @@ body {
     }
 
     .hero-content {
-        max-width: 300px;
+        max-width: 310px;
     }
 
     .hero-content h1 {
-        font-size: 28px;
+        font-size: 30px;
     }
 
     .hero-content p {
@@ -927,5 +932,4 @@ body {
     .footer p {
         font-size: 12px;
     }
-
 }

@@ -135,7 +135,7 @@
 
                     <p>
                         Cocokkan makhluk hidup dengan komponen
-                        lingkungan yang dibutuhkannya.
+                        lingkungan yang memiliki hubungan dengannya.
                     </p>
 
                     <div class="contoh-mini">
@@ -145,18 +145,13 @@
                         <span>✓</span>
                     </div>
 
-                    <!--
-                        Route Aktivitas 2 belum dibuat.
-                        Untuk sementara tombol belum berpindah halaman.
-                    -->
-                    <button
-                        type="button"
+                    <a
+                        href="{{ route('aktivitas.dua') }}"
                         class="btn-aktivitas btn-biru"
-                        onclick="tampilkanPesan('Aktivitas 2')"
                     >
                         Mulai Aktivitas
                         <span>→</span>
-                    </button>
+                    </a>
 
                 </article>
 
@@ -195,9 +190,6 @@
                         <span>🌊</span>
                     </div>
 
-                    <!--
-                        Route game belum dibuat.
-                    -->
                     <button
                         type="button"
                         class="btn-aktivitas btn-pink"
@@ -240,7 +232,9 @@
     </main>
 
 
-    <!-- MODAL SEDERHANA -->
+    <!-- =====================================
+         MODAL AKTIVITAS BELUM TERSEDIA
+    ====================================== -->
     <div
         class="modal fade"
         id="modalBelumTersedia"
@@ -289,23 +283,19 @@
 
 
     <script>
-
         function tampilkanPesan(namaAktivitas) {
 
             document.getElementById('modalJudul')
                 .textContent = namaAktivitas;
 
-            const modal =
-                new bootstrap.Modal(
-                    document.getElementById(
-                        'modalBelumTersedia'
-                    )
-                );
+            const modal = new bootstrap.Modal(
+                document.getElementById(
+                    'modalBelumTersedia'
+                )
+            );
 
             modal.show();
-
         }
-
     </script>
 
 </body>
