@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class KelolaMateriGuruController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('materi-guru');
+    }
 }

@@ -22,7 +22,7 @@
             <div class="materi-card">
 
                 <div class="materi-image">
-                    <img src="{{ asset('images/materi/ekosistem.jpeg') }}" alt="Ekosistem">
+                    <img src="{{ asset('images/ekosistem.jpeg') }}" alt="Ekosistem">
                 </div>
 
                 <div class="materi-content">
@@ -64,7 +64,7 @@
             <div class="materi-card">
 
                 <div class="materi-image">
-                    <img src="{{ asset('images/materi/interaksi.jpg') }}" alt="Interaksi Ekosistem">
+                    <img src="{{ asset('images/interaksi.jpg') }}" alt="Interaksi Ekosistem">
                 </div>
 
                 <div class="materi-content">
@@ -106,7 +106,7 @@
             <div class="materi-card">
 
                 <div class="materi-image">
-                    <img src="{{ asset('images/materi/rantaimakanan.jpg') }}" alt="Rantai Makanan">
+                    <img src="{{ asset('images/rantaimakanan.jpg') }}" alt="Rantai Makanan">
                 </div>
 
                 <div class="materi-content">
