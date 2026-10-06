@@ -200,7 +200,7 @@
     <!-- header -->
     <div class="header">
         <div class="header-logo">
-            <img src="{{ asset('images/Logo.png') }}" alt="Logo BAKAWAN">
+            <img src="{{ asset('images/logo-bakawan.png') }}" alt="Logo BAKAWAN">
         </div>
 
         <div class="header-menu">
@@ -235,19 +235,6 @@
                 </a>
             </div>
 
-            <!-- Menu Kelas -->
-            <div class="menu-card {{ request()->is('kelas') ? 'active' : '' }}">
-                <a href="/kelas">
-                    Kelas
-                </a>
-            </div>
-
-            <!-- Menu Kelompok -->
-            <div class="menu-card {{ request()->is('kelompok') ? 'active' : '' }}">
-                <a href="/kelompok">
-                    Kelompok
-                </a>
-            </div>
 
             <!-- Menu Materi -->
             <div class="menu-card {{ request()->is('materi') ? 'active' : '' }}">
