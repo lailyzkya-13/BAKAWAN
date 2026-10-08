@@ -48,18 +48,6 @@
                         </a>
                     </li>
 
-
-                    <!-- AKTIVITAS -->
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {{ request()->routeIs('aktivitas*') ? 'active' : '' }}"
-                            href="{{ route('aktivitas') }}"
-                        >
-                            Aktivitas
-                        </a>
-                    </li>
-
-
                     <!-- MATERI -->
                     <li class="nav-item">
                         <a
@@ -67,6 +55,16 @@
                             href="{{ route('materi') }}"
                         >
                             Materi
+                        </a>
+                    </li>
+                    
+                    <!-- AKTIVITAS -->
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ request()->routeIs('aktivitas*') ? 'active' : '' }}"
+                            href="{{ route('aktivitas') }}"
+                        >
+                            Aktivitas
                         </a>
                     </li>
 

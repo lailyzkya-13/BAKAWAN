@@ -1,6 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,22 +22,41 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/aktivitas-satu.css') }}">
+
+    <!-- Tambahan agar gambar terlihat rapi -->
+    <style>
+        .objek-image {
+            width: 100%;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .objek-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .objek-card {
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
 
     @include('components.header')
 
-
     <main class="aktivitas-page">
-
         <div class="container-aktivitas">
 
-
-            <!-- =====================================
-                 KEMBALI
-            ====================================== -->
-
+            <!-- KEMBALI -->
             <a
                 href="{{ route('aktivitas') }}"
                 class="btn-kembali-atas"
@@ -45,11 +64,7 @@
                 ← Kembali
             </a>
 
-
-            <!-- =====================================
-                 JUDUL
-            ====================================== -->
-
+            <!-- JUDUL -->
             <section class="aktivitas-heading">
 
                 <span class="label-aktivitas">
@@ -69,11 +84,7 @@
 
             </section>
 
-
-            <!-- =====================================
-                 PETUNJUK
-            ====================================== -->
-
+            <!-- PETUNJUK -->
             <section class="petunjuk-box">
 
                 <div class="petunjuk-icon">
@@ -93,63 +104,46 @@
 
             </section>
 
-
-            <!-- =====================================
-                 PROGRESS
-            ====================================== -->
-
+            <!-- PROGRESS -->
             <section class="progress-section">
 
                 <div class="progress-info">
-
-                    <span>
-                        Progress
-                    </span>
+                    <span>Progress</span>
 
                     <strong id="progressText">
                         0 / {{ $objekAktivitas->count() }}
                     </strong>
-
                 </div>
 
                 <div class="progress-track">
-
                     <div
                         class="progress-fill"
                         id="progressFill"
                     ></div>
-
                 </div>
 
             </section>
 
-
-            <!-- =====================================
-                 OBJEK YANG HARUS DIPINDAHKAN
-            ====================================== -->
-
+            <!-- OBJEK YANG HARUS DIPINDAHKAN -->
             <section class="objek-section">
 
                 <div class="section-title">
-
                     <div>
+
                         <span class="section-number">
                             1
                         </span>
 
                         <div>
-                            <h2>
-                                Pilih Objek
-                            </h2>
+                            <h2>Pilih Objek</h2>
 
                             <p>
                                 Seret satu per satu objek di bawah ini.
                             </p>
                         </div>
+
                     </div>
-
                 </div>
-
 
                 <div
                     class="objek-list"
@@ -157,6 +151,36 @@
                 >
 
                     @forelse ($objekAktivitas as $objek)
+
+                        @php
+                            /*
+                             * Nama gambar berdasarkan nama objek.
+                             * Tidak perlu mengubah database.
+                             */
+
+                            $namaObjek = strtolower(
+                                trim($objek->nama_objek)
+                            );
+
+                            $daftarGambar = [
+                                'teratai' => 'teratai.png',
+                                'katak' => 'katak.png',
+                                'air' => 'air.png',
+                                'batu' => 'batu.png',
+                                'ikan' => 'ikan.png',
+                                'matahari' => 'matahari.png',
+                                'cahaya matahari' => 'matahari.png',
+                                'tanah' => 'tanah.png',
+                                'bangau' => 'bangau.png',
+                            ];
+
+                            $namaGambar = $daftarGambar[$namaObjek]
+                                ?? $objek->gambar;
+
+                            $urlGambar = asset(
+                                'images/aktivitas/' . $namaGambar
+                            );
+                        @endphp
 
                         <div
                             class="objek-card"
@@ -171,8 +195,10 @@
                             <div class="objek-image">
 
                                 <img
-                                    src="{{ asset('images/aktivitas/' . $objek->gambar) }}"
+                                    src="{{ $urlGambar }}"
                                     alt="{{ $objek->nama_objek }}"
+                                    loading="lazy"
+                                    draggable="false"
                                 >
 
                             </div>
@@ -182,7 +208,7 @@
                             </p>
 
                             <span class="drag-text">
-                                ⋮⋮ Seret
+                                ⋮⋮ Seret atau klik
                             </span>
 
                         </div>
@@ -190,11 +216,9 @@
                     @empty
 
                         <div class="objek-kosong">
-
                             <p>
                                 Belum ada objek aktivitas yang tersedia.
                             </p>
-
                         </div>
 
                     @endforelse
@@ -203,16 +227,10 @@
 
             </section>
 
-
-            <!-- =====================================
-                 TEMPAT DROP
-            ====================================== -->
-
+            <!-- TEMPAT DROP -->
             <section class="drop-section">
 
-
                 <!-- BIOTIK -->
-
                 <div
                     class="drop-box drop-biotik"
                     data-kategori="biotik"
@@ -225,19 +243,11 @@
                         </div>
 
                         <div>
-
-                            <h2>
-                                Biotik
-                            </h2>
-
-                            <p>
-                                Makhluk hidup
-                            </p>
-
+                            <h2>Biotik</h2>
+                            <p>Makhluk hidup</p>
                         </div>
 
                     </div>
-
 
                     <div
                         class="drop-area"
@@ -245,22 +255,18 @@
                     >
 
                         <div class="drop-placeholder">
-
                             <span>↓</span>
 
                             <p>
                                 Letakkan objek biotik di sini
                             </p>
-
                         </div>
 
                     </div>
 
                 </div>
 
-
                 <!-- ABIOTIK -->
-
                 <div
                     class="drop-box drop-abiotik"
                     data-kategori="abiotik"
@@ -273,19 +279,11 @@
                         </div>
 
                         <div>
-
-                            <h2>
-                                Abiotik
-                            </h2>
-
-                            <p>
-                                Unsur tidak hidup
-                            </p>
-
+                            <h2>Abiotik</h2>
+                            <p>Unsur tidak hidup</p>
                         </div>
 
                     </div>
-
 
                     <div
                         class="drop-area"
@@ -293,27 +291,20 @@
                     >
 
                         <div class="drop-placeholder">
-
                             <span>↓</span>
 
                             <p>
                                 Letakkan objek abiotik di sini
                             </p>
-
                         </div>
 
                     </div>
 
                 </div>
 
-
             </section>
 
-
-            <!-- =====================================
-                 FEEDBACK / CLUE
-            ====================================== -->
-
+            <!-- FEEDBACK / CLUE -->
             <section
                 class="feedback-area"
                 id="feedbackArea"
@@ -325,7 +316,6 @@
                 >
                     🌱
                 </div>
-
 
                 <div class="feedback-content">
 
@@ -342,11 +332,7 @@
 
             </section>
 
-
-            <!-- =====================================
-                 TOMBOL CEK
-            ====================================== -->
-
+            <!-- TOMBOL CEK -->
             <section class="button-area">
 
                 <button
@@ -356,7 +342,6 @@
                 >
                     ↻ Ulangi
                 </button>
-
 
                 <button
                     type="button"
@@ -369,11 +354,7 @@
 
             </section>
 
-
-            <!-- =====================================
-                 HASIL AKHIR
-            ====================================== -->
-
+            <!-- HASIL AKHIR -->
             <section
                 class="hasil-section"
                 id="hasilSection"
@@ -404,13 +385,12 @@
 
                 </div>
 
-
                 <div
                     class="penjelasan-list"
                     id="penjelasanList"
                 ></div>
 
-
+                <!-- KESIMPULAN -->
                 <div class="kesimpulan-box">
 
                     <div class="kesimpulan-icon">
@@ -419,9 +399,7 @@
 
                     <div>
 
-                        <strong>
-                            Ingat!
-                        </strong>
+                        <strong>Ingat!</strong>
 
                         <p>
                             Komponen biotik adalah semua makhluk hidup
@@ -435,7 +413,6 @@
 
                 </div>
 
-
                 <div class="hasil-button">
 
                     <button
@@ -445,7 +422,6 @@
                     >
                         ↻ Main Lagi
                     </button>
-
 
                     <a
                         href="{{ route('aktivitas') }}"
@@ -458,20 +434,16 @@
 
             </section>
 
-
         </div>
-
     </main>
-
 
     <!-- Bootstrap -->
     <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
 
-    <!-- JS Aktivitas -->
+    <!-- JavaScript Aktivitas -->
     <script src="{{ asset('js/aktivitas-satu.js') }}"></script>
 
 </body>
-
 </html>

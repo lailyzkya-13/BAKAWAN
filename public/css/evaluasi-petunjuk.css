@@ -1,0 +1,503 @@
+
+/* =========================================
+   PETUNJUK EVALUASI BAKAWAN
+========================================= */
+
+:root {
+    --green-dark: #214b40;
+    --green-text: #53675f;
+    --pink: #e95b7c;
+    --pink-hover: #d94c6e;
+    --pink-light: #f9e3e9;
+    --cream: #fffaf4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--cream);
+}
+
+/* =========================================
+   HALAMAN
+========================================= */
+
+.petunjuk-page {
+    min-height: calc(100vh - 75px);
+    background: var(--cream);
+    padding: 55px 35px 85px;
+}
+
+.petunjuk-container {
+    width: 100%;
+    max-width: 1350px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   JUDUL
+========================================= */
+
+.petunjuk-heading {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.petunjuk-label {
+    display: inline-block;
+
+    background: #fce4eb;
+    color: #db5877;
+
+    border-radius: 50px;
+
+    padding: 11px 24px;
+    margin-bottom: 18px;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.petunjuk-heading h1 {
+    color: var(--green-dark);
+
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.25;
+
+    margin: 0 0 14px;
+}
+
+.petunjuk-heading p {
+    color: var(--green-text);
+
+    font-size: 18px;
+    font-weight: 500;
+
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* =========================================
+   CARD PETUNJUK - DIPERLEBAR
+========================================= */
+
+.petunjuk-card {
+    width: 100%;
+
+    background: var(--pink-light);
+
+    border: 1.5px solid #e9c8d1;
+    border-radius: 35px;
+
+    padding: 50px 60px;
+
+    box-shadow: 0 12px 28px rgba(66, 48, 50, 0.04);
+}
+
+/* =========================================
+   HEADER CARD
+========================================= */
+
+.petunjuk-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    margin-bottom: 35px;
+}
+
+.petunjuk-icon {
+    width: 80px;
+    height: 80px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    font-size: 38px;
+}
+
+.petunjuk-card-heading h2 {
+    color: var(--green-dark);
+
+    font-size: 29px;
+    font-weight: 800;
+
+    margin: 0 0 10px;
+}
+
+.petunjuk-card-heading p {
+    color: var(--green-text);
+
+    font-size: 17px;
+    font-weight: 500;
+
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* =========================================
+   DAFTAR PETUNJUK
+========================================= */
+
+.petunjuk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.petunjuk-item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    border-radius: 19px;
+
+    padding: 22px 25px;
+    min-height: 85px;
+}
+
+.petunjuk-number {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    color: var(--pink);
+
+    border-radius: 50%;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.petunjuk-item p {
+    color: #405a50;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    line-height: 1.8;
+    margin: 0;
+}
+
+.petunjuk-item strong {
+    color: var(--green-dark);
+    font-weight: 700;
+}
+
+/* =========================================
+   IDENTITAS SISWA
+========================================= */
+
+.identitas-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+    margin-top: 35px;
+    padding: 28px 32px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    border: 1.5px dashed #ddb9c3;
+    border-radius: 20px;
+}
+
+.identitas-box div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.identitas-box span {
+    color: #64776c;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.identitas-box strong {
+    color: var(--green-dark);
+    font-size: 20px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   TOMBOL
+========================================= */
+
+.petunjuk-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.btn-kembali,
+.btn-mulai {
+    min-height: 68px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 18px 35px;
+
+    border-radius: 17px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-kembali {
+    background: #ffffff;
+    color: var(--pink);
+
+    border: 1.5px solid #e9c3cc;
+}
+
+.btn-kembali:hover {
+    background: #fff0f4;
+    color: var(--pink-hover);
+}
+
+.btn-mulai {
+    background: var(--pink);
+    color: #ffffff;
+
+    border: 1.5px solid var(--pink);
+
+    box-shadow: 0 7px 18px rgba(233, 91, 124, 0.16);
+}
+
+.btn-mulai:hover {
+    background: var(--pink-hover);
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(233, 91, 124, 0.24);
+}
+
+.btn-kembali span,
+.btn-mulai span {
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* =========================================
+   RESPONSIVE LAPTOP
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .petunjuk-container {
+        max-width: 1100px;
+    }
+
+    .petunjuk-card {
+        padding: 45px 45px;
+    }
+
+    .petunjuk-item p {
+        font-size: 16px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+    .petunjuk-page {
+        padding: 45px 20px 70px;
+    }
+
+    .petunjuk-heading h1 {
+        font-size: 35px;
+    }
+
+    .petunjuk-heading p {
+        font-size: 16px;
+    }
+
+    .petunjuk-card {
+        padding: 35px 30px;
+        border-radius: 27px;
+    }
+
+    .petunjuk-card-heading h2 {
+        font-size: 24px;
+    }
+
+    .petunjuk-card-heading p {
+        font-size: 15px;
+    }
+
+    .petunjuk-icon {
+        width: 65px;
+        height: 65px;
+        font-size: 30px;
+    }
+
+    .petunjuk-item {
+        padding: 18px 20px;
+        min-height: 75px;
+    }
+
+    .petunjuk-item p {
+        font-size: 15px;
+    }
+
+    .petunjuk-number {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+
+    .btn-kembali,
+    .btn-mulai {
+        min-height: 60px;
+        font-size: 16px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .petunjuk-page {
+        padding: 35px 15px 55px;
+    }
+
+    .petunjuk-heading {
+        margin-bottom: 28px;
+    }
+
+    .petunjuk-label {
+        font-size: 13px;
+        padding: 9px 18px;
+    }
+
+    .petunjuk-heading h1 {
+        font-size: 29px;
+    }
+
+    .petunjuk-heading p {
+        font-size: 14px;
+    }
+
+    .petunjuk-card {
+        padding: 25px 18px;
+        border-radius: 23px;
+    }
+
+    .petunjuk-card-heading {
+        gap: 13px;
+        align-items: flex-start;
+        margin-bottom: 25px;
+    }
+
+    .petunjuk-icon {
+        width: 52px;
+        height: 52px;
+
+        font-size: 25px;
+        border-radius: 15px;
+    }
+
+    .petunjuk-card-heading h2 {
+        font-size: 20px;
+    }
+
+    .petunjuk-card-heading p {
+        font-size: 13px;
+    }
+
+    .petunjuk-list {
+        gap: 13px;
+    }
+
+    .petunjuk-item {
+        padding: 17px 14px;
+        gap: 12px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .petunjuk-number {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .petunjuk-item p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .identitas-box {
+        grid-template-columns: 1fr;
+        gap: 18px;
+
+        padding: 20px;
+        margin-top: 25px;
+    }
+
+    .identitas-box span {
+        font-size: 13px;
+    }
+
+    .identitas-box strong {
+        font-size: 17px;
+    }
+
+    .petunjuk-actions {
+        flex-direction: column-reverse;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .btn-kembali,
+    .btn-mulai {
+        width: 100%;
+        min-height: 58px;
+        font-size: 15px;
+    }
+}
