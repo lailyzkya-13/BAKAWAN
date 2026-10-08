@@ -140,7 +140,7 @@
                         <div class="materi-image">
 
                             <img
-                                src="{{ asset('images/materi-biotik.jpg') }}"
+                                src="{{ asset('images/materi-biotik.png') }}"
                                 alt="Komponen Biotik dan Abiotik"
                             >
 
@@ -187,7 +187,7 @@
                         <div class="materi-image">
 
                             <img
-                                src="{{ asset('images/materi-ekosistem.jpg') }}"
+                                src="{{ asset('images/materi-ekosistem.png') }}"
                                 alt="Hubungan dalam Ekosistem"
                             >
 
