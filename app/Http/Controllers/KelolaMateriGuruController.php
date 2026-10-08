@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class KelolaMateriGuruController extends Controller
 {
-    // Menampilkan daftar materi
+    // 1. MENAMPILKAN DAFTAR MATERI
     public function index()
     {
         $materi = Materi::latest()->get();
@@ -17,37 +17,63 @@ class KelolaMateriGuruController extends Controller
         return view('materi-guru', compact('materi'));
     }
 
-    // Membuka form tambah
+    // 2. MEMBUKA FORM TAMBAH
     public function create()
     {
-        return view('materi-form-guru');
+        return view('materi-form-guru', [
+            'materi' => new Materi()
+        ]);
     }
 
-    // Menyimpan materi baru
+    // 3. MENYIMPAN MATERI BARU
     public function store(Request $request)
     {
         $data = $this->validasi($request);
 
-        DB::transaction(function () use ($request, $data) {
-            $materi = Materi::create([
-                'judul' => $data['judul'],
-                'deskripsi' => $data['deskripsi'] ?? null,
-                'konten' => $data['subbab_isi'][0],
-                'durasi' => $data['durasi'] ?? null,
-                'ringkasan' => $data['ringkasan'] ?? null,
-                'gambar' => $request->hasFile('gambar')
-                    ? $request->file('gambar')->store('materi', 'public')
-                    : null,
-            ]);
+        $gambar = null;
 
-            $this->simpanSubbab($materi, $data);
-        });
+        // Upload gambar jika ada
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar')
+                ->store('materi', 'public');
+        }
 
-        return redirect()->route('materi')
+        try {
+            DB::transaction(function () use ($data, $gambar) {
+
+                // Simpan materi utama
+                $materi = Materi::create([
+                    'judul' => $data['judul'],
+                    'deskripsi' => $data['deskripsi'] ?? null,
+                    'konten' => $data['subbab'][0]['isi'],
+                    'gambar' => $gambar,
+                    'durasi' => $data['durasi'] ?? null,
+                    'ringkasan' => $data['ringkasan'] ?? null,
+                ]);
+
+                // Simpan semua subbab
+                $this->simpanSubbab(
+                    $materi,
+                    $data['subbab']
+                );
+            });
+
+        } catch (\Throwable $e) {
+
+            // Hapus gambar baru jika database gagal disimpan
+            if ($gambar) {
+                Storage::disk('public')->delete($gambar);
+            }
+
+            throw $e;
+        }
+
+        return redirect()
+            ->route('materi')
             ->with('success', 'Materi berhasil ditambahkan!');
     }
 
-    // Menampilkan detail guru
+    // 4. MELIHAT DETAIL MATERI GURU
     public function show(Materi $materi)
     {
         $materi->load('subbab');
@@ -55,7 +81,7 @@ class KelolaMateriGuruController extends Controller
         return view('materi-detail-guru', compact('materi'));
     }
 
-    // Membuka form edit
+    // 5. MEMBUKA FORM EDIT
     public function edit(Materi $materi)
     {
         $materi->load('subbab');
@@ -63,58 +89,91 @@ class KelolaMateriGuruController extends Controller
         return view('materi-form-guru', compact('materi'));
     }
 
-    // Menyimpan perubahan
+    // 6. MENYIMPAN PERUBAHAN
     public function update(Request $request, Materi $materi)
     {
         $data = $this->validasi($request);
 
-        DB::transaction(function () use ($request, $materi, $data) {
-            $perubahan = [
-                'judul' => $data['judul'],
-                'deskripsi' => $data['deskripsi'] ?? null,
-                'konten' => $data['subbab_isi'][0],
-                'durasi' => $data['durasi'] ?? null,
-                'ringkasan' => $data['ringkasan'] ?? null,
-            ];
+        $gambarLama = $materi->gambar;
+        $gambarBaru = null;
 
-            if ($request->hasFile('gambar')) {
-                $gambarLama = $materi->gambar;
+        // Upload gambar baru jika guru memilih gambar
+        if ($request->hasFile('gambar')) {
+            $gambarBaru = $request->file('gambar')
+                ->store('materi', 'public');
+        }
 
-                $perubahan['gambar'] = $request
-                    ->file('gambar')
-                    ->store('materi', 'public');
+        try {
+            DB::transaction(function () use (
+                $materi,
+                $data,
+                $gambarBaru
+            ) {
+
+                // Memperbarui data materi utama
+                $materi->update([
+                    'judul' => $data['judul'],
+                    'deskripsi' => $data['deskripsi'] ?? null,
+                    'konten' => $data['subbab'][0]['isi'],
+                    'gambar' => $gambarBaru ?? $materi->gambar,
+                    'durasi' => $data['durasi'] ?? null,
+                    'ringkasan' => $data['ringkasan'] ?? null,
+                ]);
+
+                // Untuk versi sederhana:
+                // hapus subbab lama, kemudian simpan data terbaru
+                $materi->subbab()->delete();
+
+                $this->simpanSubbab(
+                    $materi,
+                    $data['subbab']
+                );
+            });
+
+        } catch (\Throwable $e) {
+
+            if ($gambarBaru) {
+                Storage::disk('public')->delete($gambarBaru);
             }
 
-            $materi->update($perubahan);
+            throw $e;
+        }
 
-            $materi->subbab()->delete();
-            $this->simpanSubbab($materi, $data);
+        // Hapus gambar lama hanya setelah update berhasil
+        if ($gambarBaru && $gambarLama) {
+            Storage::disk('public')->delete($gambarLama);
+        }
 
-            if (isset($gambarLama)) {
-                Storage::disk('public')->delete($gambarLama);
-            }
-        });
-
-        return redirect()->route('materi')
+        return redirect()
+            ->route('materi')
             ->with('success', 'Materi berhasil diperbarui!');
     }
 
-    // Menghapus materi
+    // 7. MENGHAPUS MATERI
     public function destroy(Materi $materi)
     {
         $gambar = $materi->gambar;
 
-        $materi->delete();
+        DB::transaction(function () use ($materi) {
 
+            // Hapus semua subbab
+            $materi->subbab()->delete();
+
+            // Hapus materi utama
+            $materi->delete();
+        });
+
+        // Hapus gambar setelah database berhasil diperbarui
         if ($gambar) {
             Storage::disk('public')->delete($gambar);
         }
 
-        return redirect()->route('materi')
+        return redirect()
+            ->route('materi')
             ->with('success', 'Materi berhasil dihapus!');
     }
 
-    // Validasi form
+    // 8. MEMERIKSA DATA DARI FORM
     private function validasi(Request $request)
     {
         return $request->validate([
@@ -122,21 +181,27 @@ class KelolaMateriGuruController extends Controller
             'deskripsi' => 'nullable|string',
             'durasi' => 'nullable|string|max:100',
             'ringkasan' => 'nullable|string',
+
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'subbab_judul' => 'required|array|min:1',
-            'subbab_judul.*' => 'required|string|max:255',
-            'subbab_isi' => 'required|array|min:1',
-            'subbab_isi.*' => 'required|string',
+
+            'subbab' => 'required|array|min:1',
+            'subbab.*.judul' => 'required|string|max:255',
+            'subbab.*.pengantar' => 'nullable|string',
+            'subbab.*.isi' => 'required|string',
+            'subbab.*.contoh' => 'nullable|string',
         ]);
     }
 
-    // Menyimpan setiap subbab
-    private function simpanSubbab(Materi $materi, array $data)
+    // 9. FUNGSI MENYIMPAN SUBBAB
+    private function simpanSubbab(Materi $materi, array $semuaSubbab)
     {
-        foreach ($data['subbab_judul'] as $nomor => $judul) {
+        foreach (array_values($semuaSubbab) as $nomor => $subbab) {
+
             $materi->subbab()->create([
-                'judul' => $judul,
-                'isi' => $data['subbab_isi'][$nomor],
+                'judul' => $subbab['judul'],
+                'pengantar' => $subbab['pengantar'] ?? null,
+                'isi' => $subbab['isi'],
+                'contoh' => $subbab['contoh'] ?? null,
                 'urutan' => $nomor + 1,
             ]);
         }

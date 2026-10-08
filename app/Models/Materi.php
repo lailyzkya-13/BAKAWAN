@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Materi extends Model
 {
+    // Nama tabel database
     protected $table = 'materis';
 
+    // Data yang boleh disimpan
     protected $fillable = [
         'judul',
         'deskripsi',
@@ -17,6 +19,7 @@ class Materi extends Model
         'ringkasan',
     ];
 
+    // Satu materi memiliki banyak subbab
     public function subbab()
     {
         return $this->hasMany(

@@ -2,1169 +2,1133 @@
 
 @section('content')
 
-<div class="soal-page">
+    <div class="soal-page">
 
-<!-- header -->
-<div class="page-header">
+        <!-- header -->
+        <div class="page-header">
 
-    <div>
-        <h1>Soal Kuis</h1>
-        <p>Kelola soal kuis untuk pembelajaran BAKAWAN.</p>
-    </div>
-
-    <button class="btn-tambah" onclick="openModal()">
-        + Tambah Soal
-    </button>
-
-</div>
-
-
-<!-- ringkasan -->
-<div class="summary-container">
-
-    <div class="summary-card">
-
-        <div class="summary-icon">
-            📝
-        </div>
-
-        <div>
-            <p>Total Soal</p>
-            <h2>10</h2>
-            <span>Soal kuis tersedia</span>
-        </div>
-
-    </div>
-
-
-    <div class="summary-card">
-
-        <div class="summary-icon">
-            📚
-        </div>
-
-        <div>
-            <p>Total Materi</p>
-            <h2>3</h2>
-            <span>Materi memiliki soal</span>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- daftar soal -->
-<div class="soal-box">
-
-    <div class="box-header">
-
-        <div>
-            <h2>Daftar Soal</h2>
-            <p>Soal yang akan digunakan dalam kuis siswa.</p>
-        </div>
-
-    </div>
-
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-                    <th>No</th>
-                    <th>Pertanyaan</th>
-                    <th>Materi</th>
-                    <th>Jawaban Benar</th>
-                    <th>Aksi</th>
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                <!-- soal 1 -->
-                <tr>
-
-                    <td>1</td>
-
-                    <td>
-                        Apa yang dimaksud dengan ekosistem?
-                    </td>
-
-                    <td>
-                        <span class="materi-badge">
-                            Mengenal Ekosistem
-                        </span>
-                    </td>
-
-                    <td>
-                        <span class="jawaban-badge">
-                            A
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="btn-detail"
-                            onclick="lihatSoal(
-                                'Apa yang dimaksud dengan ekosistem?',
-                                'Mengenal Ekosistem',
-                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                'Kumpulan hewan saja',
-                                'Tempat tinggal manusia',
-                                'Kumpulan tumbuhan saja',
-                                'A'
-                            )">
-                            Lihat
-                        </button>
-
-                        <button
-                            class="btn-edit"
-                            onclick="openEditModal(
-                                'Apa yang dimaksud dengan ekosistem?',
-                                'Mengenal Ekosistem',
-                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                'Kumpulan hewan saja',
-                                'Tempat tinggal manusia',
-                                'Kumpulan tumbuhan saja',
-                                'A'
-                            )">
-                            Edit
-                        </button>
-
-                        <button
-                            class="btn-delete"
-                            onclick="hapusSoal()">
-                            Hapus
-                        </button>
-
-                    </td>
-
-                </tr>
-
-
-                <!-- soal 2 -->
-                <tr>
-
-                    <td>2</td>
-
-                    <td>
-                        Manakah yang termasuk komponen biotik?
-                    </td>
-
-                    <td>
-                        <span class="materi-badge">
-                            Mengenal Ekosistem
-                        </span>
-                    </td>
-
-                    <td>
-                        <span class="jawaban-badge">
-                            B
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="btn-detail"
-                            onclick="lihatSoal(
-                                'Manakah yang termasuk komponen biotik?',
-                                'Mengenal Ekosistem',
-                                'Tumbuhan',
-                                'Air',
-                                'Batu',
-                                'Cahaya matahari',
-                                'A'
-                            )">
-                            Lihat
-                        </button>
-
-                        <button
-                            class="btn-edit"
-                            onclick="openEditModal(
-                                'Manakah yang termasuk komponen biotik?',
-                                'Mengenal Ekosistem',
-                                'Air',
-                                'Tumbuhan',
-                                'Batu',
-                                'Cahaya matahari',
-                                'B'
-                            )">
-                            Edit
-                        </button>
-
-                        <button
-                            class="btn-delete"
-                            onclick="hapusSoal()">
-                            Hapus
-                        </button>
-
-                    </td>
-
-                </tr>
-
-
-                <!-- soal 3 -->
-                <tr>
-
-                    <td>3</td>
-
-                    <td>
-                        Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?
-                    </td>
-
-                    <td>
-                        <span class="materi-badge">
-                            Interaksi Ekosistem
-                        </span>
-                    </td>
-
-                    <td>
-                        <span class="jawaban-badge">
-                            C
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="btn-detail"
-                            onclick="lihatSoal(
-                                'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
-                                'Interaksi Ekosistem',
-                                'Mutualisme',
-                                'Kompetisi',
-                                'Predasi',
-                                'Parasitisme',
-                                'A'
-                            )">
-                            Lihat
-                        </button>
-
-                        <button
-                            class="btn-edit"
-                            onclick="openEditModal(
-                                'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
-                                'Interaksi Ekosistem',
-                                'Mutualisme',
-                                'Kompetisi',
-                                'Predasi',
-                                'Parasitisme',
-                                'A'
-                            )">
-                            Edit
-                        </button>
-
-                        <button
-                            class="btn-delete"
-                            onclick="hapusSoal()">
-                            Hapus
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- tambah/edit soal -->
-
-<div class="modal" id="soalModal">
-
-```
-<div class="modal-content">
-
-    <div class="modal-header">
-
-        <div>
-            <h2 id="modalTitle">Tambah Soal</h2>
-            <p>Masukkan pertanyaan dan pilihan jawaban.</p>
-        </div>
-
-        <button class="btn-close" onclick="closeModal()">
-            ×
-        </button>
-
-    </div>
-
-
-    <!-- pertanyaan -->
-
-    <div class="form-group">
-
-        <label>Pertanyaan</label>
-
-        <textarea
-            id="pertanyaan"
-            placeholder="Masukkan pertanyaan kuis"></textarea>
-
-    </div>
-
-
-    <!-- materi -->
-
-    <div class="form-group">
-
-        <label>Materi</label>
-
-        <select id="materi">
-
-            <option value="">
-                Pilih Materi
-            </option>
-
-            <option>
-                Mengenal Ekosistem
-            </option>
-
-            <option>
-                Interaksi dalam Ekosistem
-            </option>
-
-            <option>
-                Rantai Makanan
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <!-- pilihan A -->
-    <div class="form-group">
-        <label>Pilihan A</label>
-        <input
-            type="text"
-            id="pilihanA"
-            placeholder="Masukkan pilihan A">
-    </div>
-
-
-    <!-- pilihan B -->
-    <div class="form-group">
-        <label>Pilihan B</label>
-        <input
-            type="text"
-            id="pilihanB"
-            placeholder="Masukkan pilihan B">
-    </div>
-
-
-    <!-- pilihan C -->
-    <div class="form-group">
-        <label>Pilihan C</label>
-        <input
-            type="text"
-            id="pilihanC"
-            placeholder="Masukkan pilihan C">
-    </div>
-
-
-    <!-- pilihan D -->
-    <div class="form-group">
-        <label>Pilihan D</label>
-        <input
-            type="text"
-            id="pilihanD"
-            placeholder="Masukkan pilihan D">
-    </div>
-
-
-    <!-- jawaban -->
-    <div class="form-group">
-        <label>Jawaban Benar</label>
-        <select id="jawaban">
-            <option value="">
-                Pilih Jawaban
-            </option>
-
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-
-        </select>
-
-    </div>
-
-
-    <!-- tombol -->
-    <div class="modal-footer">
-        <button
-            class="btn-batal"
-            onclick="closeModal()">
-            Batal
-        </button>
-
-        <button
-            class="btn-simpan"
-            onclick="saveSoal()">
-            Simpan
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!--  lihat soal -->
-<div class="modal" id="lihatModal">
-<div class="modal-content">
-    <div class="modal-header">
-        <div>
-            <h2>Detail Soal</h2>
-            <p>Informasi lengkap soal kuis.</p>
-        </div>
-
-        <button
-            class="btn-close"
-            onclick="closeLihatModal()">
-            ×
-        </button>
-    </div>
-
-
-    <div class="detail-soal">
-        <div class="detail-item">
-            <span>Pertanyaan</span>
-            <p id="detailPertanyaan"></p>
-        </div>
-
-
-        <div class="detail-item">
-            <span>Materi</span>
-            <p id="detailMateri"></p>
-        </div>
-
-
-        <div class="detail-item">
-            <span>Pilihan Jawaban</span>
-            <div class="pilihan-list">
-                <p>A. <span id="detailA"></span></p>
-                <p>B. <span id="detailB"></span></p>
-                <p>C. <span id="detailC"></span></p>
-                <p>D. <span id="detailD"></span></p>
+            <div>
+                <h1>Soal Kuis</h1>
+                <p>Kelola soal kuis untuk pembelajaran BAKAWAN.</p>
             </div>
+
+            <button class="btn-tambah" onclick="openModal()">
+                + Tambah Soal
+            </button>
+
         </div>
 
 
-        <div class="detail-item">
-            <span>Jawaban Benar</span>
-            <strong
-                class="jawaban-detail"
-                id="detailJawaban">
-            </strong>
+        <!-- ringkasan -->
+        <div class="summary-container">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    📝
+                </div>
+
+                <div>
+                    <p>Total Soal</p>
+                    <h2>10</h2>
+                    <span>Soal kuis tersedia</span>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    📚
+                </div>
+
+
+                <p>Total Materi</p>
+
+                <h2>{{ $daftarMateri->count() }}</h2>
+
+                <span>Total materi pembelajaran</span>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- daftar soal -->
+        <div class="soal-box">
+
+            <div class="box-header">
+
+                <div>
+                    <h2>Daftar Soal</h2>
+                    <p>Soal yang akan digunakan dalam kuis siswa.</p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>No</th>
+                            <th>Pertanyaan</th>
+                            <th>Materi</th>
+                            <th>Jawaban Benar</th>
+                            <th>Aksi</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <!-- soal 1 -->
+                        <tr>
+
+                            <td>1</td>
+
+                            <td>
+                                Apa yang dimaksud dengan ekosistem?
+                            </td>
+
+                            <td>
+                                <span class="materi-badge">
+                                    Mengenal Ekosistem
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="jawaban-badge">
+                                    A
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="btn-detail" onclick="lihatSoal(
+                                        'Apa yang dimaksud dengan ekosistem?',
+                                        'Mengenal Ekosistem',
+                                        'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
+                                        'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
+                                        'Kumpulan hewan saja',
+                                        'Tempat tinggal manusia',
+                                        'Kumpulan tumbuhan saja',
+                                        'A'
+                                    )">
+                                    Lihat
+                                </button>
+
+                                <button class="btn-edit" onclick="openEditModal(
+                                        'Apa yang dimaksud dengan ekosistem?',
+                                        'Mengenal Ekosistem',
+                                        'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
+                                        'Kumpulan hewan saja',
+                                        'Tempat tinggal manusia',
+                                        'Kumpulan tumbuhan saja',
+                                        'A'
+                                    )">
+                                    Edit
+                                </button>
+
+                                <button class="btn-delete" onclick="hapusSoal()">
+                                    Hapus
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- soal 2 -->
+                        <tr>
+
+                            <td>2</td>
+
+                            <td>
+                                Manakah yang termasuk komponen biotik?
+                            </td>
+
+                            <td>
+                                <span class="materi-badge">
+                                    Mengenal Ekosistem
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="jawaban-badge">
+                                    B
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="btn-detail" onclick="lihatSoal(
+                                        'Manakah yang termasuk komponen biotik?',
+                                        'Mengenal Ekosistem',
+                                        'Tumbuhan',
+                                        'Air',
+                                        'Batu',
+                                        'Cahaya matahari',
+                                        'A'
+                                    )">
+                                    Lihat
+                                </button>
+
+                                <button class="btn-edit" onclick="openEditModal(
+                                        'Manakah yang termasuk komponen biotik?',
+                                        'Mengenal Ekosistem',
+                                        'Air',
+                                        'Tumbuhan',
+                                        'Batu',
+                                        'Cahaya matahari',
+                                        'B'
+                                    )">
+                                    Edit
+                                </button>
+
+                                <button class="btn-delete" onclick="hapusSoal()">
+                                    Hapus
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- soal 3 -->
+                        <tr>
+
+                            <td>3</td>
+
+                            <td>
+                                Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?
+                            </td>
+
+                            <td>
+                                <span class="materi-badge">
+                                    Interaksi Ekosistem
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="jawaban-badge">
+                                    C
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="btn-detail" onclick="lihatSoal(
+                                        'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
+                                        'Interaksi Ekosistem',
+                                        'Mutualisme',
+                                        'Kompetisi',
+                                        'Predasi',
+                                        'Parasitisme',
+                                        'A'
+                                    )">
+                                    Lihat
+                                </button>
+
+                                <button class="btn-edit" onclick="openEditModal(
+                                        'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
+                                        'Interaksi Ekosistem',
+                                        'Mutualisme',
+                                        'Kompetisi',
+                                        'Predasi',
+                                        'Parasitisme',
+                                        'A'
+                                    )">
+                                    Edit
+                                </button>
+
+                                <button class="btn-delete" onclick="hapusSoal()">
+                                    Hapus
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- tambah/edit soal -->
+
+    <div class="modal" id="soalModal">
+
+        ```
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="modalTitle">Tambah Soal</h2>
+                    <p>Masukkan pertanyaan dan pilihan jawaban.</p>
+                </div>
+
+                <button class="btn-close" onclick="closeModal()">
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- pertanyaan -->
+
+            <div class="form-group">
+
+                <label>Pertanyaan</label>
+
+                <textarea id="pertanyaan" placeholder="Masukkan pertanyaan kuis"></textarea>
+
+            </div>
+
+
+            <!-- materi -->
+
+            <div class="form-group">
+
+                <label>Materi</label>
+
+
+                <!-- PILIH MATERI -->
+                <div class="form-group">
+
+                    <label for="materi">Materi</label>
+
+                    <select id="materi" name="materi_id">
+
+                        <option value="">
+                            Pilih Materi
+                        </option>
+
+                        @foreach($daftarMateri as $materi)
+
+                            <option value="{{ $materi->id }}">
+                                {{ $materi->judul }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- pilihan A -->
+            <div class="form-group">
+                <label>Pilihan A</label>
+                <input type="text" id="pilihanA" placeholder="Masukkan pilihan A">
+            </div>
+
+
+            <!-- pilihan B -->
+            <div class="form-group">
+                <label>Pilihan B</label>
+                <input type="text" id="pilihanB" placeholder="Masukkan pilihan B">
+            </div>
+
+
+            <!-- pilihan C -->
+            <div class="form-group">
+                <label>Pilihan C</label>
+                <input type="text" id="pilihanC" placeholder="Masukkan pilihan C">
+            </div>
+
+
+            <!-- pilihan D -->
+            <div class="form-group">
+                <label>Pilihan D</label>
+                <input type="text" id="pilihanD" placeholder="Masukkan pilihan D">
+            </div>
+
+
+            <!-- jawaban -->
+            <div class="form-group">
+                <label>Jawaban Benar</label>
+                <select id="jawaban">
+                    <option value="">
+                        Pilih Jawaban
+                    </option>
+
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- tombol -->
+            <div class="modal-footer">
+                <button class="btn-batal" onclick="closeModal()">
+                    Batal
+                </button>
+
+                <button class="btn-simpan" onclick="saveSoal()">
+                    Simpan
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--  lihat soal -->
+    <div class="modal" id="lihatModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2>Detail Soal</h2>
+                    <p>Informasi lengkap soal kuis.</p>
+                </div>
+
+                <button class="btn-close" onclick="closeLihatModal()">
+                    ×
+                </button>
+            </div>
+
+
+            <div class="detail-soal">
+                <div class="detail-item">
+                    <span>Pertanyaan</span>
+                    <p id="detailPertanyaan"></p>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Materi</span>
+                    <p id="detailMateri"></p>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Pilihan Jawaban</span>
+                    <div class="pilihan-list">
+                        <p>A. <span id="detailA"></span></p>
+                        <p>B. <span id="detailB"></span></p>
+                        <p>C. <span id="detailC"></span></p>
+                        <p>D. <span id="detailD"></span></p>
+                    </div>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Jawaban Benar</span>
+                    <strong class="jawaban-detail" id="detailJawaban">
+                    </strong>
+                </div>
+            </div>
+
         </div>
     </div>
 
-</div>
-</div>
-
-<style>
-
-
-/* HALAMAN */
-.soal-page {
-    padding-bottom: 30px;
-}
-
-
-/* header */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.page-header h1 {
-    margin: 0 0 5px;
-    color: #1b4332;
-    font-size: 28px;
-}
-
-.page-header p {
-    margin: 0;
-    color: #777;
-    font-size: 14px;
-}
-
-
-/* tombol tambah */
-.btn-tambah {
-    border: none;
-    background-color: #2d6a4f;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.btn-tambah:hover {
-    background-color: #1b4332;
-}
+    <style>
+        /* HALAMAN */
+        .soal-page {
+            padding-bottom: 30px;
+        }
+
+
+        /* header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 5px;
+            color: #1b4332;
+            font-size: 28px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* tombol tambah */
+        .btn-tambah {
+            border: none;
+            background-color: #2d6a4f;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-tambah:hover {
+            background-color: #1b4332;
+        }
+
+
+        /* ringkasan */
+        .summary-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
 
+        .summary-card {
+            background-color: white;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
 
-/* ringkasan */
-.summary-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-bottom: 25px;
-}
+        .summary-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background-color: #d8f3dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
 
-.summary-card {
-    background-color: white;
-    border-radius: 14px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-}
+        .summary-card p {
+            margin: 0;
+            color: #777;
+            font-size: 13px;
+        }
 
-.summary-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    background-color: #d8f3dc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-}
+        .summary-card h2 {
+            margin: 4px 0;
+            color: #1b4332;
+            font-size: 25px;
+        }
 
-.summary-card p {
-    margin: 0;
-    color: #777;
-    font-size: 13px;
-}
+        .summary-card span {
+            color: #999;
+            font-size: 12px;
+        }
 
-.summary-card h2 {
-    margin: 4px 0;
-    color: #1b4332;
-    font-size: 25px;
-}
 
-.summary-card span {
-    color: #999;
-    font-size: 12px;
-}
 
+        /* box soal */
+        .soal-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 22px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
 
+        .box-header {
+            margin-bottom: 20px;
+        }
 
-/* box soal */
-.soal-box {
-    background-color: white;
-    border-radius: 15px;
-    padding: 22px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-}
+        .box-header h2 {
+            margin: 0;
+            color: #1b4332;
+            font-size: 20px;
+        }
 
-.box-header {
-    margin-bottom: 20px;
-}
+        .box-header p {
+            margin: 5px 0 0;
+            color: #999;
+            font-size: 13px;
+        }
 
-.box-header h2 {
-    margin: 0;
-    color: #1b4332;
-    font-size: 20px;
-}
 
-.box-header p {
-    margin: 5px 0 0;
-    color: #999;
-    font-size: 13px;
-}
+        /* table */
+        .table-container {
 
+            overflow-x: auto;
 
-/* table */
-.table-container {
+        }
 
-    overflow-x: auto;
+        table {
 
-}
+            width: 100%;
 
-table {
+            border-collapse: collapse;
 
-    width: 100%;
+        }
 
-    border-collapse: collapse;
+        thead {
 
-}
+            background-color: #ABE7B2;
 
-thead {
+        }
 
-    background-color: #ABE7B2;
+        th {
 
-}
+            padding: 14px;
 
-th {
+            text-align: left;
 
-    padding: 14px;
+            color: #2d6a4f;
 
-    text-align: left;
+            font-size: 13px;
 
-    color: #2d6a4f;
+        }
 
-    font-size: 13px;
+        td {
 
-}
+            padding: 15px 14px;
 
-td {
+            border-bottom: 1px solid #eeeeee;
 
-    padding: 15px 14px;
+            color: #555;
 
-    border-bottom: 1px solid #eeeeee;
+            font-size: 14px;
 
-    color: #555;
+            vertical-align: middle;
 
-    font-size: 14px;
+        }
 
-    vertical-align: middle;
+        tbody tr:hover {
 
-}
+            background-color: #fafdfb;
 
-tbody tr:hover {
+        }
 
-    background-color: #fafdfb;
 
-}
+        /* latar belakaang tombol materi */
 
+        .materi-badge {
 
-/* latar belakaang tombol materi */
+            display: inline-block;
 
-.materi-badge {
+            padding: 5px 10px;
 
-    display: inline-block;
+            background-color: #FF788D;
 
-    padding: 5px 10px;
+            color: #FFFFFF;
 
-    background-color: #FF788D;
+            border-radius: 20px;
 
-    color: #FFFFFF;
+            font-size: 11px;
 
-    border-radius: 20px;
+            font-weight: 600;
 
-    font-size: 11px;
+        }
 
-    font-weight: 600;
+        .jawaban-badge {
 
-}
+            display: inline-flex;
 
-.jawaban-badge {
+            width: 30px;
 
-    display: inline-flex;
+            height: 30px;
 
-    width: 30px;
+            align-items: center;
 
-    height: 30px;
+            justify-content: center;
 
-    align-items: center;
+            background-color: #FF788D;
 
-    justify-content: center;
+            color: white;
 
-    background-color: #FF788D;
+            border-radius: 50%;
 
-    color: white;
+            font-size: 12px;
 
-    border-radius: 50%;
+            font-weight: bold;
 
-    font-size: 12px;
+        }
 
-    font-weight: bold;
 
-}
+        /* BUTTON AKSI */
 
+        .btn-detail,
+        .btn-edit,
+        .btn-delete {
 
-/* BUTTON AKSI */
+            border: none;
 
-.btn-detail,
-.btn-edit,
-.btn-delete {
+            padding: 7px 10px;
 
-    border: none;
+            border-radius: 7px;
 
-    padding: 7px 10px;
+            font-size: 12px;
 
-    border-radius: 7px;
+            cursor: pointer;
 
-    font-size: 12px;
+            margin-right: 4px;
 
-    cursor: pointer;
+        }
 
-    margin-right: 4px;
+        .btn-detail {
 
-}
+            background-color: #e8f5e9;
 
-.btn-detail {
+            color: #2d6a4f;
 
-    background-color: #e8f5e9;
+        }
 
-    color: #2d6a4f;
+        .btn-edit {
 
-}
+            background-color: #fff3cd;
 
-.btn-edit {
+            color: #856404;
 
-    background-color: #fff3cd;
+        }
 
-    color: #856404;
+        .btn-delete {
 
-}
+            background-color: #f8d7da;
 
-.btn-delete {
+            color: #842029;
 
-    background-color: #f8d7da;
+        }
 
-    color: #842029;
 
-}
+        /* MODAL */
+        .modal {
 
+            display: none;
 
-/* MODAL */
-.modal {
+            position: fixed;
 
-    display: none;
+            z-index: 1000;
 
-    position: fixed;
+            left: 0;
 
-    z-index: 1000;
+            top: 0;
 
-    left: 0;
+            width: 100%;
 
-    top: 0;
+            height: 100%;
 
-    width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
 
-    height: 100%;
+            align-items: center;
 
-    background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
 
-    align-items: center;
+        }
 
-    justify-content: center;
+        .modal-content {
 
-}
+            width: 550px;
 
-.modal-content {
+            max-width: 90%;
 
-    width: 550px;
+            max-height: 90vh;
 
-    max-width: 90%;
+            overflow-y: auto;
 
-    max-height: 90vh;
+            background-color: white;
 
-    overflow-y: auto;
+            border-radius: 16px;
 
-    background-color: white;
+            padding: 25px;
 
-    border-radius: 16px;
+        }
 
-    padding: 25px;
+        .modal-header {
 
-}
+            display: flex;
 
-.modal-header {
+            justify-content: space-between;
 
-    display: flex;
+            align-items: flex-start;
 
-    justify-content: space-between;
+            margin-bottom: 25px;
 
-    align-items: flex-start;
+        }
 
-    margin-bottom: 25px;
+        .modal-header h2 {
 
-}
+            margin: 0;
 
-.modal-header h2 {
+            color: #1b4332;
 
-    margin: 0;
+        }
 
-    color: #1b4332;
+        .modal-header p {
 
-}
+            margin: 5px 0 0;
 
-.modal-header p {
+            color: #999;
 
-    margin: 5px 0 0;
+            font-size: 13px;
 
-    color: #999;
+        }
 
-    font-size: 13px;
+        .btn-close {
 
-}
+            border: none;
 
-.btn-close {
+            background: none;
 
-    border: none;
+            font-size: 28px;
 
-    background: none;
+            color: #777;
 
-    font-size: 28px;
+            cursor: pointer;
 
-    color: #777;
+        }
 
-    cursor: pointer;
 
-}
+        /* FORM */
 
+        .form-group {
 
-/* FORM */
+            margin-bottom: 18px;
 
-.form-group {
+        }
 
-    margin-bottom: 18px;
+        .form-group label {
 
-}
+            display: block;
 
-.form-group label {
+            margin-bottom: 7px;
 
-    display: block;
+            color: #374151;
 
-    margin-bottom: 7px;
+            font-size: 14px;
 
-    color: #374151;
+            font-weight: 600;
 
-    font-size: 14px;
+        }
 
-    font-weight: 600;
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
 
-}
+            width: 100%;
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+            box-sizing: border-box;
 
-    width: 100%;
+            padding: 11px 12px;
 
-    box-sizing: border-box;
+            border: 1px solid #dddddd;
 
-    padding: 11px 12px;
+            border-radius: 9px;
 
-    border: 1px solid #dddddd;
+            outline: none;
 
-    border-radius: 9px;
+            font-size: 14px;
 
-    outline: none;
+            font-family: Arial, sans-serif;
 
-    font-size: 14px;
+            background-color: white;
 
-    font-family: Arial, sans-serif;
+        }
 
-    background-color: white;
+        .form-group textarea {
 
-}
+            height: 100px;
 
-.form-group textarea {
+            resize: vertical;
 
-    height: 100px;
+        }
 
-    resize: vertical;
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
 
-}
+            border-color: #2d6a4f;
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
+        }
 
-    border-color: #2d6a4f;
 
-}
+        /* MODAL FOOTER */
 
+        .modal-footer {
 
-/* MODAL FOOTER */
+            display: flex;
 
-.modal-footer {
+            justify-content: flex-end;
 
-    display: flex;
+            gap: 10px;
 
-    justify-content: flex-end;
+            margin-top: 25px;
 
-    gap: 10px;
+        }
 
-    margin-top: 25px;
+        .btn-batal,
+        .btn-simpan {
 
-}
+            border: none;
 
-.btn-batal,
-.btn-simpan {
+            padding: 10px 18px;
 
-    border: none;
+            border-radius: 9px;
 
-    padding: 10px 18px;
+            cursor: pointer;
 
-    border-radius: 9px;
+            font-size: 14px;
 
-    cursor: pointer;
+        }
 
-    font-size: 14px;
+        .btn-batal {
 
-}
+            background-color: #eeeeee;
 
-.btn-batal {
+            color: #555;
 
-    background-color: #eeeeee;
+        }
 
-    color: #555;
+        .btn-simpan {
 
-}
+            background-color: #2d6a4f;
 
-.btn-simpan {
+            color: white;
 
-    background-color: #2d6a4f;
+        }
 
-    color: white;
 
-}
 
+        /* DETAIL SOAL */
+        .detail-item {
 
+            margin-bottom: 20px;
 
-/* DETAIL SOAL */
-.detail-item {
+        }
 
-    margin-bottom: 20px;
+        .detail-item>span {
 
-}
+            display: block;
 
-.detail-item > span {
+            color: #888;
 
-    display: block;
+            font-size: 12px;
 
-    color: #888;
+            margin-bottom: 6px;
 
-    font-size: 12px;
+        }
 
-    margin-bottom: 6px;
+        .detail-item>p {
 
-}
+            margin: 0;
 
-.detail-item > p {
+            color: #333;
 
-    margin: 0;
+            line-height: 1.6;
 
-    color: #333;
+        }
 
-    line-height: 1.6;
+        .pilihan-list {
 
-}
+            background-color: #f8faf9;
 
-.pilihan-list {
+            border-radius: 10px;
 
-    background-color: #f8faf9;
+            padding: 10px 15px;
 
-    border-radius: 10px;
+        }
 
-    padding: 10px 15px;
+        .pilihan-list p {
 
-}
+            margin: 10px 0;
 
-.pilihan-list p {
+            color: #555;
 
-    margin: 10px 0;
+        }
 
-    color: #555;
+        .jawaban-detail {
 
-}
+            display: inline-flex;
 
-.jawaban-detail {
+            width: 35px;
 
-    display: inline-flex;
+            height: 35px;
 
-    width: 35px;
+            align-items: center;
 
-    height: 35px;
+            justify-content: center;
 
-    align-items: center;
+            background-color: #2d6a4f;
 
-    justify-content: center;
+            color: white;
 
-    background-color: #2d6a4f;
+            border-radius: 50%;
 
-    color: white;
+        }
 
-    border-radius: 50%;
 
-}
+        /* RESPONSIVE */
 
+        @media (max-width: 900px) {
 
-/* RESPONSIVE */
+            .page-header {
 
-@media (max-width: 900px) {
+                flex-direction: column;
 
-    .page-header {
+                align-items: flex-start;
 
-        flex-direction: column;
+                gap: 15px;
 
-        align-items: flex-start;
+            }
 
-        gap: 15px;
+            .summary-container {
 
-    }
+                grid-template-columns: 1fr;
 
-    .summary-container {
+            }
 
-        grid-template-columns: 1fr;
+            th,
+            td {
 
-    }
+                white-space: nowrap;
 
-    th,
-    td {
+            }
 
-        white-space: nowrap;
+        }
+    </style>
 
-    }
+    <script>
 
-}
+        /* TAMBAH SOAL */
+        function openModal() {
 
-</style>
+            document.getElementById('modalTitle').innerText = 'Tambah Soal';
 
-<script>
+            document.getElementById('pertanyaan').value = '';
 
-/* TAMBAH SOAL */
-function openModal() {
+            document.getElementById('materi').value = '';
 
-    document.getElementById('modalTitle').innerText = 'Tambah Soal';
+            document.getElementById('pilihanA').value = '';
 
-    document.getElementById('pertanyaan').value = '';
+            document.getElementById('pilihanB').value = '';
 
-    document.getElementById('materi').value = '';
+            document.getElementById('pilihanC').value = '';
 
-    document.getElementById('pilihanA').value = '';
+            document.getElementById('pilihanD').value = '';
 
-    document.getElementById('pilihanB').value = '';
+            document.getElementById('jawaban').value = '';
 
-    document.getElementById('pilihanC').value = '';
+            document.getElementById('soalModal').style.display = 'flex';
 
-    document.getElementById('pilihanD').value = '';
+        }
 
-    document.getElementById('jawaban').value = '';
 
-    document.getElementById('soalModal').style.display = 'flex';
+        /* EDIT SOAL */
+        function openEditModal(
+            pertanyaan,
+            materi,
+            pilihanA,
+            pilihanB,
+            pilihanC,
+            pilihanD,
+            jawaban
+        ) {
 
-}
+            document.getElementById('modalTitle').innerText = 'Edit Soal';
 
+            document.getElementById('pertanyaan').value = pertanyaan;
 
-/* EDIT SOAL */
-function openEditModal(
-    pertanyaan,
-    materi,
-    pilihanA,
-    pilihanB,
-    pilihanC,
-    pilihanD,
-    jawaban
-) {
+            document.getElementById('materi').value = materi;
 
-    document.getElementById('modalTitle').innerText = 'Edit Soal';
+            document.getElementById('pilihanA').value = pilihanA;
 
-    document.getElementById('pertanyaan').value = pertanyaan;
+            document.getElementById('pilihanB').value = pilihanB;
 
-    document.getElementById('materi').value = materi;
+            document.getElementById('pilihanC').value = pilihanC;
 
-    document.getElementById('pilihanA').value = pilihanA;
+            document.getElementById('pilihanD').value = pilihanD;
 
-    document.getElementById('pilihanB').value = pilihanB;
+            document.getElementById('jawaban').value = jawaban;
 
-    document.getElementById('pilihanC').value = pilihanC;
+            document.getElementById('soalModal').style.display = 'flex';
 
-    document.getElementById('pilihanD').value = pilihanD;
+        }
 
-    document.getElementById('jawaban').value = jawaban;
 
-    document.getElementById('soalModal').style.display = 'flex';
 
-}
+        /* TUTUP MODAL */
+        function closeModal() {
 
+            document.getElementById('soalModal').style.display = 'none';
 
+        }
 
-/* TUTUP MODAL */
-function closeModal() {
 
-    document.getElementById('soalModal').style.display = 'none';
 
-}
+        /* SIMPAN SOAL */
+        function saveSoal() {
 
+            alert('Soal berhasil disimpan!');
 
+            closeModal();
 
-/* SIMPAN SOAL */
-function saveSoal() {
+        }
 
-    alert('Soal berhasil disimpan!');
 
-    closeModal();
+        /* HAPUS SOAL */
+        function hapusSoal() {
 
-}
+            if (confirm('Apakah Anda yakin ingin menghapus soal ini?')) {
 
+                alert('Soal berhasil dihapus!');
 
-/* HAPUS SOAL */
-function hapusSoal() {
+            }
 
-    if (confirm('Apakah Anda yakin ingin menghapus soal ini?')) {
+        }
 
-        alert('Soal berhasil dihapus!');
 
-    }
+        /* LIHAT SOAL */
+        function lihatSoal(
+            pertanyaan,
+            materi,
+            pilihanA,
+            pilihanB,
+            pilihanC,
+            pilihanD,
+            jawaban
+        ) {
 
-}
+            document.getElementById('detailPertanyaan').innerText = pertanyaan;
 
+            document.getElementById('detailMateri').innerText = materi;
 
-/* LIHAT SOAL */
-function lihatSoal(
-    pertanyaan,
-    materi,
-    pilihanA,
-    pilihanB,
-    pilihanC,
-    pilihanD,
-    jawaban
-) {
+            document.getElementById('detailA').innerText = pilihanA;
 
-    document.getElementById('detailPertanyaan').innerText = pertanyaan;
+            document.getElementById('detailB').innerText = pilihanB;
 
-    document.getElementById('detailMateri').innerText = materi;
+            document.getElementById('detailC').innerText = pilihanC;
 
-    document.getElementById('detailA').innerText = pilihanA;
+            document.getElementById('detailD').innerText = pilihanD;
 
-    document.getElementById('detailB').innerText = pilihanB;
+            document.getElementById('detailJawaban').innerText = jawaban;
 
-    document.getElementById('detailC').innerText = pilihanC;
+            document.getElementById('lihatModal').style.display = 'flex';
 
-    document.getElementById('detailD').innerText = pilihanD;
+        }
 
-    document.getElementById('detailJawaban').innerText = jawaban;
 
-    document.getElementById('lihatModal').style.display = 'flex';
+        /* TUTUP DETAIL */
+        function closeLihatModal() {
 
-}
+            document.getElementById('lihatModal').style.display = 'none';
 
+        }
 
-/* TUTUP DETAIL */
-function closeLihatModal() {
-
-    document.getElementById('lihatModal').style.display = 'none';
-
-}
-
-</script>
+    </script>
 
 @endsection
