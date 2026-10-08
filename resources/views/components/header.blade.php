@@ -64,7 +64,7 @@
                     <li class="nav-item">
                         <a
                             class="nav-link {{ request()->routeIs('materi*') ? 'active' : '' }}"
-                            href="{{ route('materi') }}"
+                            href="{{ route('materi.siswa') }}"
                         >
                             Materi
                         </a>
