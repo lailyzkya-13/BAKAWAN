@@ -1,3 +1,4 @@
+
 @extends('layouts.app-guru')
 
 @section('content')
@@ -5,207 +6,205 @@
 <!-- Background Bagian Atas -->
 <div class="dashboard-background">
 
-<!-- Judul Dashboard -->
-<div class="dashboard-header">
-    <div>
-        <h1>Dashboard Guru</h1>
-        <p>Selamat datang kembali di Portal Guru BAKAWAN 👋</p>
+    <!-- Judul Dashboard -->
+    <div class="dashboard-header">
+        <div>
+            <h1>Dashboard Guru</h1>
+            <p>Selamat datang kembali di Portal Guru BAKAWAN</p>
+        </div>
     </div>
-</div>
 
 </div>
 
 <!-- Ringkasan Data -->
 <div class="summary-container">
 
-<!-- Jumlah Kelas -->
-<div class="summary-card">
-    <div class="summary-icon">📚</div>
+    <!-- Jumlah Kelas -->
+    <div class="summary-card">
+        <div class="summary-icon">
+            <i data-lucide="book-open"></i>
+        </div>
 
-    <div>
-        <p>Jumlah Kelas</p>
-        <h2>4</h2>
-        <span>Kelas yang diajar</span>
+        <div>
+            <p>Jumlah Kelas</p>
+            <h2>4</h2>
+            <span>Kelas yang diajar</span>
+        </div>
     </div>
-</div>
 
+    <!-- Jumlah Murid -->
+    <div class="summary-card">
+        <div class="summary-icon">
+            <i data-lucide="users"></i>
+        </div>
 
-<!-- Jumlah Murid -->
-<div class="summary-card">
-    <div class="summary-icon">👨‍🎓</div>
-
-    <div>
-        <p>Jumlah Murid</p>
-        <h2>120</h2>
-        <span>Total murid</span>
+        <div>
+            <p>Jumlah Murid</p>
+            <h2>120</h2>
+            <span>Total murid</span>
+        </div>
     </div>
-</div>
 
+    <!-- Kuis Selesai -->
+    <div class="summary-card">
+        <div class="summary-icon">
+            <i data-lucide="clipboard-check"></i>
+        </div>
 
-<!-- Kuis Selesai -->
-<div class="summary-card">
-    <div class="summary-icon">📝</div>
-
-    <div>
-        <p>Kuis Selesai</p>
-        <h2>86</h2>
-        <span>Minggu ini</span>
+        <div>
+            <p>Kuis Selesai</p>
+            <h2>86</h2>
+            <span>Minggu ini</span>
+        </div>
     </div>
-</div>
 
+    <!-- Rata-rata Nilai -->
+    <div class="summary-card">
+        <div class="summary-icon">
+            <i data-lucide="star"></i>
+        </div>
 
-<!-- Rata-rata Nilai -->
-<div class="summary-card">
-    <div class="summary-icon">⭐</div>
-
-    <div>
-        <p>Rata-rata Nilai</p>
-        <h2>84</h2>
-        <span>Nilai seluruh kelas</span>
+        <div>
+            <p>Rata-rata Nilai</p>
+            <h2>84</h2>
+            <span>Nilai seluruh kelas</span>
+        </div>
     </div>
-</div>
 
 </div>
 
 <!-- Bagian Bawah -->
 <div class="dashboard-grid">
 
-<!-- Aktivitas Murid -->
-<div class="dashboard-box">
+    <!-- Aktivitas Murid -->
+    <div class="dashboard-box">
 
-    <div class="box-header">
-        <div>
-            <h2>Aktivitas Murid</h2>
-            <p>Aktivitas terbaru siswa</p>
+        <div class="box-header">
+            <div>
+                <h2>Aktivitas Murid</h2>
+                <p>Aktivitas terbaru siswa</p>
+            </div>
+        </div>
+
+        <div class="activity-list">
+
+            <!-- Aktivitas Kuis -->
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i data-lucide="file-check"></i>
+                </div>
+
+                <div class="activity-content">
+                    <strong>Kelas 5A</strong>
+                    <p>Baru saja menyelesaikan Kuis Ekosistem</p>
+                    <span>5 menit yang lalu</span>
+                </div>
+            </div>
+
+            <!-- Aktivitas Game -->
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i data-lucide="gamepad-2"></i>
+                </div>
+
+                <div class="activity-content">
+                    <strong>Kelas 5B</strong>
+                    <p>Menyelesaikan Game Bajaga Banua</p>
+                    <span>15 menit yang lalu</span>
+                </div>
+            </div>
+
+            <!-- Aktivitas Kuis -->
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i data-lucide="clipboard-check"></i>
+                </div>
+
+                <div class="activity-content">
+                    <strong>Kelas 5C</strong>
+                    <p>Menyelesaikan Kuis Rantai Makanan</p>
+                    <span>30 menit yang lalu</span>
+                </div>
+            </div>
+
+            <!-- Prestasi Murid -->
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i data-lucide="trophy"></i>
+                </div>
+
+                <div class="activity-content">
+                    <strong>Kelas 5A</strong>
+                    <p>Mendapatkan nilai rata-rata 90 pada kuis</p>
+                    <span>1 jam yang lalu</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <!-- Rekap Nilai -->
+    <div class="dashboard-box">
 
-    <div class="activity-list">
-
-        <div class="activity-item">
-            <div class="activity-icon">📝</div>
-
-            <div class="activity-content">
-                <strong>Kelas 5A</strong>
-                <p>Baru saja menyelesaikan Kuis Ekosistem</p>
-                <span>5 menit yang lalu</span>
+        <div class="box-header">
+            <div>
+                <h2>Rekap Nilai Kuis</h2>
+                <p>Rata-rata nilai setiap kelas</p>
             </div>
         </div>
 
+        <div class="score-list">
 
-        <div class="activity-item">
-            <div class="activity-icon">🎮</div>
+            <!-- Kelas 5A -->
+            <div class="score-item">
+                <div class="score-info">
+                    <strong>Kelas 5A</strong>
+                    <span>90</span>
+                </div>
 
-            <div class="activity-content">
-                <strong>Kelas 5B</strong>
-                <p>Menyelesaikan Game Bajaga Banua</p>
-                <span>15 menit yang lalu</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 90%;"></div>
+                </div>
             </div>
-        </div>
 
+            <!-- Kelas 5B -->
+            <div class="score-item">
+                <div class="score-info">
+                    <strong>Kelas 5B</strong>
+                    <span>84</span>
+                </div>
 
-        <div class="activity-item">
-            <div class="activity-icon">📝</div>
-
-            <div class="activity-content">
-                <strong>Kelas 5C</strong>
-                <p>Menyelesaikan Kuis Rantai Makanan</p>
-                <span>30 menit yang lalu</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 84%;"></div>
+                </div>
             </div>
-        </div>
 
+            <!-- Kelas 5C -->
+            <div class="score-item">
+                <div class="score-info">
+                    <strong>Kelas 5C</strong>
+                    <span>78</span>
+                </div>
 
-        <div class="activity-item">
-            <div class="activity-icon">🏆</div>
-
-            <div class="activity-content">
-                <strong>Kelas 5A</strong>
-                <p>Mendapatkan nilai rata-rata 90 pada kuis</p>
-                <span>1 jam yang lalu</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 78%;"></div>
+                </div>
             </div>
-        </div>
 
+            <!-- Kelas 5D -->
+            <div class="score-item">
+                <div class="score-info">
+                    <strong>Kelas 5D</strong>
+                    <span>88</span>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 88%;"></div>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-</div>
-
-
-<!-- Rekap Nilai -->
-<div class="dashboard-box">
-
-    <div class="box-header">
-        <div>
-            <h2>Rekap Nilai Kuis</h2>
-            <p>Rata-rata nilai setiap kelas</p>
-        </div>
-    </div>
-
-
-    <div class="score-list">
-
-        <!-- Kelas 5A -->
-        <div class="score-item">
-
-            <div class="score-info">
-                <strong>Kelas 5A</strong>
-                <span>90</span>
-            </div>
-
-            <div class="progress">
-                <div class="progress-bar" style="width: 90%;"></div>
-            </div>
-
-        </div>
-
-
-        <!-- Kelas 5B -->
-        <div class="score-item">
-
-            <div class="score-info">
-                <strong>Kelas 5B</strong>
-                <span>84</span>
-            </div>
-
-            <div class="progress">
-                <div class="progress-bar" style="width: 84%;"></div>
-            </div>
-
-        </div>
-
-
-        <!-- Kelas 5C -->
-        <div class="score-item">
-
-            <div class="score-info">
-                <strong>Kelas 5C</strong>
-                <span>78</span>
-            </div>
-
-            <div class="progress">
-                <div class="progress-bar" style="width: 78%;"></div>
-            </div>
-
-        </div>
-
-
-        <!-- Kelas 5D -->
-        <div class="score-item">
-
-            <div class="score-info">
-                <strong>Kelas 5D</strong>
-                <span>88</span>
-            </div>
-
-            <div class="progress">
-                <div class="progress-bar" style="width: 88%;"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 </div>
 
@@ -240,7 +239,6 @@
         z-index: 1;
     }
 
-
     /* Header Dashboard */
     .dashboard-header {
         margin-bottom: 0;
@@ -256,7 +254,6 @@
         color: #6b7280;
         font-size: 15px;
     }
-
 
     /* Summary */
     .summary-container {
@@ -289,7 +286,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
+        flex-shrink: 0;
+    }
+
+    .summary-icon svg {
+        width: 26px;
+        height: 26px;
+        color: #2d6a4f;
+        stroke-width: 2;
     }
 
     .summary-card p {
@@ -309,14 +313,12 @@
         color: #9ca3af;
     }
 
-
     /* Dashboard Grid */
     .dashboard-grid {
         display: grid;
         grid-template-columns: 1.2fr 1fr;
         gap: 20px;
     }
-
 
     /* Box */
     .dashboard-box {
@@ -342,7 +344,6 @@
         font-size: 13px;
     }
 
-
     /* Aktivitas */
     .activity-item {
         display: flex;
@@ -366,6 +367,13 @@
         flex-shrink: 0;
     }
 
+    .activity-icon svg {
+        width: 21px;
+        height: 21px;
+        color: #2d6a4f;
+        stroke-width: 2;
+    }
+
     .activity-content strong {
         color: #2d6a4f;
         font-size: 14px;
@@ -381,7 +389,6 @@
         color: #9ca3af;
         font-size: 11px;
     }
-
 
     /* Rekap Nilai */
     .score-item {
@@ -418,10 +425,8 @@
         border-radius: 10px;
     }
 
-
     /* Responsive */
     @media (max-width: 1000px) {
-
         .summary-container {
             grid-template-columns: repeat(2, 1fr);
         }
@@ -429,9 +434,25 @@
         .dashboard-grid {
             grid-template-columns: 1fr;
         }
+    }
 
+    @media (max-width: 600px) {
+        .summary-container {
+            grid-template-columns: 1fr;
+        }
     }
 
 </style>
+
+<!-- Library Lucide Icons -->
+<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    });
+</script>
 
 @endsection
