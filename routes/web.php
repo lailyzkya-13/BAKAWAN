@@ -136,3 +136,32 @@ Route::get('/profil', [
     ProfilGuruController::class,
     'index'
 ])->name('profil');
+
+
+
+/* KELOLA GAME GURU */
+
+// Menampilkan semua game
+Route::get('/game', [
+    KelolaGameController::class, 'index'
+])->name('game');
+
+// Menyimpan game baru
+Route::post('/game', [
+    KelolaGameController::class, 'store'
+])->name('game.store');
+
+// Mengubah game
+Route::put('/game/{game}', [
+    KelolaGameController::class, 'update'
+])->name('game.update');
+
+// Menghapus game
+Route::delete('/game/{game}', [
+    KelolaGameController::class, 'destroy'
+])->name('game.destroy');
+
+// Memainkan game
+Route::get('/game/{game}/play', [
+    KelolaGameController::class, 'play'
+])->name('game.play');
