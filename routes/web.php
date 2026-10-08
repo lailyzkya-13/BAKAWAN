@@ -11,6 +11,8 @@ use App\Http\Controllers\KelolaMateriGuruController;
 use App\Http\Controllers\HasilEvaluasiController;
 use App\Http\Controllers\ProfilGuruController;
 
+use App\Models\Materi;
+
 
 /* ROUTE AWAL */
 
@@ -45,13 +47,30 @@ Route::get('/aktivitas/mencocokkan', function () {
 })->name('aktivitas.mencocokkan');
 
 
-// Materi Siswa
+
+// MATERI SISWA
+
+// Daftar Materi Siswa
 Route::get('/materi-siswa', function () {
-    return view('materi');
+
+    $materi = Materi::latest()->get();
+
+    return view('materi', compact('materi'));
+
 })->name('materi.siswa');
 
 
-// Detail Materi Biotik dan Abiotik Siswa
+// Detail Materi Siswa
+Route::get('/materi-siswa/{materi}', function (Materi $materi) {
+
+    $materi->load('subbab');
+
+    return view('materi-detail-siswa', compact('materi'));
+
+})->name('materi.siswa.show');
+
+
+// Materi Biotik dan Abiotik Lama
 Route::get('/materi/biotik-abiotik', function () {
     return view('materi-biotik');
 })->name('materi.biotik');
@@ -83,6 +102,7 @@ Route::get('/dashboard', [
 ])->name('dashboard');
 
 
+
 // KELOLA MATERI GURU
 
 // Daftar Materi
@@ -90,39 +110,70 @@ Route::get('/materi', [
     KelolaMateriGuruController::class, 'index'
 ])->name('materi');
 
-// Tambah Materi
+
+// Form Tambah Materi
+Route::get('/materi/tambah', [
+    KelolaMateriGuruController::class, 'create'
+])->name('materi.create');
+
+
+// Simpan Materi Baru
 Route::post('/materi', [
     KelolaMateriGuruController::class, 'store'
 ])->name('materi.store');
 
-// Detail Materi
+
+// Lihat Detail Materi Guru
 Route::get('/materi/detail/{materi}', [
     KelolaMateriGuruController::class, 'show'
 ])->name('materi.show');
 
 
+// Form Edit Materi
+Route::get('/materi/{materi}/edit', [
+    KelolaMateriGuruController::class, 'edit'
+])->name('materi.edit');
 
+
+// Simpan Perubahan Materi
+Route::put('/materi/{materi}', [
+    KelolaMateriGuruController::class, 'update'
+])->name('materi.update');
+
+
+// Hapus Materi
+Route::delete('/materi/{materi}', [
+    KelolaMateriGuruController::class, 'destroy'
+])->name('materi.destroy');
+
+
+// ==========================
 // KELOLA GAME GURU
+// ==========================
 
 // Daftar Game
 Route::get('/game', [
     KelolaGameController::class, 'index'
 ])->name('game');
 
+
 // Tambah Game
 Route::post('/game', [
     KelolaGameController::class, 'store'
 ])->name('game.store');
+
 
 // Edit Game
 Route::put('/game/{game}', [
     KelolaGameController::class, 'update'
 ])->name('game.update');
 
+
 // Hapus Game
 Route::delete('/game/{game}', [
     KelolaGameController::class, 'destroy'
 ])->name('game.destroy');
+
 
 // Guru Mencoba Game
 Route::get('/game/{game}/play', [
@@ -130,19 +181,19 @@ Route::get('/game/{game}/play', [
 ])->name('game.play');
 
 
-
-
-// FITUR GURU LAINNYA
+/* FITUR GURU LAINNYA */
 
 // Soal Kuis
 Route::get('/soal-kuis', [
     KelolaKuisController::class, 'index'
 ])->name('soal.kuis');
 
+
 // Hasil Evaluasi
 Route::get('/hasil-evaluasi', [
     HasilEvaluasiController::class, 'index'
 ])->name('hasil.evaluasi');
+
 
 // Profil Guru
 Route::get('/profil', [

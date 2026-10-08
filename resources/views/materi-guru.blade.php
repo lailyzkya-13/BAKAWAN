@@ -12,10 +12,12 @@
             <p>Kelola materi pembelajaran IPAS untuk siswa kelas V.</p>
         </div>
 
-        <button type="button" class="btn-tambah" onclick="openModal()">
+        <!-- TOMBOL TAMBAH MATERI -->
+        <a href="{{ route('materi.create') }}" class="btn-tambah">
             + Tambah Materi
-        </button>
+        </a>
     </div>
+
 
     <!-- PESAN BERHASIL -->
     @if(session('success'))
@@ -24,10 +26,11 @@
         </div>
     @endif
 
+
     <!-- PESAN ERROR -->
     @if($errors->any())
         <div class="alert-error">
-            <strong>Materi gagal disimpan:</strong>
+            <strong>Terjadi kesalahan:</strong>
             <ul>
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -36,6 +39,7 @@
         </div>
     @endif
 
+
     <!-- DAFTAR MATERI -->
     <div class="materi-container">
 
@@ -43,7 +47,9 @@
 
             <div class="materi-card">
 
+                <!-- GAMBAR -->
                 <div class="materi-image">
+
                     @if($item->gambar)
                         <img
                             src="{{ asset('storage/' . $item->gambar) }}"
@@ -53,8 +59,11 @@
                             src="{{ asset('images/ekosistem.jpeg') }}"
                             alt="Gambar Materi">
                     @endif
+
                 </div>
 
+
+                <!-- KONTEN KARTU -->
                 <div class="materi-content">
 
                     <span class="materi-label">
@@ -65,6 +74,7 @@
 
                     <p>{{ $item->deskripsi }}</p>
 
+                    <!-- INFORMASI MATERI -->
                     <div class="materi-info">
                         <span>📚 IPAS Kelas V</span>
 
@@ -73,26 +83,57 @@
                         </span>
                     </div>
 
+
+                    <!-- TOMBOL AKSI -->
                     <div class="materi-action">
 
+                        <!-- LIHAT -->
                         <a
                             href="{{ route('materi.show', $item->id) }}"
                             class="btn-lihat">
                             Lihat
                         </a>
 
+                        <!-- EDIT -->
+                        <a
+                            href="{{ route('materi.edit', $item->id) }}"
+                            class="btn-edit">
+                            Edit
+                        </a>
+
+                        <!-- HAPUS -->
+                        <form
+                            action="{{ route('materi.destroy', $item->id) }}"
+                            method="POST"
+                            onsubmit="return confirm('Yakin ingin menghapus materi ini?')">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn-hapus">
+                                Hapus
+                            </button>
+
+                        </form>
+
                     </div>
+
                 </div>
+
             </div>
 
         @empty
 
+            <!-- JIKA BELUM ADA MATERI -->
             <div class="materi-kosong">
+
                 <h3>Belum ada materi</h3>
+
                 <p>
                     Klik tombol Tambah Materi
                     untuk membuat materi pembelajaran.
                 </p>
+
             </div>
 
         @endforelse
@@ -102,119 +143,15 @@
 </div>
 
 
-<!-- MODAL TAMBAH MATERI -->
-<div class="modal" id="materiModal">
-
-    <form
-        action="{{ route('materi.store') }}"
-        method="POST"
-        enctype="multipart/form-data"
-        class="modal-content">
-
-        @csrf
-
-        <div class="modal-header">
-            <div>
-                <h2>Tambah Materi</h2>
-                <p>Masukkan informasi materi pembelajaran.</p>
-            </div>
-
-            <button
-                type="button"
-                class="btn-close"
-                onclick="closeModal()">
-                &times;
-            </button>
-        </div>
-
-        <!-- JUDUL -->
-        <div class="form-group">
-            <label for="judulMateri">Judul Materi</label>
-
-            <input
-                type="text"
-                id="judulMateri"
-                name="judul"
-                value="{{ old('judul') }}"
-                placeholder="Contoh: Mengenal Ekosistem"
-                required>
-        </div>
-
-        <!-- DESKRIPSI -->
-        <div class="form-group">
-            <label for="deskripsiMateri">Deskripsi Materi</label>
-
-            <textarea
-                id="deskripsiMateri"
-                name="deskripsi"
-                placeholder="Masukkan deskripsi materi">{{ old('deskripsi') }}</textarea>
-        </div>
-
-        <!-- ISI MATERI -->
-        <div class="form-group">
-            <label for="kontenMateri">Isi Materi</label>
-
-            <textarea
-                id="kontenMateri"
-                name="konten"
-                rows="6"
-                placeholder="Tuliskan isi materi pembelajaran"
-                required>{{ old('konten') }}</textarea>
-        </div>
-
-        <!-- GAMBAR -->
-        <div class="form-group">
-            <label for="gambarMateri">Gambar Materi</label>
-
-            <input
-                type="file"
-                id="gambarMateri"
-                name="gambar"
-                accept=".jpg,.jpeg,.png">
-
-            <small>
-                Format JPG, JPEG atau PNG. Maksimal 2 MB.
-            </small>
-        </div>
-
-        <!-- DURASI -->
-        <div class="form-group">
-            <label for="durasiMateri">Durasi Materi</label>
-
-            <input
-                type="text"
-                id="durasiMateri"
-                name="durasi"
-                value="{{ old('durasi') }}"
-                placeholder="Contoh: 20 Menit">
-        </div>
-
-        <!-- TOMBOL -->
-        <div class="modal-footer">
-
-            <button
-                type="button"
-                class="btn-batal"
-                onclick="closeModal()">
-                Batal
-            </button>
-
-            <button
-                type="submit"
-                class="btn-simpan">
-                Simpan Materi
-            </button>
-
-        </div>
-    </form>
-</div>
-
-
 <style>
+
+    /* HALAMAN UTAMA */
     .materi-page {
         padding-bottom: 30px;
     }
 
+
+    /* HEADER */
     .page-header {
         display: flex;
         justify-content: space-between;
@@ -235,7 +172,11 @@
         font-size: 14px;
     }
 
+
+    /* TOMBOL TAMBAH */
     .btn-tambah {
+        display: inline-block;
+        flex-shrink: 0;
         border: none;
         background: #2d6a4f;
         color: white;
@@ -243,12 +184,17 @@
         border-radius: 10px;
         cursor: pointer;
         font-weight: bold;
+        text-decoration: none;
+        transition: 0.2s;
     }
 
     .btn-tambah:hover {
         background: #1b4332;
+        color: white;
     }
 
+
+    /* PESAN */
     .alert-success {
         background: #d8f3dc;
         color: #1b4332;
@@ -265,35 +211,45 @@
         margin-bottom: 20px;
     }
 
+
+    /* GRID MATERI */
     .materi-container {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
     }
 
+
+    /* CARD MATERI */
     .materi-card {
         background: white;
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
         transition: 0.2s;
+        min-width: 0;
     }
 
     .materi-card:hover {
         transform: translateY(-3px);
     }
 
+
+    /* GAMBAR */
     .materi-image {
         height: 300px;
         background: #d8f3dc;
     }
 
     .materi-image img {
+        display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
+
+    /* KONTEN */
     .materi-content {
         padding: 20px;
     }
@@ -312,14 +268,18 @@
         color: #1b4332;
         font-size: 20px;
         margin: 12px 0 8px;
+        overflow-wrap: anywhere;
     }
 
     .materi-content p {
         color: #666;
         font-size: 14px;
         line-height: 1.6;
+        overflow-wrap: anywhere;
     }
 
+
+    /* INFORMASI */
     .materi-info {
         display: flex;
         flex-wrap: wrap;
@@ -329,22 +289,67 @@
         font-size: 12px;
     }
 
+
+    /* TOMBOL LIHAT, EDIT, HAPUS */
     .materi-action {
         display: flex;
+        align-items: center;
+        flex-wrap: wrap;
         gap: 8px;
         margin-top: 18px;
     }
 
-    .btn-lihat {
+    .materi-action form {
+        margin: 0;
+    }
+
+    .btn-lihat,
+    .btn-edit,
+    .btn-hapus {
         display: inline-block;
-        background: #e8f5e9;
-        color: #2d6a4f;
         padding: 9px 15px;
         border-radius: 7px;
         text-decoration: none;
+        font-family: inherit;
         font-size: 13px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
     }
 
+    .btn-lihat {
+        background: #e8f5e9;
+        color: #2d6a4f;
+    }
+
+    .btn-lihat:hover {
+        background: #d8f3dc;
+        color: #1b4332;
+    }
+
+    .btn-edit {
+        background: #fff1d6;
+        color: #946200;
+    }
+
+    .btn-edit:hover {
+        background: #ffe3a4;
+        color: #805400;
+    }
+
+    .btn-hapus {
+        background: #ffe0e5;
+        color: #b42342;
+    }
+
+    .btn-hapus:hover {
+        background: #ffc7d1;
+        color: #9c1733;
+    }
+
+
+    /* KONDISI KOSONG */
     .materi-kosong {
         grid-column: 1 / -1;
         background: white;
@@ -354,123 +359,15 @@
         color: #52796f;
     }
 
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        inset: 0;
-        background: rgba(0,0,0,0.4);
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .modal-content {
-        width: 500px;
-        max-width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        background: white;
-        border-radius: 16px;
-        padding: 25px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-    }
-
-    .modal-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        margin-bottom: 25px;
-    }
-
-    .modal-header h2 {
-        margin: 0;
+    .materi-kosong h3 {
         color: #1b4332;
+        font-size: 20px;
     }
 
-    .modal-header p {
-        margin: 5px 0 0;
-        color: #999;
-        font-size: 13px;
-    }
 
-    .btn-close {
-        background: none;
-        border: none;
-        font-size: 28px;
-        cursor: pointer;
-        color: #777;
-    }
-
-    .form-group {
-        margin-bottom: 18px;
-    }
-
-    .form-group label {
-        display: block;
-        font-size: 14px;
-        font-weight: bold;
-        color: #374151;
-        margin-bottom: 7px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 11px 12px;
-        border: 1px solid #ddd;
-        border-radius: 9px;
-        outline: none;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        border-color: #2d6a4f;
-    }
-
-    .form-group textarea {
-        resize: vertical;
-    }
-
-    .form-group small {
-        display: block;
-        margin-top: 5px;
-        color: #999;
-        font-size: 11px;
-    }
-
-    .modal-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 25px;
-    }
-
-    .btn-batal,
-    .btn-simpan {
-        border: none;
-        padding: 11px 18px;
-        border-radius: 9px;
-        cursor: pointer;
-    }
-
-    .btn-batal {
-        background: #eee;
-        color: #555;
-    }
-
-    .btn-simpan {
-        background: #2d6a4f;
-        color: white;
-    }
-
-    .btn-simpan:hover {
-        background: #1b4332;
-    }
-
+    /* RESPONSIVE TABLET */
     @media (max-width: 900px) {
+
         .materi-container {
             grid-template-columns: 1fr;
         }
@@ -478,26 +375,46 @@
         .page-header {
             flex-wrap: wrap;
         }
-    }
-</style>
 
-
-<script>
-    function openModal() {
-        document.getElementById('materiModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('materiModal').style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const adaError = @json($errors->any());
-
-        if (adaError) {
-            openModal();
+        .materi-image {
+            height: 260px;
         }
-    });
-</script>
+    }
+
+
+    /* RESPONSIVE HP */
+    @media (max-width: 480px) {
+
+        .page-header h1 {
+            font-size: 23px;
+        }
+
+        .page-header p {
+            font-size: 13px;
+        }
+
+        .btn-tambah {
+            width: 100%;
+            text-align: center;
+        }
+
+        .materi-image {
+            height: 210px;
+        }
+
+        .materi-content {
+            padding: 16px;
+        }
+
+        .materi-content h2 {
+            font-size: 18px;
+        }
+
+        .materi-info {
+            gap: 10px;
+        }
+    }
+
+</style>
 
 @endsection

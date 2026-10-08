@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -8,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Jika tabel sudah ada, tidak perlu dibuat ulang.
+        // Cek apakah tabel subbab_materis sudah ada
         if (!Schema::hasTable('subbab_materis')) {
 
             Schema::create('subbab_materis', function (Blueprint $table) {
@@ -24,11 +25,12 @@ return new class extends Migration
 
                 $table->timestamps();
             });
+
         }
     }
 
     public function down(): void
     {
-        // Sengaja tidak menghapus tabel yang sudah ada sebelumnya.
+        // Tidak menghapus tabel yang mungkin sudah ada sebelumnya.
     }
 };

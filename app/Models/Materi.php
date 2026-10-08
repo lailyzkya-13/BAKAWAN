@@ -14,5 +14,14 @@ class Materi extends Model
         'konten',
         'gambar',
         'durasi',
+        'ringkasan',
     ];
+
+    public function subbab()
+    {
+        return $this->hasMany(
+            SubbabMateri::class,
+            'materi_id'
+        )->orderBy('urutan');
+    }
 }
