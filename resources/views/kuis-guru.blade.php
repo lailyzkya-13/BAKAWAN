@@ -30,7 +30,7 @@
 
                 <div>
                     <p>Total Soal</p>
-                    <h2>10</h2>
+                    <h2>{{ $daftarSoal->count() }}</h2>
                     <span>Soal kuis tersedia</span>
                 </div>
 
@@ -112,27 +112,27 @@
                             <td>
 
                                 <button class="btn-detail" onclick="lihatSoal(
-                                        'Apa yang dimaksud dengan ekosistem?',
-                                        'Mengenal Ekosistem',
-                                        'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                        'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                        'Kumpulan hewan saja',
-                                        'Tempat tinggal manusia',
-                                        'Kumpulan tumbuhan saja',
-                                        'A'
-                                    )">
+                                                'Apa yang dimaksud dengan ekosistem?',
+                                                'Mengenal Ekosistem',
+                                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
+                                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
+                                                'Kumpulan hewan saja',
+                                                'Tempat tinggal manusia',
+                                                'Kumpulan tumbuhan saja',
+                                                'A'
+                                            )">
                                     Lihat
                                 </button>
 
                                 <button class="btn-edit" onclick="openEditModal(
-                                        'Apa yang dimaksud dengan ekosistem?',
-                                        'Mengenal Ekosistem',
-                                        'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                        'Kumpulan hewan saja',
-                                        'Tempat tinggal manusia',
-                                        'Kumpulan tumbuhan saja',
-                                        'A'
-                                    )">
+                                                'Apa yang dimaksud dengan ekosistem?',
+                                                'Mengenal Ekosistem',
+                                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
+                                                'Kumpulan hewan saja',
+                                                'Tempat tinggal manusia',
+                                                'Kumpulan tumbuhan saja',
+                                                'A'
+                                            )">
                                     Edit
                                 </button>
 
@@ -169,26 +169,26 @@
                             <td>
 
                                 <button class="btn-detail" onclick="lihatSoal(
-                                        'Manakah yang termasuk komponen biotik?',
-                                        'Mengenal Ekosistem',
-                                        'Tumbuhan',
-                                        'Air',
-                                        'Batu',
-                                        'Cahaya matahari',
-                                        'A'
-                                    )">
+                                                'Manakah yang termasuk komponen biotik?',
+                                                'Mengenal Ekosistem',
+                                                'Tumbuhan',
+                                                'Air',
+                                                'Batu',
+                                                'Cahaya matahari',
+                                                'A'
+                                            )">
                                     Lihat
                                 </button>
 
                                 <button class="btn-edit" onclick="openEditModal(
-                                        'Manakah yang termasuk komponen biotik?',
-                                        'Mengenal Ekosistem',
-                                        'Air',
-                                        'Tumbuhan',
-                                        'Batu',
-                                        'Cahaya matahari',
-                                        'B'
-                                    )">
+                                                'Manakah yang termasuk komponen biotik?',
+                                                'Mengenal Ekosistem',
+                                                'Air',
+                                                'Tumbuhan',
+                                                'Batu',
+                                                'Cahaya matahari',
+                                                'B'
+                                            )">
                                     Edit
                                 </button>
 
@@ -225,26 +225,26 @@
                             <td>
 
                                 <button class="btn-detail" onclick="lihatSoal(
-                                        'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
-                                        'Interaksi Ekosistem',
-                                        'Mutualisme',
-                                        'Kompetisi',
-                                        'Predasi',
-                                        'Parasitisme',
-                                        'A'
-                                    )">
+                                                'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
+                                                'Interaksi Ekosistem',
+                                                'Mutualisme',
+                                                'Kompetisi',
+                                                'Predasi',
+                                                'Parasitisme',
+                                                'A'
+                                            )">
                                     Lihat
                                 </button>
 
                                 <button class="btn-edit" onclick="openEditModal(
-                                        'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
-                                        'Interaksi Ekosistem',
-                                        'Mutualisme',
-                                        'Kompetisi',
-                                        'Predasi',
-                                        'Parasitisme',
-                                        'A'
-                                    )">
+                                                'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
+                                                'Interaksi Ekosistem',
+                                                'Mutualisme',
+                                                'Kompetisi',
+                                                'Predasi',
+                                                'Parasitisme',
+                                                'A'
+                                            )">
                                     Edit
                                 </button>
 
@@ -311,19 +311,23 @@
 
                     <label for="materi">Materi</label>
 
-                    <select id="materi" name="materi_id">
+                    <select id="materi" name="materi_id" required>
 
-                        <option value="">
-                            Pilih Materi
-                        </option>
+                        <option value="">-- Pilih Materi --</option>
 
-                        @foreach($daftarMateri as $materi)
+                        @forelse($daftarMateri as $materi)
 
                             <option value="{{ $materi->id }}">
                                 {{ $materi->judul }}
                             </option>
 
-                        @endforeach
+                        @empty
+
+                            <option value="" disabled>
+                                Belum ada materi tersedia
+                            </option>
+
+                        @endforelse
 
                     </select>
 
@@ -385,7 +389,7 @@
                     Batal
                 </button>
 
-                <button class="btn-simpan" onclick="saveSoal()">
+                <button type="submit" class="btn-simpan">
                     Simpan
                 </button>
 
