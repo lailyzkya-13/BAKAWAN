@@ -263,9 +263,34 @@ Route::get('/game/{game}/play', [
 
 
 // SOAL KUIS
+
+/* =====================================
+   CRUD SOAL KUIS GURU
+===================================== */
+
+// Menampilkan daftar soal
 Route::get('/soal-kuis', [
     KelolaKuisController::class, 'index'
 ])->name('soal.kuis');
+
+
+// Menyimpan soal baru
+Route::post('/soal-kuis', [
+    KelolaKuisController::class, 'store'
+])->name('soal.kuis.store');
+
+
+// Memperbarui soal
+Route::put('/soal-kuis/{soalKuis}', [
+    KelolaKuisController::class, 'update'
+])->name('soal.kuis.update');
+
+
+// Menghapus soal
+Route::delete('/soal-kuis/{soalKuis}', [
+    KelolaKuisController::class, 'destroy'
+])->name('soal.kuis.destroy');
+
 
 
 

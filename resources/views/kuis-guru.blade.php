@@ -4,7 +4,7 @@
 
     <div class="soal-page">
 
-        <!-- header -->
+        <!-- HEADER HALAMAN -->
         <div class="page-header">
 
             <div>
@@ -12,20 +12,42 @@
                 <p>Kelola soal kuis untuk pembelajaran BAKAWAN.</p>
             </div>
 
-            <button class="btn-tambah" onclick="openModal()">
+            <button type="button" class="btn-tambah" onclick="openModal()">
                 + Tambah Soal
             </button>
 
         </div>
 
 
-        <!-- ringkasan -->
+        <!-- PESAN BERHASIL -->
+        @if(session('success'))
+            <div class="alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
+        <!-- PESAN ERROR -->
+        @if($errors->any())
+            <div class="alert-error">
+                <strong>Terjadi kesalahan:</strong>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
+        <!-- RINGKASAN -->
         <div class="summary-container">
 
+            <!-- TOTAL SOAL -->
             <div class="summary-card">
 
                 <div class="summary-icon">
-                    📝
+                    <i class="bi bi-file-earmark-text"></i>
                 </div>
 
                 <div>
@@ -37,44 +59,37 @@
             </div>
 
 
+            <!-- TOTAL MATERI -->
             <div class="summary-card">
 
                 <div class="summary-icon">
-                    📚
+                    <i class="bi bi-book"></i>
                 </div>
 
-
-                <p>Total Materi</p>
-
-                <h2>{{ $daftarMateri->count() }}</h2>
-
-                <span>Total materi pembelajaran</span>
-
+                <div>
+                    <p>Total Materi</p>
+                    <h2>{{ $daftarMateri->count() }}</h2>
+                    <span>Total materi pembelajaran</span>
+                </div>
 
             </div>
 
         </div>
 
 
-        <!-- daftar soal -->
+        <!-- DAFTAR SOAL -->
         <div class="soal-box">
 
             <div class="box-header">
-
-                <div>
-                    <h2>Daftar Soal</h2>
-                    <p>Soal yang akan digunakan dalam kuis siswa.</p>
-                </div>
-
+                <h2>Daftar Soal</h2>
+                <p>Soal yang akan digunakan dalam kuis siswa.</p>
             </div>
-
 
             <div class="table-container">
 
                 <table>
 
                     <thead>
-
                         <tr>
                             <th>No</th>
                             <th>Pertanyaan</th>
@@ -82,179 +97,68 @@
                             <th>Jawaban Benar</th>
                             <th>Aksi</th>
                         </tr>
-
                     </thead>
-
 
                     <tbody>
 
-                        <!-- soal 1 -->
-                        <tr>
+                        @forelse($daftarSoal as $soal)
 
-                            <td>1</td>
+                            <tr>
 
-                            <td>
-                                Apa yang dimaksud dengan ekosistem?
-                            </td>
+                                <td>{{ $loop->iteration }}</td>
 
-                            <td>
-                                <span class="materi-badge">
-                                    Mengenal Ekosistem
-                                </span>
-                            </td>
+                                <td>{{ $soal->pertanyaan }}</td>
 
-                            <td>
-                                <span class="jawaban-badge">
-                                    A
-                                </span>
-                            </td>
+                                <td>
+                                    <span class="materi-badge">
+                                        {{ $soal->materi->judul ?? '-' }}
+                                    </span>
+                                </td>
 
-                            <td>
+                                <td>
+                                    <span class="jawaban-badge">
+                                        {{ $soal->jawaban_benar }}
+                                    </span>
+                                </td>
 
-                                <button class="btn-detail" onclick="lihatSoal(
-                                                'Apa yang dimaksud dengan ekosistem?',
-                                                'Mengenal Ekosistem',
-                                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                                'Kumpulan hewan saja',
-                                                'Tempat tinggal manusia',
-                                                'Kumpulan tumbuhan saja',
-                                                'A'
-                                            )">
-                                    Lihat
-                                </button>
+                                <td>
 
-                                <button class="btn-edit" onclick="openEditModal(
-                                                'Apa yang dimaksud dengan ekosistem?',
-                                                'Mengenal Ekosistem',
-                                                'Lingkungan yang terdiri dari makhluk hidup dan benda tak hidup yang saling berinteraksi.',
-                                                'Kumpulan hewan saja',
-                                                'Tempat tinggal manusia',
-                                                'Kumpulan tumbuhan saja',
-                                                'A'
-                                            )">
-                                    Edit
-                                </button>
+                                    <!-- LIHAT -->
+                                    <button type="button" class="btn-detail" onclick="lihatSoal({{ $soal->id }})">
+                                        Lihat
+                                    </button>
 
-                                <button class="btn-delete" onclick="hapusSoal()">
-                                    Hapus
-                                </button>
+                                    <!-- EDIT -->
+                                    <button type="button" class="btn-edit" onclick="openEditModal({{ $soal->id }})">
+                                        Edit
+                                    </button>
 
-                            </td>
+                                    <!-- HAPUS -->
+                                    <form action="{{ route('soal.kuis.destroy', $soal->id) }}" method="POST" class="form-hapus"
+                                        onsubmit="return confirm('Yakin ingin menghapus soal ini?')">
 
-                        </tr>
+                                        @csrf
+                                        @method('DELETE')
 
+                                        <button type="submit" class="btn-delete">
+                                            Hapus
+                                        </button>
 
-                        <!-- soal 2 -->
-                        <tr>
+                                    </form>
 
-                            <td>2</td>
+                                </td>
 
-                            <td>
-                                Manakah yang termasuk komponen biotik?
-                            </td>
+                            </tr>
 
-                            <td>
-                                <span class="materi-badge">
-                                    Mengenal Ekosistem
-                                </span>
-                            </td>
+                        @empty
 
-                            <td>
-                                <span class="jawaban-badge">
-                                    B
-                                </span>
-                            </td>
+                            <tr>
+                                <td colspan="5" class="soal-kosong">
+                                    Belum ada soal kuis. Silakan tambahkan soal terlebih dahulu.
+                                </td>
+                            </tr>
 
-                            <td>
-
-                                <button class="btn-detail" onclick="lihatSoal(
-                                                'Manakah yang termasuk komponen biotik?',
-                                                'Mengenal Ekosistem',
-                                                'Tumbuhan',
-                                                'Air',
-                                                'Batu',
-                                                'Cahaya matahari',
-                                                'A'
-                                            )">
-                                    Lihat
-                                </button>
-
-                                <button class="btn-edit" onclick="openEditModal(
-                                                'Manakah yang termasuk komponen biotik?',
-                                                'Mengenal Ekosistem',
-                                                'Air',
-                                                'Tumbuhan',
-                                                'Batu',
-                                                'Cahaya matahari',
-                                                'B'
-                                            )">
-                                    Edit
-                                </button>
-
-                                <button class="btn-delete" onclick="hapusSoal()">
-                                    Hapus
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-
-                        <!-- soal 3 -->
-                        <tr>
-
-                            <td>3</td>
-
-                            <td>
-                                Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?
-                            </td>
-
-                            <td>
-                                <span class="materi-badge">
-                                    Interaksi Ekosistem
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="jawaban-badge">
-                                    C
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <button class="btn-detail" onclick="lihatSoal(
-                                                'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
-                                                'Interaksi Ekosistem',
-                                                'Mutualisme',
-                                                'Kompetisi',
-                                                'Predasi',
-                                                'Parasitisme',
-                                                'A'
-                                            )">
-                                    Lihat
-                                </button>
-
-                                <button class="btn-edit" onclick="openEditModal(
-                                                'Hubungan antara dua makhluk hidup yang saling menguntungkan disebut?',
-                                                'Interaksi Ekosistem',
-                                                'Mutualisme',
-                                                'Kompetisi',
-                                                'Predasi',
-                                                'Parasitisme',
-                                                'A'
-                                            )">
-                                    Edit
-                                </button>
-
-                                <button class="btn-delete" onclick="hapusSoal()">
-                                    Hapus
-                                </button>
-
-                            </td>
-
-                        </tr>
+                        @endforelse
 
                     </tbody>
 
@@ -267,11 +171,11 @@
     </div>
 
 
-    <!-- tambah/edit soal -->
+
+    <!-- MODAL TAMBAH DAN EDIT SOAL -->
 
     <div class="modal" id="soalModal">
 
-        ```
         <div class="modal-content">
 
             <div class="modal-header">
@@ -281,29 +185,30 @@
                     <p>Masukkan pertanyaan dan pilihan jawaban.</p>
                 </div>
 
-                <button class="btn-close" onclick="closeModal()">
+                <button type="button" class="btn-close" onclick="closeModal()">
                     ×
                 </button>
 
             </div>
 
 
-            <!-- pertanyaan -->
+            <!-- FORM SOAL -->
+            <form id="formSoal" action="{{ route('soal.kuis.store') }}" method="POST">
 
-            <div class="form-group">
+                @csrf
 
-                <label>Pertanyaan</label>
-
-                <textarea id="pertanyaan" placeholder="Masukkan pertanyaan kuis"></textarea>
-
-            </div>
+                <!-- POST untuk tambah, PUT untuk edit -->
+                <input type="hidden" name="_method" id="methodForm" value="POST">
 
 
-            <!-- materi -->
+                <!-- PERTANYAAN -->
+                <div class="form-group">
 
-            <div class="form-group">
+                    <label for="pertanyaan">Pertanyaan</label>
 
-                <label>Materi</label>
+                    <textarea id="pertanyaan" name="pertanyaan" placeholder="Masukkan pertanyaan kuis" required></textarea>
+
+                </div>
 
 
                 <!-- PILIH MATERI -->
@@ -334,133 +239,168 @@
                 </div>
 
 
-            </div>
+                <!-- PILIHAN A -->
+                <div class="form-group">
+
+                    <label for="pilihanA">Pilihan A</label>
+
+                    <input type="text" id="pilihanA" name="pilihan_a" maxlength="255" placeholder="Masukkan pilihan A"
+                        required>
+
+                </div>
 
 
-            <!-- pilihan A -->
-            <div class="form-group">
-                <label>Pilihan A</label>
-                <input type="text" id="pilihanA" placeholder="Masukkan pilihan A">
-            </div>
+                <!-- PILIHAN B -->
+                <div class="form-group">
+
+                    <label for="pilihanB">Pilihan B</label>
+
+                    <input type="text" id="pilihanB" name="pilihan_b" maxlength="255" placeholder="Masukkan pilihan B"
+                        required>
+
+                </div>
 
 
-            <!-- pilihan B -->
-            <div class="form-group">
-                <label>Pilihan B</label>
-                <input type="text" id="pilihanB" placeholder="Masukkan pilihan B">
-            </div>
+                <!-- PILIHAN C -->
+                <div class="form-group">
+
+                    <label for="pilihanC">Pilihan C</label>
+
+                    <input type="text" id="pilihanC" name="pilihan_c" maxlength="255" placeholder="Masukkan pilihan C"
+                        required>
+
+                </div>
 
 
-            <!-- pilihan C -->
-            <div class="form-group">
-                <label>Pilihan C</label>
-                <input type="text" id="pilihanC" placeholder="Masukkan pilihan C">
-            </div>
+                <!-- PILIHAN D -->
+                <div class="form-group">
+
+                    <label for="pilihanD">Pilihan D</label>
+
+                    <input type="text" id="pilihanD" name="pilihan_d" maxlength="255" placeholder="Masukkan pilihan D"
+                        required>
+
+                </div>
 
 
-            <!-- pilihan D -->
-            <div class="form-group">
-                <label>Pilihan D</label>
-                <input type="text" id="pilihanD" placeholder="Masukkan pilihan D">
-            </div>
+                <!-- JAWABAN BENAR -->
+                <div class="form-group">
+
+                    <label for="jawaban">Jawaban Benar</label>
+
+                    <select id="jawaban" name="jawaban_benar" required>
+
+                        <option value="">-- Pilih Jawaban --</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+
+                    </select>
+
+                </div>
 
 
-            <!-- jawaban -->
-            <div class="form-group">
-                <label>Jawaban Benar</label>
-                <select id="jawaban">
-                    <option value="">
-                        Pilih Jawaban
-                    </option>
+                <!-- TOMBOL MODAL -->
+                <div class="modal-footer">
 
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
+                    <button type="button" class="btn-batal" onclick="closeModal()">
+                        Batal
+                    </button>
 
-                </select>
+                    <button type="submit" class="btn-simpan">
+                        Simpan
+                    </button>
 
-            </div>
+                </div>
 
-
-            <!-- tombol -->
-            <div class="modal-footer">
-                <button class="btn-batal" onclick="closeModal()">
-                    Batal
-                </button>
-
-                <button type="submit" class="btn-simpan">
-                    Simpan
-                </button>
-
-            </div>
+            </form>
 
         </div>
 
     </div>
 
 
-    <!--  lihat soal -->
+
+    <!-- =====================================
+                         MODAL LIHAT DETAIL SOAL
+                    ===================================== -->
+
     <div class="modal" id="lihatModal">
+
         <div class="modal-content">
+
             <div class="modal-header">
+
                 <div>
                     <h2>Detail Soal</h2>
                     <p>Informasi lengkap soal kuis.</p>
                 </div>
 
-                <button class="btn-close" onclick="closeLihatModal()">
+                <button type="button" class="btn-close" onclick="closeLihatModal()">
                     ×
                 </button>
+
             </div>
 
 
             <div class="detail-soal">
+
                 <div class="detail-item">
                     <span>Pertanyaan</span>
                     <p id="detailPertanyaan"></p>
                 </div>
-
 
                 <div class="detail-item">
                     <span>Materi</span>
                     <p id="detailMateri"></p>
                 </div>
 
-
                 <div class="detail-item">
+
                     <span>Pilihan Jawaban</span>
+
                     <div class="pilihan-list">
                         <p>A. <span id="detailA"></span></p>
                         <p>B. <span id="detailB"></span></p>
                         <p>C. <span id="detailC"></span></p>
                         <p>D. <span id="detailD"></span></p>
                     </div>
-                </div>
 
+                </div>
 
                 <div class="detail-item">
                     <span>Jawaban Benar</span>
+
                     <strong class="jawaban-detail" id="detailJawaban">
                     </strong>
                 </div>
+
             </div>
 
         </div>
+
     </div>
 
+
+
+    <!-- BOOTSTRAP ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
-        /* HALAMAN */
+        /* HALAMAN SOAL KUIS */
+
         .soal-page {
             padding-bottom: 30px;
         }
 
 
-        /* header */
+        /* HEADER */
         .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
             margin-bottom: 25px;
         }
 
@@ -477,7 +417,7 @@
         }
 
 
-        /* tombol tambah */
+        /* TOMBOL TAMBAH */
         .btn-tambah {
             border: none;
             background-color: #2d6a4f;
@@ -493,7 +433,26 @@
         }
 
 
-        /* ringkasan */
+        /* NOTIFIKASI */
+        .alert-success {
+            background: #d8f3dc;
+            color: #1b4332;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #842029;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+
+        /* KARTU RINGKASAN */
+
         .summary-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -511,15 +470,24 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
         }
 
+        /* KOTAK IKON */
         .summary-icon {
             width: 50px;
             height: 50px;
             border-radius: 12px;
             background-color: #d8f3dc;
+
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* WARNA DAN UKURAN IKON */
+        .summary-icon i {
             font-size: 24px;
+            color: #2d6a4f;
+            line-height: 1;
         }
 
         .summary-card p {
@@ -540,8 +508,8 @@
         }
 
 
+        /* DAFTAR SOAL */
 
-        /* box soal */
         .soal-box {
             background-color: white;
             border-radius: 15px;
@@ -566,413 +534,272 @@
         }
 
 
-        /* table */
+        /* TABEL */
         .table-container {
-
             overflow-x: auto;
-
         }
 
-        table {
-
+        .table-container table {
             width: 100%;
-
             border-collapse: collapse;
-
         }
 
-        thead {
-
+        .table-container thead {
             background-color: #ABE7B2;
-
         }
 
-        th {
-
+        .table-container th {
             padding: 14px;
-
             text-align: left;
-
             color: #2d6a4f;
-
             font-size: 13px;
-
         }
 
-        td {
-
+        .table-container td {
             padding: 15px 14px;
-
             border-bottom: 1px solid #eeeeee;
-
             color: #555;
-
             font-size: 14px;
-
             vertical-align: middle;
-
         }
 
-        tbody tr:hover {
-
+        .table-container tbody tr:hover {
             background-color: #fafdfb;
-
         }
 
 
-        /* latar belakaang tombol materi */
-
+        /* LABEL MATERI */
         .materi-badge {
-
             display: inline-block;
-
             padding: 5px 10px;
-
             background-color: #FF788D;
-
-            color: #FFFFFF;
-
-            border-radius: 20px;
-
-            font-size: 11px;
-
-            font-weight: 600;
-
-        }
-
-        .jawaban-badge {
-
-            display: inline-flex;
-
-            width: 30px;
-
-            height: 30px;
-
-            align-items: center;
-
-            justify-content: center;
-
-            background-color: #FF788D;
-
             color: white;
-
-            border-radius: 50%;
-
-            font-size: 12px;
-
-            font-weight: bold;
-
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
         }
 
 
-        /* BUTTON AKSI */
+        /* LABEL JAWABAN */
+        .jawaban-badge {
+            display: inline-flex;
+            width: 30px;
+            height: 30px;
+            align-items: center;
+            justify-content: center;
+            background-color: #FF788D;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /*  TOMBOL AKSI */
 
         .btn-detail,
         .btn-edit,
         .btn-delete {
-
             border: none;
-
             padding: 7px 10px;
-
             border-radius: 7px;
-
             font-size: 12px;
-
             cursor: pointer;
-
             margin-right: 4px;
-
         }
 
         .btn-detail {
-
             background-color: #e8f5e9;
-
             color: #2d6a4f;
-
         }
 
         .btn-edit {
-
             background-color: #fff3cd;
-
             color: #856404;
-
         }
 
         .btn-delete {
-
             background-color: #f8d7da;
-
             color: #842029;
+        }
 
+        .form-hapus {
+            display: inline;
+        }
+
+
+        /* BELUM ADA SOAL */
+        .soal-kosong {
+            text-align: center;
+            padding: 25px !important;
+            color: #777;
         }
 
 
         /* MODAL */
+
         .modal {
-
             display: none;
-
             position: fixed;
-
             z-index: 1000;
-
             left: 0;
-
             top: 0;
-
             width: 100%;
-
             height: 100%;
-
             background-color: rgba(0, 0, 0, 0.4);
-
             align-items: center;
-
             justify-content: center;
-
         }
 
         .modal-content {
-
             width: 550px;
-
             max-width: 90%;
-
             max-height: 90vh;
-
             overflow-y: auto;
-
             background-color: white;
-
             border-radius: 16px;
-
             padding: 25px;
-
+            box-sizing: border-box;
         }
 
         .modal-header {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: flex-start;
-
             margin-bottom: 25px;
-
         }
 
         .modal-header h2 {
-
             margin: 0;
-
             color: #1b4332;
-
         }
 
         .modal-header p {
-
             margin: 5px 0 0;
-
             color: #999;
-
             font-size: 13px;
-
         }
 
         .btn-close {
-
             border: none;
-
             background: none;
-
             font-size: 28px;
-
             color: #777;
-
             cursor: pointer;
-
         }
 
 
-        /* FORM */
+        /* =====================================
+                       FORM SOAL
+                    ===================================== */
 
         .form-group {
-
             margin-bottom: 18px;
-
         }
 
         .form-group label {
-
             display: block;
-
             margin-bottom: 7px;
-
             color: #374151;
-
             font-size: 14px;
-
             font-weight: 600;
-
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
-
             width: 100%;
-
             box-sizing: border-box;
-
             padding: 11px 12px;
-
             border: 1px solid #dddddd;
-
             border-radius: 9px;
-
             outline: none;
-
             font-size: 14px;
-
             font-family: Arial, sans-serif;
-
             background-color: white;
-
         }
 
         .form-group textarea {
-
             height: 100px;
-
             resize: vertical;
-
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
-
             border-color: #2d6a4f;
-
         }
 
 
-        /* MODAL FOOTER */
-
+        /* TOMBOL MODAL */
         .modal-footer {
-
             display: flex;
-
             justify-content: flex-end;
-
             gap: 10px;
-
             margin-top: 25px;
-
         }
 
         .btn-batal,
         .btn-simpan {
-
             border: none;
-
             padding: 10px 18px;
-
             border-radius: 9px;
-
             cursor: pointer;
-
             font-size: 14px;
-
         }
 
         .btn-batal {
-
             background-color: #eeeeee;
-
             color: #555;
-
         }
 
         .btn-simpan {
-
             background-color: #2d6a4f;
-
             color: white;
-
         }
-
 
 
         /* DETAIL SOAL */
+
         .detail-item {
-
             margin-bottom: 20px;
-
         }
 
         .detail-item>span {
-
             display: block;
-
             color: #888;
-
             font-size: 12px;
-
             margin-bottom: 6px;
-
         }
 
         .detail-item>p {
-
             margin: 0;
-
             color: #333;
-
             line-height: 1.6;
-
+            overflow-wrap: anywhere;
         }
 
         .pilihan-list {
-
             background-color: #f8faf9;
-
             border-radius: 10px;
-
             padding: 10px 15px;
-
         }
 
         .pilihan-list p {
-
             margin: 10px 0;
-
             color: #555;
-
+            overflow-wrap: anywhere;
         }
 
         .jawaban-detail {
-
             display: inline-flex;
-
             width: 35px;
-
             height: 35px;
-
             align-items: center;
-
             justify-content: center;
-
             background-color: #2d6a4f;
-
             color: white;
-
             border-radius: 50%;
-
         }
 
 
@@ -981,157 +808,178 @@
         @media (max-width: 900px) {
 
             .page-header {
-
                 flex-direction: column;
-
                 align-items: flex-start;
-
                 gap: 15px;
-
             }
 
             .summary-container {
-
                 grid-template-columns: 1fr;
-
             }
 
-            th,
-            td {
-
+            .table-container th,
+            .table-container td {
                 white-space: nowrap;
+            }
 
+        }
+
+        @media (max-width: 480px) {
+
+            .modal-content {
+                padding: 18px;
+            }
+
+            .page-header h1 {
+                font-size: 23px;
+            }
+
+            .btn-tambah {
+                width: 100%;
             }
 
         }
     </style>
 
+
+
     <script>
 
-        /* TAMBAH SOAL */
+        // Mengambil data soal dari Laravel
+        const daftarSoal = {{ Illuminate\Support\Js::from($daftarSoal) }};
+
+        // Alamat untuk tambah dan edit
+        const urlSimpan = @js(route('soal.kuis.store'));
+        const urlSoal = @js(url('/soal-kuis'));
+
+
+        // 1. MEMBUKA MODAL TAMBAH SOAL
         function openModal() {
 
+            // Mengubah judul
             document.getElementById('modalTitle').innerText = 'Tambah Soal';
 
-            document.getElementById('pertanyaan').value = '';
+            // Mengosongkan form
+            document.getElementById('formSoal').reset();
 
-            document.getElementById('materi').value = '';
+            // Mengatur alamat penyimpanan
+            document.getElementById('formSoal').action = urlSimpan;
+            document.getElementById('methodForm').value = 'POST';
 
-            document.getElementById('pilihanA').value = '';
-
-            document.getElementById('pilihanB').value = '';
-
-            document.getElementById('pilihanC').value = '';
-
-            document.getElementById('pilihanD').value = '';
-
-            document.getElementById('jawaban').value = '';
-
+            // Menampilkan modal
             document.getElementById('soalModal').style.display = 'flex';
-
         }
 
 
-        /* EDIT SOAL */
-        function openEditModal(
-            pertanyaan,
-            materi,
-            pilihanA,
-            pilihanB,
-            pilihanC,
-            pilihanD,
-            jawaban
-        ) {
+        // 2. MEMBUKA MODAL EDIT SOAL
+        function openEditModal(id) {
 
-            document.getElementById('modalTitle').innerText = 'Edit Soal';
+            // Mencari soal berdasarkan ID
+            const soal = daftarSoal.find(function (item) {
+                return item.id == id;
+            });
 
-            document.getElementById('pertanyaan').value = pertanyaan;
-
-            document.getElementById('materi').value = materi;
-
-            document.getElementById('pilihanA').value = pilihanA;
-
-            document.getElementById('pilihanB').value = pilihanB;
-
-            document.getElementById('pilihanC').value = pilihanC;
-
-            document.getElementById('pilihanD').value = pilihanD;
-
-            document.getElementById('jawaban').value = jawaban;
-
-            document.getElementById('soalModal').style.display = 'flex';
-
-        }
-
-
-
-        /* TUTUP MODAL */
-        function closeModal() {
-
-            document.getElementById('soalModal').style.display = 'none';
-
-        }
-
-
-
-        /* SIMPAN SOAL */
-        function saveSoal() {
-
-            alert('Soal berhasil disimpan!');
-
-            closeModal();
-
-        }
-
-
-        /* HAPUS SOAL */
-        function hapusSoal() {
-
-            if (confirm('Apakah Anda yakin ingin menghapus soal ini?')) {
-
-                alert('Soal berhasil dihapus!');
-
+            if (!soal) {
+                alert('Soal tidak ditemukan.');
+                return;
             }
 
+            // Mengubah judul modal
+            document.getElementById('modalTitle').innerText = 'Edit Soal';
+
+            // Mengisi data soal lama
+            document.getElementById('pertanyaan').value = soal.pertanyaan;
+            document.getElementById('materi').value = soal.materi_id;
+            document.getElementById('pilihanA').value = soal.pilihan_a;
+            document.getElementById('pilihanB').value = soal.pilihan_b;
+            document.getElementById('pilihanC').value = soal.pilihan_c;
+            document.getElementById('pilihanD').value = soal.pilihan_d;
+            document.getElementById('jawaban').value = soal.jawaban_benar;
+
+            // Mengatur alamat update
+            document.getElementById('formSoal').action = urlSoal + '/' + id;
+            document.getElementById('methodForm').value = 'PUT';
+
+            // Menampilkan modal
+            document.getElementById('soalModal').style.display = 'flex';
         }
 
 
-        /* LIHAT SOAL */
-        function lihatSoal(
-            pertanyaan,
-            materi,
-            pilihanA,
-            pilihanB,
-            pilihanC,
-            pilihanD,
-            jawaban
-        ) {
+        // 3. MENUTUP MODAL
+        function closeModal() {
+            document.getElementById('soalModal').style.display = 'none';
+        }
 
-            document.getElementById('detailPertanyaan').innerText = pertanyaan;
 
-            document.getElementById('detailMateri').innerText = materi;
+        // 4. MELIHAT DETAIL SOAL
+        function lihatSoal(id) {
 
-            document.getElementById('detailA').innerText = pilihanA;
+            const soal = daftarSoal.find(function (item) {
+                return item.id == id;
+            });
 
-            document.getElementById('detailB').innerText = pilihanB;
+            if (!soal) {
+                alert('Soal tidak ditemukan.');
+                return;
+            }
 
-            document.getElementById('detailC').innerText = pilihanC;
+            // Menampilkan informasi soal
+            document.getElementById('detailPertanyaan').innerText =
+                soal.pertanyaan;
 
-            document.getElementById('detailD').innerText = pilihanD;
+            document.getElementById('detailMateri').innerText =
+                soal.materi ? soal.materi.judul : '-';
 
-            document.getElementById('detailJawaban').innerText = jawaban;
+            document.getElementById('detailA').innerText = soal.pilihan_a;
+            document.getElementById('detailB').innerText = soal.pilihan_b;
+            document.getElementById('detailC').innerText = soal.pilihan_c;
+            document.getElementById('detailD').innerText = soal.pilihan_d;
 
+            document.getElementById('detailJawaban').innerText =
+                soal.jawaban_benar;
+
+            // Menampilkan modal detail
             document.getElementById('lihatModal').style.display = 'flex';
-
         }
 
 
-        /* TUTUP DETAIL */
+        // 5. MENUTUP MODAL DETAIL
         function closeLihatModal() {
-
             document.getElementById('lihatModal').style.display = 'none';
-
         }
+
+
+        // 6. MEMULIHKAN FORM JIKA VALIDASI GAGAL
+        @if($errors->any())
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+                openModal();
+
+                document.getElementById('pertanyaan').value =
+                    @js(old('pertanyaan', ''));
+
+                document.getElementById('materi').value =
+                    @js(old('materi_id', ''));
+
+                document.getElementById('pilihanA').value =
+                    @js(old('pilihan_a', ''));
+
+                document.getElementById('pilihanB').value =
+                    @js(old('pilihan_b', ''));
+
+                document.getElementById('pilihanC').value =
+                    @js(old('pilihan_c', ''));
+
+                document.getElementById('pilihanD').value =
+                    @js(old('pilihan_d', ''));
+
+                document.getElementById('jawaban').value =
+                    @js(old('jawaban_benar', ''));
+
+            });
+
+        @endif
 
     </script>
 

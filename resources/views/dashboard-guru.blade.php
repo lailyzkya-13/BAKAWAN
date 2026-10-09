@@ -45,18 +45,6 @@
         </div>
     </div>
 
-    <!-- Kuis Selesai -->
-    <div class="summary-card">
-        <div class="summary-icon">
-            <i data-lucide="clipboard-check"></i>
-        </div>
-
-        <div>
-            <p>Kuis Selesai</p>
-            <h2>86</h2>
-            <span>Minggu ini</span>
-        </div>
-    </div>
 
     <!-- Rata-rata Nilai -->
     <div class="summary-card">
@@ -258,7 +246,7 @@
     /* Summary */
     .summary-container {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 18px;
         margin-bottom: 25px;
     }
