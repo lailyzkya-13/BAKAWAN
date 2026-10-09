@@ -30,7 +30,7 @@
 
     <!-- TOMBOL KEMBALI -->
     <a href="{{ route('materi') }}" class="btn-kembali">
-        ← Kembali ke Daftar Materi
+        Kembali ke Daftar Materi
     </a>
 
     <!-- JUDUL HALAMAN -->
