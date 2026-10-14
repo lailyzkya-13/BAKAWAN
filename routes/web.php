@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -35,19 +34,22 @@ Route::get('/beranda', function () {
 
 // Daftar Aktivitas
 Route::get('/aktivitas', [
-    AktivitasController::class, 'index'
+    AktivitasController::class,
+    'index'
 ])->name('aktivitas');
 
 
 // Aktivitas 1
 Route::get('/aktivitas/klasifikasi-biotik-abiotik', [
-    AktivitasController::class, 'aktivitasSatu'
+    AktivitasController::class,
+    'aktivitasSatu'
 ])->name('aktivitas.satu');
 
 
 // Aktivitas 2
 Route::get('/aktivitas/hubungan-dalam-ekosistem', [
-    AktivitasController::class, 'aktivitasDua'
+    AktivitasController::class,
+    'aktivitasDua'
 ])->name('aktivitas.dua');
 
 
@@ -176,7 +178,8 @@ Route::get('/login-guru', function () {
 
 // DASHBOARD GURU
 Route::get('/dashboard', [
-    DashboardGuruController::class, 'index'
+    DashboardGuruController::class,
+    'index'
 ])->name('dashboard');
 
 
@@ -185,43 +188,50 @@ Route::get('/dashboard', [
 
 // 1. Menampilkan daftar materi
 Route::get('/materi', [
-    KelolaMateriGuruController::class, 'index'
+    KelolaMateriGuruController::class,
+    'index'
 ])->name('materi');
 
 
 // 2. Membuka form tambah materi
 Route::get('/materi/tambah', [
-    KelolaMateriGuruController::class, 'create'
+    KelolaMateriGuruController::class,
+    'create'
 ])->name('materi.create');
 
 
 // 3. Menyimpan materi baru
 Route::post('/materi', [
-    KelolaMateriGuruController::class, 'store'
+    KelolaMateriGuruController::class,
+    'store'
 ])->name('materi.store');
 
 
 // 4. Melihat detail materi guru
 Route::get('/materi/detail/{materi}', [
-    KelolaMateriGuruController::class, 'show'
+    KelolaMateriGuruController::class,
+    'show'
 ])->name('materi.show');
 
 
 // 5. Membuka form edit materi
 Route::get('/materi/{materi}/edit', [
-    KelolaMateriGuruController::class, 'edit'
+    KelolaMateriGuruController::class,
+    'edit'
 ])->name('materi.edit');
 
 
 // 6. Menyimpan perubahan materi
 Route::put('/materi/{materi}', [
-    KelolaMateriGuruController::class, 'update'
+    KelolaMateriGuruController::class,
+    'update'
 ])->name('materi.update');
 
 
 // 7. Menghapus materi
 Route::delete('/materi/{materi}', [
-    KelolaMateriGuruController::class, 'destroy'
+    KelolaMateriGuruController::class,
+    'destroy'
 ])->name('materi.destroy');
 
 
@@ -230,31 +240,36 @@ Route::delete('/materi/{materi}', [
 
 // Daftar Game
 Route::get('/game', [
-    KelolaGameController::class, 'index'
+    KelolaGameController::class,
+    'index'
 ])->name('game');
 
 
 // Tambah Game
 Route::post('/game', [
-    KelolaGameController::class, 'store'
+    KelolaGameController::class,
+    'store'
 ])->name('game.store');
 
 
 // Edit Game
 Route::put('/game/{game}', [
-    KelolaGameController::class, 'update'
+    KelolaGameController::class,
+    'update'
 ])->name('game.update');
 
 
 // Hapus Game
 Route::delete('/game/{game}', [
-    KelolaGameController::class, 'destroy'
+    KelolaGameController::class,
+    'destroy'
 ])->name('game.destroy');
 
 
 // Guru Mencoba Game
 Route::get('/game/{game}/play', [
-    KelolaGameController::class, 'play'
+    KelolaGameController::class,
+    'play'
 ])->name('game.play');
 
 
@@ -270,25 +285,29 @@ Route::get('/game/{game}/play', [
 
 // Menampilkan daftar soal
 Route::get('/soal-kuis', [
-    KelolaKuisController::class, 'index'
+    KelolaKuisController::class,
+    'index'
 ])->name('soal.kuis');
 
 
 // Menyimpan soal baru
 Route::post('/soal-kuis', [
-    KelolaKuisController::class, 'store'
+    KelolaKuisController::class,
+    'store'
 ])->name('soal.kuis.store');
 
 
 // Memperbarui soal
 Route::put('/soal-kuis/{soalKuis}', [
-    KelolaKuisController::class, 'update'
+    KelolaKuisController::class,
+    'update'
 ])->name('soal.kuis.update');
 
 
 // Menghapus soal
 Route::delete('/soal-kuis/{soalKuis}', [
-    KelolaKuisController::class, 'destroy'
+    KelolaKuisController::class,
+    'destroy'
 ])->name('soal.kuis.destroy');
 
 
@@ -296,12 +315,20 @@ Route::delete('/soal-kuis/{soalKuis}', [
 
 // HASIL EVALUASI
 Route::get('/hasil-evaluasi', [
-    HasilEvaluasiController::class, 'index'
+    HasilEvaluasiController::class,
+    'index'
 ])->name('hasil.evaluasi');
 
 
 
 // PROFIL GURU
-Route::get('/profil', [
-    ProfilGuruController::class, 'index'
-])->name('profil');
+Route::get('/profil', function () {
+    return view('profil-guru');
+})->name('profil');
+
+
+
+// Hasil  evaluasi guru
+Route::get('/hasil-evaluasi', function () {
+    return view('evaluasi-guru');
+})->name('hasil-evaluasi');
