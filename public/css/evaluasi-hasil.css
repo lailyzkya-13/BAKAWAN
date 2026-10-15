@@ -1,0 +1,200 @@
+
+/* =====================================
+   HASIL EVALUASI BAKAWAN
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #fffaf4;
+}
+
+.hasil-page {
+    min-height: calc(100vh - 75px);
+    padding: 85px 25px 90px;
+    background: #fffaf4;
+
+    display: flex;
+    justify-content: center;
+}
+
+.hasil-container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.hasil-container h1 {
+    color: #214b40;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.hasil-subtitle {
+    color: #53675f;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.8;
+    margin-bottom: 42px;
+}
+
+/* CARD NILAI */
+
+.hasil-nilai-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    max-width: 850px;
+    margin: 0 auto;
+
+    background: #dceef2;
+    border: 1.5px solid #536a69;
+    border-radius: 22px;
+    overflow: hidden;
+}
+
+.hasil-nilai-item {
+    padding: 40px 25px;
+}
+
+.hasil-nilai-item + .hasil-nilai-item {
+    border-left: 1.5px solid #536a69;
+}
+
+.hasil-nilai-item h2 {
+    color: #344746;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.hasil-angka {
+    color: #344746;
+    font-size: 65px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hasil-total {
+    font-size: 43px;
+}
+
+/* PESAN */
+
+.hasil-pesan {
+    color: #53675f;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 30px 0 35px;
+}
+
+/* TOMBOL */
+
+.hasil-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-pembahasan,
+.btn-beranda {
+    min-width: 260px;
+    min-height: 65px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+
+    padding: 15px 25px;
+    border-radius: 16px;
+
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-pembahasan {
+    background: #e95b7c;
+    color: #ffffff;
+}
+
+.btn-pembahasan:hover {
+    background: #d94c6e;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.btn-beranda {
+    background: #ffffff;
+    color: #e95b7c;
+    border: 1.5px solid #e5bdc6;
+}
+
+.btn-beranda:hover {
+    background: #fff0f4;
+    color: #d94c6e;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .hasil-page {
+        padding: 65px 20px;
+    }
+
+    .hasil-container h1 {
+        font-size: 34px;
+    }
+
+    .hasil-subtitle {
+        font-size: 15px;
+    }
+
+    .hasil-nilai-item {
+        padding: 28px 15px;
+    }
+
+    .hasil-nilai-item h2 {
+        font-size: 19px;
+    }
+
+    .hasil-angka {
+        font-size: 48px;
+    }
+
+    .hasil-total {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .hasil-nilai-card {
+        grid-template-columns: 1fr;
+    }
+
+    .hasil-nilai-item + .hasil-nilai-item {
+        border-left: none;
+        border-top: 1.5px solid #536a69;
+    }
+
+    .hasil-actions {
+        flex-direction: column;
+    }
+
+    .btn-pembahasan,
+    .btn-beranda {
+        width: 100%;
+    }
+}

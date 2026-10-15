@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\AktivitasController;
 use App\Http\Controllers\DashboardGuruController;
@@ -13,24 +14,28 @@ use App\Http\Controllers\ProfilGuruController;
 use App\Models\Materi;
 
 
-/* ROUTE AWAL */
+/* ==========================================
+   HALAMAN UTAMA
+========================================== */
 
 Route::get('/', function () {
     return redirect()->route('beranda');
 });
 
 
-/* HALAMAN SISWA */
+/* ==========================================
+   HALAMAN SISWA
+========================================== */
 
 // BERANDA SISWA
-
 Route::get('/beranda', function () {
     return view('beranda');
 })->name('beranda');
 
 
-
-// AKTIVITAS SISWA
+/* ==========================================
+   AKTIVITAS SISWA
+========================================== */
 
 // Daftar Aktivitas
 Route::get('/aktivitas', [
@@ -59,24 +64,21 @@ Route::get('/aktivitas/mencocokkan', function () {
 })->name('aktivitas.mencocokkan');
 
 
+/* ==========================================
+   MATERI SISWA
+========================================== */
 
-/* MATERI SISWA */
-
-// DAFTAR MATERI SISWA
-
+// Daftar Materi Siswa
 Route::get('/materi-siswa', function () {
 
-    // Mengambil semua materi dari database
     $materi = Materi::latest()->get();
 
-    // Menampilkan kartu materi siswa
     return view('materi', compact('materi'));
 
 })->name('materi.siswa');
 
 
-// DETAIL MATERI SISWA
-
+// Detail Materi Siswa
 Route::get('/materi-siswa/{materi}', function (Materi $materi) {
 
     // Mengambil seluruh subbab dari materi
@@ -87,10 +89,10 @@ Route::get('/materi-siswa/{materi}', function (Materi $materi) {
     // Mengambil ID subbab yang dipilih siswa
     $idSubbab = request()->query('subbab');
 
-    // Jika belum memilih, tampilkan subbab pertama
+    // Menampilkan subbab pertama
     $subbabAktif = $semuaSubbab->first();
 
-    // Jika siswa mengklik salah satu subbab
+    // Jika siswa memilih subbab tertentu
     if ($idSubbab !== null) {
 
         $subbabAktif = $semuaSubbab->first(function ($item) use ($idSubbab) {
@@ -99,13 +101,12 @@ Route::get('/materi-siswa/{materi}', function (Materi $materi) {
 
         });
 
-        // Jika subbab tidak ditemukan
         if (!$subbabAktif) {
             abort(404);
         }
     }
 
-    // Mencari posisi subbab yang sedang dibaca
+    // Mencari posisi subbab aktif
     $posisi = $subbabAktif
         ? $semuaSubbab->search(function ($item) use ($subbabAktif) {
 
@@ -114,17 +115,17 @@ Route::get('/materi-siswa/{materi}', function (Materi $materi) {
         })
         : false;
 
-    // Menentukan subbab sebelumnya
+    // Subbab sebelumnya
     $sebelumnya = $posisi !== false && $posisi > 0
         ? $semuaSubbab->get($posisi - 1)
         : null;
 
-    // Menentukan subbab selanjutnya
+    // Subbab selanjutnya
     $selanjutnya = $posisi !== false
         ? $semuaSubbab->get($posisi + 1)
         : null;
 
-    // Mengirim seluruh data ke halaman siswa
+    // Menampilkan detail materi siswa
     return view('materi-detail-siswa', compact(
         'materi',
         'semuaSubbab',
@@ -136,9 +137,7 @@ Route::get('/materi-siswa/{materi}', function (Materi $materi) {
 })->name('materi.siswa.show');
 
 
-// MATERI BIOTIK LAMA
-
-// Tetap dipertahankan agar route lama tidak error
+// Materi Biotik Lama
 Route::get('/materi/biotik-abiotik', function () {
 
     return view('materi-biotik');
@@ -146,8 +145,11 @@ Route::get('/materi/biotik-abiotik', function () {
 })->name('materi.biotik');
 
 
+/* ==========================================
+   EVALUASI SISWA
+========================================== */
 
-// EVALUASI SISWA
+// Halaman Identitas
 Route::get('/evaluasi', function () {
 
     return view('evaluasi');
@@ -155,8 +157,91 @@ Route::get('/evaluasi', function () {
 })->name('evaluasi');
 
 
+// Memulai Evaluasi
+Route::post('/evaluasi/mulai', function (Request $request) {
 
-// TENTANG BAKAWAN
+    $data = $request->validate([
+        'nama_lengkap' => 'required|string|max:100',
+        'kelas' => 'required|string|max:30',
+    ], [
+        'nama_lengkap.required' => 'Nama lengkap wajib diisi.',
+        'kelas.required' => 'Kelas wajib diisi.',
+    ]);
+
+    session([
+        'evaluasi_nama' => $data['nama_lengkap'],
+        'evaluasi_kelas' => $data['kelas'],
+    ]);
+
+    return redirect()->route('evaluasi.petunjuk');
+
+})->name('evaluasi.mulai');
+
+
+// Petunjuk Evaluasi
+Route::get('/evaluasi/petunjuk', function () {
+
+    if (
+        !session()->has('evaluasi_nama') ||
+        !session()->has('evaluasi_kelas')
+    ) {
+        return redirect()->route('evaluasi');
+    }
+
+    return view('evaluasi-petunjuk');
+
+})->name('evaluasi.petunjuk');
+
+
+// Soal Evaluasi
+Route::get('/evaluasi/soal', function () {
+
+    if (
+        !session()->has('evaluasi_nama') ||
+        !session()->has('evaluasi_kelas')
+    ) {
+        return redirect()->route('evaluasi');
+    }
+
+    return view('evaluasi-soal');
+
+})->name('evaluasi.soal');
+
+
+// Hasil Evaluasi Siswa
+Route::get('/evaluasi/hasil', function () {
+
+    if (
+        !session()->has('evaluasi_nama') ||
+        !session()->has('evaluasi_kelas')
+    ) {
+        return redirect()->route('evaluasi');
+    }
+
+    return view('evaluasi-hasil');
+
+})->name('evaluasi.hasil');
+
+
+// Pembahasan Evaluasi Siswa
+Route::get('/evaluasi/pembahasan', function () {
+
+    if (
+        !session()->has('evaluasi_nama') ||
+        !session()->has('evaluasi_kelas')
+    ) {
+        return redirect()->route('evaluasi');
+    }
+
+    return view('evaluasi-pembahasan');
+
+})->name('evaluasi.pembahasan');
+
+
+/* ==========================================
+   TENTANG BAKAWAN
+========================================== */
+
 Route::get('/tentang', function () {
 
     return view('tentang');
@@ -164,8 +249,11 @@ Route::get('/tentang', function () {
 })->name('tentang');
 
 
+/* ==========================================
+   HALAMAN GURU
+========================================== */
 
-// LOGIN GURU
+// Login Guru
 Route::get('/login-guru', function () {
 
     return view('login-guru');
@@ -173,70 +261,69 @@ Route::get('/login-guru', function () {
 })->name('login.guru');
 
 
-
-/* HALAMAN GURU */
-
-// DASHBOARD GURU
+// Dashboard Guru
 Route::get('/dashboard', [
     DashboardGuruController::class,
     'index'
 ])->name('dashboard');
 
 
+/* ==========================================
+   CRUD MATERI GURU
+========================================== */
 
-/* CRUD MATERI GURU */
-
-// 1. Menampilkan daftar materi
+// Daftar Materi
 Route::get('/materi', [
     KelolaMateriGuruController::class,
     'index'
 ])->name('materi');
 
 
-// 2. Membuka form tambah materi
+// Tambah Materi
 Route::get('/materi/tambah', [
     KelolaMateriGuruController::class,
     'create'
 ])->name('materi.create');
 
 
-// 3. Menyimpan materi baru
+// Simpan Materi
 Route::post('/materi', [
     KelolaMateriGuruController::class,
     'store'
 ])->name('materi.store');
 
 
-// 4. Melihat detail materi guru
+// Detail Materi
 Route::get('/materi/detail/{materi}', [
     KelolaMateriGuruController::class,
     'show'
 ])->name('materi.show');
 
 
-// 5. Membuka form edit materi
+// Edit Materi
 Route::get('/materi/{materi}/edit', [
     KelolaMateriGuruController::class,
     'edit'
 ])->name('materi.edit');
 
 
-// 6. Menyimpan perubahan materi
+// Update Materi
 Route::put('/materi/{materi}', [
     KelolaMateriGuruController::class,
     'update'
 ])->name('materi.update');
 
 
-// 7. Menghapus materi
+// Hapus Materi
 Route::delete('/materi/{materi}', [
     KelolaMateriGuruController::class,
     'destroy'
 ])->name('materi.destroy');
 
 
-
-/* KELOLA GAME GURU */
+/* ==========================================
+   KELOLA GAME GURU
+========================================== */
 
 // Daftar Game
 Route::get('/game', [
@@ -252,7 +339,7 @@ Route::post('/game', [
 ])->name('game.store');
 
 
-// Edit Game
+// Update Game
 Route::put('/game/{game}', [
     KelolaGameController::class,
     'update'
@@ -266,69 +353,70 @@ Route::delete('/game/{game}', [
 ])->name('game.destroy');
 
 
-// Guru Mencoba Game
+// Mainkan Game
 Route::get('/game/{game}/play', [
     KelolaGameController::class,
     'play'
 ])->name('game.play');
 
 
-
-/* FITUR GURU LAINNYA */
-
-
-// SOAL KUIS
-
-/* =====================================
+/* ==========================================
    CRUD SOAL KUIS GURU
-===================================== */
+========================================== */
 
-// Menampilkan daftar soal
+// Daftar Soal
 Route::get('/soal-kuis', [
     KelolaKuisController::class,
     'index'
 ])->name('soal.kuis');
 
 
-// Menyimpan soal baru
+// Tambah Soal
 Route::post('/soal-kuis', [
     KelolaKuisController::class,
     'store'
 ])->name('soal.kuis.store');
 
 
-// Memperbarui soal
+// Update Soal
 Route::put('/soal-kuis/{soalKuis}', [
     KelolaKuisController::class,
     'update'
 ])->name('soal.kuis.update');
 
 
-// Menghapus soal
+// Hapus Soal
 Route::delete('/soal-kuis/{soalKuis}', [
     KelolaKuisController::class,
     'destroy'
 ])->name('soal.kuis.destroy');
 
 
+/* ==========================================
+   HASIL EVALUASI GURU
+========================================== */
+
+// Halaman Hasil Evaluasi Guru
+Route::get('/hasil-evaluasi', function () {
+
+    return view('evaluasi-guru');
+
+})->name('hasil-evaluasi');
 
 
-// HASIL EVALUASI
-Route::get('/hasil-evaluasi', [
+// Hasil Evaluasi Melalui Controller
+Route::get('/hasil-evaluasi/kelola', [
     HasilEvaluasiController::class,
     'index'
 ])->name('hasil.evaluasi');
 
 
+/* ==========================================
+   PROFIL GURU
+========================================== */
 
-// PROFIL GURU
 Route::get('/profil', function () {
+
     return view('profil-guru');
+
 })->name('profil');
-
-
-
-// Hasil  evaluasi guru
-Route::get('/hasil-evaluasi', function () {
-    return view('evaluasi-guru');
-})->name('hasil-evaluasi');
