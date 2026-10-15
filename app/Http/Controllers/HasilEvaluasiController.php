@@ -6,9 +6,6 @@ use App\Models\HasilKuis;
 
 class HasilEvaluasiController extends Controller
 
-
-
-
 {
     public function index()
     {
