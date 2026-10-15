@@ -503,12 +503,14 @@ Route::delete('/soal-kuis/{soalKuis}', [
    HASIL EVALUASI GURU
 ========================================== */
 
-// Halaman Hasil Evaluasi Guru
-Route::get('/hasil-evaluasi', function () {
 
-    return view('evaluasi-guru');
+ // Halaman Hasil Evaluasi Guru
+ // Mengambil nama siswa dan nilai dari database
+ Route::get('/hasil-evaluasi', [
+     HasilEvaluasiController::class,
+     'index'
+ ])->name('hasil-evaluasi');
 
-})->name('hasil-evaluasi');
 
 
 // Hasil Evaluasi Melalui Controller
