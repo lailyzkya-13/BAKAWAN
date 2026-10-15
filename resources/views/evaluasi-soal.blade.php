@@ -1,21 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sebagai keamanan Laravel saat siswa mengirim jawaban kuis ke database BAKAWAN.-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Soal Evaluasi | BAKAWAN</title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/evaluasi-soal.css') }}">
@@ -206,15 +203,9 @@
 
                     <h2>Nomor Soal</h2>
 
-                    <div
-                        class="nomor-grid"
-                        id="nomorGrid"
-                    ></div>
+                    <div class="nomor-grid" id="nomorGrid"></div>
 
-                    <p
-                        class="jumlah-terjawab"
-                        id="jumlahTerjawab"
-                    >
+                    <p class="jumlah-terjawab" id="jumlahTerjawab">
                         0/5 terjawab
                     </p>
 
@@ -243,19 +234,13 @@
 
                 <section class="soal-card">
 
-                    <div
-                        class="soal-progress"
-                        id="soalProgress"
-                    >
+                    <div class="soal-progress" id="soalProgress">
                         Soal 1 dari 5
                     </div>
 
                     <h2 id="pertanyaan"></h2>
 
-                    <div
-                        class="pilihan-list"
-                        id="pilihanList"
-                    ></div>
+                    <div class="pilihan-list" id="pilihanList"></div>
 
                 </section>
 
@@ -265,20 +250,12 @@
 
             <div class="soal-actions">
 
-                <button
-                    type="button"
-                    class="btn-sebelumnya"
-                    id="btnSebelumnya"
-                >
+                <button type="button" class="btn-sebelumnya" id="btnSebelumnya">
                     <span>←</span>
                     Soal Sebelumnya
                 </button>
 
-                <button
-                    type="button"
-                    class="btn-selanjutnya"
-                    id="btnSelanjutnya"
-                >
+                <button type="button" class="btn-selanjutnya" id="btnSelanjutnya">
                     Soal Selanjutnya
                     <span>→</span>
                 </button>
@@ -293,15 +270,8 @@
          MODAL KONFIRMASI PENGIRIMAN
     ====================================== -->
 
-    <div
-        class="konfirmasi-overlay"
-        id="modalKonfirmasi"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="judulKonfirmasi"
-        aria-describedby="deskripsiKonfirmasi"
-        hidden
-    >
+    <div class="konfirmasi-overlay" id="modalKonfirmasi" role="dialog" aria-modal="true"
+        aria-labelledby="judulKonfirmasi" aria-describedby="deskripsiKonfirmasi" hidden>
 
         <div class="konfirmasi-card">
 
@@ -319,27 +289,15 @@
                 diubah lagi.
             </p>
 
-            <div
-                class="konfirmasi-peringatan"
-                id="peringatanBelumLengkap"
-                hidden
-            ></div>
+            <div class="konfirmasi-peringatan" id="peringatanBelumLengkap" hidden></div>
 
             <div class="konfirmasi-actions">
 
-                <button
-                    type="button"
-                    class="btn-batal-kirim"
-                    id="btnBatalKirim"
-                >
+                <button type="button" class="btn-batal-kirim" id="btnBatalKirim">
                     Batal
                 </button>
 
-                <button
-                    type="button"
-                    class="btn-ya-kirim"
-                    id="btnYaKirim"
-                >
+                <button type="button" class="btn-ya-kirim" id="btnYaKirim">
                     Ya, Kirim Jawaban
                 </button>
 
@@ -353,7 +311,8 @@
 
     <script>
         window.bakawanEvaluasiUrls = {
-            hasil: @json(route('evaluasi.hasil'))
+            hasil: @json(route('evaluasi.hasil')),
+            simpan: @json(route('evaluasi.simpan'))
         };
 
         window.bakawanNamaSiswa =
@@ -365,4 +324,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

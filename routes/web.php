@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,8 @@ use App\Http\Controllers\HasilEvaluasiController;
 use App\Http\Controllers\ProfilGuruController;
 
 use App\Models\Materi;
+use App\Models\Siswa;
+use App\Models\HasilKuis;
 
 
 /* ==========================================
@@ -27,9 +30,11 @@ Route::get('/', function () {
    HALAMAN SISWA
 ========================================== */
 
-// BERANDA SISWA
+// Beranda Siswa
 Route::get('/beranda', function () {
+
     return view('beranda');
+
 })->name('beranda');
 
 
@@ -60,7 +65,9 @@ Route::get('/aktivitas/hubungan-dalam-ekosistem', [
 
 // Aktivitas Mencocokkan
 Route::get('/aktivitas/mencocokkan', function () {
+
     return view('aktivitas.mencocokkan');
+
 })->name('aktivitas.mencocokkan');
 
 
@@ -149,7 +156,7 @@ Route::get('/materi/biotik-abiotik', function () {
    EVALUASI SISWA
 ========================================== */
 
-// Halaman Identitas
+// Halaman Identitas Siswa
 Route::get('/evaluasi', function () {
 
     return view('evaluasi');
@@ -160,6 +167,7 @@ Route::get('/evaluasi', function () {
 // Memulai Evaluasi
 Route::post('/evaluasi/mulai', function (Request $request) {
 
+    // 1. Memeriksa nama dan kelas siswa
     $data = $request->validate([
         'nama_lengkap' => 'required|string|max:100',
         'kelas' => 'required|string|max:30',
@@ -168,15 +176,114 @@ Route::post('/evaluasi/mulai', function (Request $request) {
         'kelas.required' => 'Kelas wajib diisi.',
     ]);
 
-    session([
-        'evaluasi_nama' => $data['nama_lengkap'],
-        'evaluasi_kelas' => $data['kelas'],
+    // 2. Menyimpan data siswa ke database
+    $siswa = Siswa::firstOrCreate([
+        'nama_lengkap' => $data['nama_lengkap'],
+        'kelas' => $data['kelas'],
     ]);
 
+    // 3. Menyimpan identitas siswa ke session
+    session([
+        'evaluasi_siswa_id' => $siswa->id,
+        'evaluasi_nama' => $siswa->nama_lengkap,
+        'evaluasi_kelas' => $siswa->kelas,
+    ]);
+
+    // 4. Mengarahkan siswa ke halaman petunjuk
     return redirect()->route('evaluasi.petunjuk');
 
 })->name('evaluasi.mulai');
 
+
+/* ==========================================
+   MENYIMPAN HASIL EVALUASI SISWA
+========================================== */
+
+// Menyimpan jawaban dan nilai siswa
+Route::post('/evaluasi/simpan', function (Request $request) {
+
+    // 1. Mengambil ID siswa dari session
+    $siswaId = session('evaluasi_siswa_id');
+
+    // Memastikan siswa sudah mengisi identitas
+    if (!$siswaId || !Siswa::whereKey($siswaId)->exists()) {
+
+        return response()->json([
+            'message' => 'Identitas siswa tidak ditemukan.'
+        ], 401);
+    }
+
+    // 2. Memeriksa jawaban yang dikirim siswa
+    $data = $request->validate([
+        'jawaban' => 'required|array|size:5',
+        'jawaban.*.id' => 'required|integer|between:1,5',
+        'jawaban.*.pilihan' => 'nullable|string|max:255',
+    ]);
+
+    // 3. Kunci jawaban evaluasi
+    $kunciJawaban = [
+        1 => 'Ikan gabus',
+        2 => 'Air',
+        3 => 'Katak dan serangga',
+        4 => 'Untuk melakukan fotosintesis',
+        5 => 'Sebagai tempat hidup'
+    ];
+
+    // Memastikan ID soal tidak berulang
+    $daftarId = array_column($data['jawaban'], 'id');
+
+    if (count(array_unique($daftarId)) !== 5) {
+
+        return response()->json([
+            'message' => 'Data jawaban tidak valid.'
+        ], 422);
+    }
+
+    // 4. Menghitung jawaban benar
+    $jumlahBenar = 0;
+
+    foreach ($data['jawaban'] as $jawaban) {
+
+        $id = $jawaban['id'];
+
+        $pilihan = $jawaban['pilihan'] ?? null;
+
+        if ($pilihan === $kunciJawaban[$id]) {
+            $jumlahBenar++;
+        }
+    }
+
+    // 5. Menghitung nilai siswa
+    $jumlahSoal = count($kunciJawaban);
+
+    $nilai = round(($jumlahBenar / $jumlahSoal) * 100);
+
+    // 6. Menyimpan nilai ke database
+    $hasil = HasilKuis::create([
+        'siswa_id' => $siswaId,
+        'jumlah_benar' => $jumlahBenar,
+        'jumlah_soal' => $jumlahSoal,
+        'nilai' => $nilai
+    ]);
+
+    // 7. Menyimpan ID hasil ke session
+    session([
+        'evaluasi_hasil_id' => $hasil->id
+    ]);
+
+    // 8. Mengirim hasil ke JavaScript
+    return response()->json([
+        'nilai' => $hasil->nilai,
+        'jumlahBenar' => $hasil->jumlah_benar,
+        'jumlahSoal' => $hasil->jumlah_soal
+    ]);
+
+})->name('evaluasi.simpan');
+
+
+/* ==========================================
+   HALAMAN EVALUASI SISWA
+========================================== */
 
 // Petunjuk Evaluasi
 Route::get('/evaluasi/petunjuk', function () {
