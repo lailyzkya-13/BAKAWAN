@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\HasilKuis;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\HasilEvaluasiExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HasilEvaluasiController extends Controller
 {
@@ -50,5 +52,14 @@ class HasilEvaluasiController extends Controller
 
         // Mengunduh PDF
         return $pdf->download('hasil-evaluasi-bakawan.pdf');
+    }
+
+    // Export hasil evaluasi siswa ke Excel
+    public function exportExcel()
+    {
+        return Excel::download(
+            new HasilEvaluasiExport,
+            'hasil-evaluasi-bakawan.xlsx'
+        );
     }
 }

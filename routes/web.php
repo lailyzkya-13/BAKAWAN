@@ -525,6 +525,11 @@ Route::get('/hasil-evaluasi/export/pdf', [
 ])->name('hasil.evaluasi.pdf');
 
 
+// Export Excel Hasil Evaluasi
+Route::get('/hasil-evaluasi/export/excel', [
+    HasilEvaluasiController::class,
+    'exportExcel'
+])->name('hasil.evaluasi.excel');
 
 /* ==========================================
    PROFIL GURU
