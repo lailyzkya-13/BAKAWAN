@@ -137,6 +137,23 @@
         padding: 20px;
     }
 
+    /* Tombol Export PDF */
+.btn-export-pdf {
+    display: inline-block;
+    background-color: #dc3545;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-export-pdf:hover {
+    background-color: #b02a37;
+    color: white;
+}
+
 </style>
 
 
@@ -156,6 +173,16 @@
 <!-- =====================================
      3. TABEL NILAI SISWA
 ===================================== -->
+
+
+<!-- TOMBOL EXPORT PDF -->
+<a href="{{ route('hasil.evaluasi.pdf') }}"
+   class="btn-export-pdf">
+
+    Export PDF
+
+</a>
+
 
 <div class="kotak-evaluasi">
 

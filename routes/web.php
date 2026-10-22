@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -11,6 +10,7 @@ use App\Http\Controllers\KelolaKuisController;
 use App\Http\Controllers\KelolaMateriGuruController;
 use App\Http\Controllers\HasilEvaluasiController;
 use App\Http\Controllers\ProfilGuruController;
+
 
 use App\Models\Materi;
 use App\Models\Siswa;
@@ -499,25 +499,31 @@ Route::delete('/soal-kuis/{soalKuis}', [
 ])->name('soal.kuis.destroy');
 
 
+
 /* ==========================================
    HASIL EVALUASI GURU
 ========================================== */
 
-
- // Halaman Hasil Evaluasi Guru
- // Mengambil nama siswa dan nilai dari database
- Route::get('/hasil-evaluasi', [
-     HasilEvaluasiController::class,
-     'index'
- ])->name('hasil-evaluasi');
+// Menampilkan halaman hasil evaluasi guru
+Route::get('/hasil-evaluasi', [
+    HasilEvaluasiController::class,
+    'index'
+])->name('hasil-evaluasi');
 
 
-
-// Hasil Evaluasi Melalui Controller
+// Menampilkan halaman pengelolaan evaluasi
 Route::get('/hasil-evaluasi/kelola', [
     HasilEvaluasiController::class,
     'index'
 ])->name('hasil.evaluasi');
+
+
+// Mengekspor hasil evaluasi siswa ke PDF
+Route::get('/hasil-evaluasi/export/pdf', [
+    HasilEvaluasiController::class,
+    'exportPdf'
+])->name('hasil.evaluasi.pdf');
+
 
 
 /* ==========================================
