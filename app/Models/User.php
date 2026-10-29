@@ -46,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relasi akun dengan profil guru
+    public function guruProfile()
+    {
+        return $this->hasOne(GuruProfile::class);
+    }
 }

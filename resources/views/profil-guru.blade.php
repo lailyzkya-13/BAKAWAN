@@ -1,9 +1,11 @@
+
 @extends('layouts.app-guru')
 
 @section('content')
 
 <style>
-    /* Judul halaman */
+    /* ================= JUDUL ================= */
+
     .judul-profil {
         color: #2d6a4f;
         margin-bottom: 10px;
@@ -14,7 +16,8 @@
         margin-bottom: 25px;
     }
 
-    /* Kotak utama profil */
+    /* ================= KOTAK PROFIL ================= */
+
     .kotak-profil {
         background-color: #FFFAF3;
         border-radius: 12px;
@@ -22,7 +25,8 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* Bagian foto dan nama guru */
+    /* ================= HEADER PROFIL ================= */
+
     .profil-header {
         display: flex;
         align-items: center;
@@ -31,7 +35,6 @@
         border-bottom: 1px solid #ddd;
     }
 
-    /* Foto profil sementara */
     .foto-profil {
         width: 90px;
         height: 90px;
@@ -46,7 +49,6 @@
         flex-shrink: 0;
     }
 
-    /* Nama guru */
     .profil-nama h2 {
         color: #2d6a4f;
         margin: 0 0 8px;
@@ -57,7 +59,19 @@
         margin: 0;
     }
 
-    /* Judul setiap bagian */
+    .status-guru {
+        display: inline-block;
+        background-color: #FF788D;
+        color: white;
+        padding: 7px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 12px;
+    }
+
+    /* ================= INFORMASI PROFIL ================= */
+
     .judul-bagian {
         color: #2d6a4f;
         margin-top: 30px;
@@ -65,7 +79,6 @@
         font-size: 20px;
     }
 
-    /* Baris informasi profil */
     .baris-profil {
         display: flex;
         padding: 15px 0;
@@ -73,7 +86,6 @@
         gap: 15px;
     }
 
-    /* Nama keterangan */
     .label-profil {
         width: 180px;
         color: #555;
@@ -81,26 +93,119 @@
         flex-shrink: 0;
     }
 
-    /* Isi keterangan */
     .isi-profil {
         color: #333;
         overflow-wrap: anywhere;
     }
 
-    /* Penanda status guru */
-    .status-guru {
-        background-color: #FF788D;
-        color: white;
-        padding: 7px 15px;
-        border-radius: 20px;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 12px;
+    /* ================= FORM CRUD ================= */
+
+    .form-profil {
+        margin-top: 30px;
+        padding: 25px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 12px;
     }
 
-    /* Tampilan pada layar kecil */
+    /* Tombol membuka form */
+    .form-profil summary {
+        display: inline-block;
+        background-color: #2d6a4f;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .form-profil summary:hover {
+        background-color: #1b4332;
+    }
+
+    /* Kolom input */
+    .input-profil {
+        margin-top: 20px;
+    }
+
+    .input-profil label {
+        display: block;
+        margin-bottom: 8px;
+        color: #2d6a4f;
+        font-weight: bold;
+    }
+
+    .input-profil input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .input-profil input:focus {
+        outline: none;
+        border-color: #2d6a4f;
+    }
+
+    /* ================= TOMBOL ================= */
+
+    .btn-simpan {
+        background-color: #2d6a4f;
+        color: white;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .btn-simpan:hover {
+        background-color: #1b4332;
+    }
+
+    .btn-hapus {
+        background-color: #e63946;
+        color: white;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    .btn-hapus:hover {
+        background-color: #b71c1c;
+    }
+
+    /* ================= NOTIFIKASI ================= */
+
+    .pesan-sukses {
+        background-color: #d8f3dc;
+        color: #1b4332;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .pesan-error {
+        background-color: #ffe5e5;
+        color: #b71c1c;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
     @media (max-width: 600px) {
+
+        .kotak-profil {
+            padding: 20px;
+        }
+
         .profil-header {
             flex-direction: column;
             text-align: center;
@@ -114,11 +219,16 @@
         .label-profil {
             width: 100%;
         }
+
+        .form-profil {
+            padding: 15px;
+        }
     }
 </style>
 
 
-<!-- Judul halaman -->
+<!-- ================= JUDUL HALAMAN ================= -->
+
 <h1 class="judul-profil">Profil Guru</h1>
 
 <p class="deskripsi-profil">
@@ -126,34 +236,57 @@
 </p>
 
 
-<!-- Data Guru -->
+<!-- ================= NOTIFIKASI ================= -->
+
+@if (session('success'))
+    <div class="pesan-sukses">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="pesan-error">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="pesan-error">
+        {{ $errors->first() }}
+    </div>
+@endif
+
+
+<!-- ================= MENGAMBIL DATA GURU ================= -->
+
 @php
-    // Mengambil nama dan email jika guru sudah login
+    // Mengambil akun guru yang sedang login
     $guru = auth()->user();
 
-    // Data sementara jika belum tersedia
-    $nama = $guru?->name ?? 'Nama Guru';
-    $email = $guru?->email ?? 'Belum diisi';
+    // Nama dan email dari tabel users
+    $nama = $guru->name;
+    $email = $guru->email;
 
-    $nip = 'Belum diisi';
-    $sekolah = 'Belum diisi';
-    $mataPelajaran = 'IPAS';
-    $kelas = 'V (Lima)';
+    // Identitas dari tabel guru_profiles
+    $nip = $profil?->nip_nuptk ?: 'Belum diisi';
+    $sekolah = $profil?->sekolah ?: 'Belum diisi';
+    $mataPelajaran = $profil?->mata_pelajaran ?: 'Belum diisi';
+    $kelas = $profil?->kelas ?: 'Belum diisi';
 @endphp
 
 
-<!-- Kotak Profil -->
+<!-- ================= KOTAK PROFIL ================= -->
+
 <div class="kotak-profil">
 
-    <!-- Bagian atas profil -->
+    <!-- HEADER PROFIL -->
+
     <div class="profil-header">
 
-        <!-- Foto profil sementara -->
         <div class="foto-profil">
             G
         </div>
 
-        <!-- Nama dan status guru -->
         <div class="profil-nama">
 
             <h2>{{ $nama }}</h2>
@@ -169,10 +302,9 @@
     </div>
 
 
-    <!-- Informasi Pribadi -->
-    <h3 class="judul-bagian">
-        Informasi Pribadi
-    </h3>
+    <!-- ================= INFORMASI PRIBADI ================= -->
+
+    <h3 class="judul-bagian">Informasi Pribadi</h3>
 
     <div class="baris-profil">
         <div class="label-profil">
@@ -205,10 +337,9 @@
     </div>
 
 
-    <!-- Informasi Mengajar -->
-    <h3 class="judul-bagian">
-        Informasi Mengajar
-    </h3>
+    <!-- ================= INFORMASI MENGAJAR ================= -->
+
+    <h3 class="judul-bagian">Informasi Mengajar</h3>
 
     <div class="baris-profil">
         <div class="label-profil">
@@ -239,6 +370,132 @@
             {{ $kelas }}
         </div>
     </div>
+
+
+    <!-- ================= FORM TAMBAH / EDIT PROFIL ================= -->
+
+    <details class="form-profil"
+        @if ($errors->any()) open @endif>
+
+        <summary>
+            {{ $profil ? 'Edit Profil' : 'Isi Profil Guru' }}
+        </summary>
+
+        <!-- Menyimpan atau mengubah profil -->
+        <form
+            action="{{ $profil ? route('profil.update') : route('profil.store') }}"
+            method="POST">
+
+            @csrf
+
+            <!-- Jika profil sudah ada, gunakan UPDATE -->
+            @if ($profil)
+                @method('PUT')
+            @endif
+
+
+            <!-- NIP / NUPTK -->
+            <div class="input-profil">
+
+                <label for="nip_nuptk">
+                    NIP / NUPTK
+                </label>
+
+                <input
+                    type="text"
+                    id="nip_nuptk"
+                    name="nip_nuptk"
+                    value="{{ old('nip_nuptk', $profil?->nip_nuptk) }}"
+                    placeholder="Masukkan NIP atau NUPTK"
+                    maxlength="50">
+
+            </div>
+
+
+            <!-- NAMA SEKOLAH -->
+            <div class="input-profil">
+
+                <label for="sekolah">
+                    Nama Sekolah
+                </label>
+
+                <input
+                    type="text"
+                    id="sekolah"
+                    name="sekolah"
+                    value="{{ old('sekolah', $profil?->sekolah) }}"
+                    placeholder="Masukkan nama sekolah"
+                    maxlength="255">
+
+            </div>
+
+
+            <!-- MATA PELAJARAN -->
+            <div class="input-profil">
+
+                <label for="mata_pelajaran">
+                    Mata Pelajaran
+                </label>
+
+                <input
+                    type="text"
+                    id="mata_pelajaran"
+                    name="mata_pelajaran"
+                    value="{{ old('mata_pelajaran', $profil?->mata_pelajaran) }}"
+                    placeholder="Contoh: IPAS"
+                    maxlength="100">
+
+            </div>
+
+
+            <!-- KELAS -->
+            <div class="input-profil">
+
+                <label for="kelas">
+                    Kelas yang Diajar
+                </label>
+
+                <input
+                    type="text"
+                    id="kelas"
+                    name="kelas"
+                    value="{{ old('kelas', $profil?->kelas) }}"
+                    placeholder="Contoh: V (Lima)"
+                    maxlength="100">
+
+            </div>
+
+
+            <!-- TOMBOL SIMPAN -->
+
+            <button type="submit" class="btn-simpan">
+                {{ $profil ? 'Simpan Perubahan' : 'Simpan Profil' }}
+            </button>
+
+        </form>
+
+
+        <!-- ================= HAPUS PROFIL ================= -->
+
+        @if ($profil)
+
+            <form
+                action="{{ route('profil.destroy') }}"
+                method="POST"
+                onsubmit="return confirm('Yakin ingin menghapus profil guru?')">
+
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="btn-hapus">
+                    Hapus Profil
+                </button>
+
+            </form>
+
+        @endif
+
+    </details>
 
 </div>
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\KelolaKuisController;
 use App\Http\Controllers\KelolaMateriGuruController;
 use App\Http\Controllers\HasilEvaluasiController;
 use App\Http\Controllers\ProfilGuruController;
+use App\Http\Controllers\AuthGuruController;
 
 
 use App\Models\Materi;
@@ -360,19 +361,30 @@ Route::get('/tentang', function () {
    HALAMAN GURU
 ========================================== */
 
-// Login Guru
-Route::get('/login-guru', function () {
+// Menampilkan halaman login guru
+Route::get('/login-guru', [
+    AuthGuruController::class,
+    'showLogin'
+])->name('login.guru');
 
-    return view('login-guru');
+// Memproses login guru
+Route::post('/login-guru', [
+    AuthGuruController::class,
+    'login'
+])->name('login.guru.proses');
 
-})->name('login.guru');
+// Logout guru
+Route::post('/logout-guru', [
+    AuthGuruController::class,
+    'logout'
+])->middleware('auth')->name('logout.guru');
 
 
-// Dashboard Guru
+// Dashboard Guru - Wajib Login
 Route::get('/dashboard', [
     DashboardGuruController::class,
     'index'
-])->name('dashboard');
+])->middleware('auth')->name('dashboard');
 
 
 /* ==========================================
@@ -535,8 +547,27 @@ Route::get('/hasil-evaluasi/export/excel', [
    PROFIL GURU
 ========================================== */
 
-Route::get('/profil', function () {
 
-    return view('profil-guru');
+// ==========================================
+// CRUD PROFIL GURU
+// ==========================================
 
-})->name('profil');
+// READ - Menampilkan profil
+Route::get('/profil', [
+    ProfilGuruController::class, 'index'
+])->name('profil');
+
+// CREATE - Menyimpan profil
+Route::post('/profil', [
+    ProfilGuruController::class, 'store'
+])->name('profil.store');
+
+// UPDATE - Mengubah profil
+Route::put('/profil', [
+    ProfilGuruController::class, 'update'
+])->name('profil.update');
+
+// DELETE - Menghapus profil
+Route::delete('/profil', [
+    ProfilGuruController::class, 'destroy'
+])->name('profil.destroy');

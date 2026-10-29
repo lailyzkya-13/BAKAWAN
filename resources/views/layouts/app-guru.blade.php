@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -61,16 +60,27 @@
             color: #1b4332;
         }
 
+
         /* Tombol Keluar berwarna merah */
         .header-menu .btn-logout {
             background-color: #FF0000;
             color: white;
             padding: 12px 25px;
+            border: none;
             border-radius: 8px;
             font-size: 16px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
             text-align: center;
             transition: 0.2s;
         }
+
+        .header-menu .btn-logout:hover {
+            background-color: #cc0000;
+            color: white;
+        }
+
 
         .header-menu .btn-logout:hover {
             background-color: #cc0000;
@@ -182,7 +192,6 @@
         .dashboard-card p {
             color: #555;
         }
-
     </style>
 </head>
 
@@ -194,8 +203,7 @@
 
         <!-- Logo BAKAWAN -->
         <div class="header-logo">
-            <img src="{{ asset('images/logo-bakawan.png') }}"
-                 alt="Logo BAKAWAN">
+            <img src="{{ asset('images/logo-bakawan.png') }}" alt="Logo BAKAWAN">
         </div>
 
         <!-- Menu kanan atas -->
@@ -205,8 +213,16 @@
 
             <a href="/profil">Profil</a>
 
+
             <!-- Tombol Keluar -->
-            <a href="#" class="btn-logout">Keluar</a>
+            <form action="{{ route('logout.guru') }}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn-logout">
+                    Keluar
+                </button>
+            </form>
+
 
         </div>
 
