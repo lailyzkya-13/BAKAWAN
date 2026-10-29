@@ -34,7 +34,11 @@ Route::get('/', function () {
 // Beranda Siswa
 Route::get('/beranda', function () {
 
-    return view('beranda');
+    // Mengambil materi dengan ID 7 dari database
+    $materiBiotik = Materi::find(7);
+
+    // Mengirim data ke halaman Beranda Siswa
+    return view('beranda', compact('materiBiotik'));
 
 })->name('beranda');
 
@@ -79,8 +83,10 @@ Route::get('/aktivitas/mencocokkan', function () {
 // Daftar Materi Siswa
 Route::get('/materi-siswa', function () {
 
+    // Mengambil semua materi dari database
     $materi = Materi::latest()->get();
 
+    // Mengirim data ke halaman siswa
     return view('materi', compact('materi'));
 
 })->name('materi.siswa');
@@ -145,12 +151,25 @@ Route::get('/materi-siswa/{materi}', function (Materi $materi) {
 })->name('materi.siswa.show');
 
 
-// Materi Biotik Lama
+
+/* MATERI BIOTIK DARI DATABASE */
+
 Route::get('/materi/biotik-abiotik', function () {
 
-    return view('materi-biotik');
+    // Mencari materi yang tersimpan di database
+    $materi = Materi::where(
+        'judul',
+        'Komponen Biotik dan Abiotik'
+    )->firstOrFail();
+
+    // Membuka halaman detail materi siswa
+    return redirect()->route(
+        'materi.siswa.show',
+        $materi
+    );
 
 })->name('materi.biotik');
+
 
 
 /* ==========================================
@@ -554,20 +573,24 @@ Route::get('/hasil-evaluasi/export/excel', [
 
 // READ - Menampilkan profil
 Route::get('/profil', [
-    ProfilGuruController::class, 'index'
+    ProfilGuruController::class,
+    'index'
 ])->name('profil');
 
 // CREATE - Menyimpan profil
 Route::post('/profil', [
-    ProfilGuruController::class, 'store'
+    ProfilGuruController::class,
+    'store'
 ])->name('profil.store');
 
 // UPDATE - Mengubah profil
 Route::put('/profil', [
-    ProfilGuruController::class, 'update'
+    ProfilGuruController::class,
+    'update'
 ])->name('profil.update');
 
 // DELETE - Menghapus profil
 Route::delete('/profil', [
-    ProfilGuruController::class, 'destroy'
+    ProfilGuruController::class,
+    'destroy'
 ])->name('profil.destroy');
