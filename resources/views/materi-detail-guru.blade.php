@@ -1,409 +1,630 @@
 
-@extends('layouts.app-guru')
+<!DOCTYPE html>
+<html lang="id">
 
-@section('content')
+<head>
+    <meta charset="UTF-8">
 
-<div class="detail-materi">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <!-- TOMBOL KEMBALI -->
-    <a href="{{ route('materi') }}" class="btn-kembali">
-        <== Kembali ke Daftar Materi
-    </a>
+    <title>{{ $materi->judul }} | BAKAWAN</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- GOOGLE FONT -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS HEADER BAKAWAN -->
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/header.css') }}">
+
+    <style>
+
+        /* HALAMAN UTAMA */
+        body {
+            margin: 0;
+            background: #fffaf4;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .detail-page {
+            min-height: 100vh;
+            padding: 40px 20px 70px;
+        }
+
+        .detail-container {
+            max-width: 1150px;
+            margin: auto;
+        }
 
 
-    <!-- KARTU DETAIL MATERI -->
-    <div class="detail-card">
+        /* TOMBOL KEMBALI */
+        .detail-kembali {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #247259;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
 
-        <!-- GAMBAR MATERI -->
-        <div class="detail-gambar">
+        .detail-kembali:hover {
+            color: #174e40;
+        }
 
-            @if($materi->gambar)
 
-                <!-- Gambar yang diunggah guru -->
-                <img
-                    src="{{ asset('storage/' . $materi->gambar) }}"
-                    alt="{{ $materi->judul }}">
+        /* JUDUL HALAMAN */
+        .detail-header {
+            margin-bottom: 30px;
+        }
 
-            @else
+        .detail-header h1 {
+            color: #214b40;
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
 
-                <!-- Jika tidak ada gambar -->
-                <div class="detail-tanpa-gambar">
-                    Tidak Ada Gambar
+        .detail-header p {
+            color: #64776c;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+
+        /* GAMBAR SAMPUL */
+        .detail-cover {
+            margin-bottom: 30px;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .detail-cover img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+
+        /* LAYOUT SIDEBAR DAN KONTEN */
+        .detail-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+
+        /* SIDEBAR */
+        .detail-sidebar {
+            background: #dceee2;
+            border-radius: 18px;
+            padding: 24px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .detail-sidebar h2 {
+            color: #214b40;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .detail-sidebar a {
+            display: block;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+
+            background: white;
+            color: #247259;
+
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.6;
+
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .detail-sidebar a:hover {
+            background: #c4e7d1;
+        }
+
+        .detail-sidebar a.active {
+            background: #247259;
+            color: white;
+            font-weight: 600;
+        }
+
+
+        /* KONTEN UTAMA */
+        .detail-content {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
+            min-width: 0;
+        }
+
+        .detail-label {
+            display: inline-block;
+            padding: 7px 14px;
+            margin-bottom: 18px;
+
+            border-radius: 20px;
+
+            background: #dceee2;
+            color: #247259;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .detail-content h2 {
+            color: #214b40;
+            font-size: 25px;
+            font-weight: 800;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            overflow-wrap: anywhere;
+        }
+
+
+        /* PENGANTAR */
+        .detail-pengantar {
+            color: #64776c;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            white-space: pre-line;
+        }
+
+
+        /* KOTAK ISI MATERI */
+        .detail-materi-box {
+            background: #f1faf3;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .detail-materi-box h3 {
+            color: #214b40;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .detail-materi-box p {
+            color: #455b4e;
+            font-size: 14px;
+            line-height: 2;
+            margin-bottom: 0;
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+        }
+
+
+        /* KOTAK CONTOH */
+        .detail-contoh-box {
+            background: #fff0f3;
+            border-left: 5px solid #e95b7c;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+
+        .detail-contoh-box h3 {
+            color: #b93d60;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .detail-contoh-box p {
+            color: #5c5155;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 0;
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+        }
+
+
+        /* RINGKASAN */
+        .detail-ringkasan {
+            background: #fff8e8;
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 25px;
+        }
+
+        .detail-ringkasan h3 {
+            color: #805d24;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .detail-ringkasan p {
+            color: #66583e;
+            font-size: 14px;
+            line-height: 1.9;
+            white-space: pre-line;
+            margin-bottom: 0;
+        }
+
+
+        /* TOMBOL NAVIGASI */
+        .detail-navigasi {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 35px;
+        }
+
+        .detail-btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 9px;
+
+            background: #247259;
+            color: white;
+
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .detail-btn:hover {
+            background: #174e40;
+            color: white;
+        }
+
+        .detail-btn-pink {
+            background: #e95b7c;
+        }
+
+        .detail-btn-pink:hover {
+            background: #d94c6e;
+        }
+
+
+        /* JIKA MATERI KOSONG */
+        .detail-kosong {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64776c;
+        }
+
+
+        /* RESPONSIVE TABLET */
+        @media (max-width: 900px) {
+
+            .detail-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-sidebar {
+                position: static;
+            }
+        }
+
+
+        /* RESPONSIVE HP */
+        @media (max-width: 480px) {
+
+            .detail-page {
+                padding: 25px 15px 50px;
+            }
+
+            .detail-header h1 {
+                font-size: 24px;
+            }
+
+            .detail-content {
+                padding: 22px;
+            }
+
+            .detail-content h2 {
+                font-size: 21px;
+            }
+
+            .detail-materi-box,
+            .detail-contoh-box {
+                padding: 18px;
+            }
+
+            .detail-btn {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER BAKAWAN -->
+    @include('components.header')
+
+
+    <!-- HALAMAN DETAIL MATERI -->
+    <main class="detail-page">
+
+        <div class="detail-container">
+
+
+            <!-- TOMBOL KEMBALI -->
+            <a
+                href="{{ route('materi.siswa') }}"
+                class="detail-kembali">
+
+                ← Kembali ke Daftar Materi
+
+            </a>
+
+
+            <!-- JUDUL MATERI -->
+            <div class="detail-header">
+
+                <h1>
+                    {{ $materi->judul }}
+                </h1>
+
+                <p>
+                    {{ $materi->deskripsi
+                        ?: 'Materi pembelajaran IPAS untuk siswa kelas V.' }}
+                </p>
+
+            </div>
+
+
+            <!-- GAMBAR MATERI -->
+            @if ($materi->gambar)
+
+                <div class="detail-cover">
+
+                    <img
+                        src="{{ asset('storage/' . $materi->gambar) }}"
+                        alt="{{ $materi->judul }}">
+
                 </div>
 
             @endif
 
-        </div>
+
+            <!-- SIDEBAR DAN ISI -->
+            <div class="detail-layout">
 
 
-        <!-- INFORMASI MATERI -->
-        <div class="detail-content">
+                <!-- =========================
+                     SIDEBAR SUBBAB
+                ========================== -->
+                <aside class="detail-sidebar">
 
-            <span class="detail-label">
-                📚 IPAS Kelas V
-            </span>
+                    <h2>Daftar Subbab</h2>
 
-            <!-- JUDUL MATERI -->
-            <h1>{{ $materi->judul }}</h1>
+                    @forelse ($semuaSubbab as $index => $item)
 
-            <!-- DESKRIPSI MATERI -->
-            @if($materi->deskripsi)
-                <p class="detail-deskripsi">
-                    {{ $materi->deskripsi }}
-                </p>
-            @endif
+                        <a
+                            href="{{ route('materi.siswa.show', [
+                                'materi' => $materi->id,
+                                'subbab' => $item->id
+                            ]) }}"
 
-            <!-- DURASI MATERI -->
-            <div class="detail-info">
-                <span>
-                    ⏱️ {{ $materi->durasi ?: '20 Menit' }}
-                </span>
-            </div>
+                            class="{{ $subbabAktif && $subbabAktif->id == $item->id
+                                ? 'active'
+                                : '' }}">
+
+                            {{ $index + 1 }}.
+                            {{ $item->judul }}
+
+                        </a>
+
+                    @empty
+
+                        <p>
+                            Belum ada subbab.
+                        </p>
+
+                    @endforelse
+
+                </aside>
 
 
-            <!-- DAFTAR SUBBAB -->
-            <h2>Subbab Materi Pembelajaran</h2>
+                <!-- =========================
+                     KONTEN PEMBELAJARAN
+                ========================== -->
+                <section class="detail-content">
 
-            <div class="daftar-subbab">
+                    @if ($subbabAktif)
 
-                @forelse($materi->subbab->sortBy('urutan') as $subbab)
-
-                    <div class="subbab-card">
 
                         <!-- NOMOR SUBBAB -->
-                        <span class="subbab-label">
-                            Subbab {{ $loop->iteration }}
+                        <span class="detail-label">
+
+                            Subbab Pembelajaran
+
                         </span>
 
+
                         <!-- JUDUL SUBBAB -->
-                        <h3>{{ $subbab->judul }}</h3>
+                        <h2>
+                            {{ $subbabAktif->judul }}
+                        </h2>
 
 
                         <!-- PENGANTAR SUBBAB -->
-                        @if($subbab->pengantar)
+                        @if ($subbabAktif->pengantar)
 
-                            <div class="subbab-pengantar">
-                                {{ $subbab->pengantar }}
-                            </div>
+                            <p class="detail-pengantar">
+                                {{ $subbabAktif->pengantar }}
+                            </p>
 
                         @endif
 
 
                         <!-- ISI SUBBAB -->
-                        <div class="subbab-isi">
-                            {{ $subbab->isi }}
+                        <div class="detail-materi-box">
+
+                            <h3>
+                                Materi Pembelajaran
+                            </h3>
+
+                            <p>
+                                {{ $subbabAktif->isi }}
+                            </p>
+
                         </div>
 
 
-                        <!-- CONTOH SEDERHANA -->
-                        @if($subbab->contoh)
+                        <!-- CONTOH SUBBAB -->
+                        @if ($subbabAktif->contoh)
 
-                            <div class="subbab-contoh">
+                            <div class="detail-contoh-box">
 
-                                <strong>Contoh Sederhana</strong>
+                                <h3>
+                                    Contoh Materi
+                                </h3>
 
-                                <p>{{ $subbab->contoh }}</p>
+                                <p>
+                                    {{ $subbabAktif->contoh }}
+                                </p>
 
                             </div>
 
                         @endif
 
-                    </div>
 
-                @empty
+                        <!-- RINGKASAN DI AKHIR MATERI -->
+                        @if (
+                            !$selanjutnya &&
+                            $materi->ringkasan
+                        )
 
-                    <!-- JIKA BELUM ADA SUBBAB -->
-                    <div class="subbab-kosong">
-                        Belum ada subbab pada materi ini.
-                    </div>
+                            <div class="detail-ringkasan">
 
-                @endforelse
+                                <h3>
+                                    Ringkasan Materi
+                                </h3>
+
+                                <p>
+                                    {{ $materi->ringkasan }}
+                                </p>
+
+                            </div>
+
+                        @endif
+
+
+                        <!-- NAVIGASI SUBBAB -->
+                        <div class="detail-navigasi">
+
+
+                            <!-- TOMBOL SEBELUMNYA -->
+                            @if ($sebelumnya)
+
+                                <a
+                                    href="{{ route('materi.siswa.show', [
+                                        'materi' => $materi->id,
+                                        'subbab' => $sebelumnya->id
+                                    ]) }}"
+                                    class="detail-btn">
+
+                                    ← Sebelumnya
+
+                                </a>
+
+                            @else
+
+                                <span></span>
+
+                            @endif
+
+
+                            <!-- TOMBOL SELANJUTNYA -->
+                            @if ($selanjutnya)
+
+                                <a
+                                    href="{{ route('materi.siswa.show', [
+                                        'materi' => $materi->id,
+                                        'subbab' => $selanjutnya->id
+                                    ]) }}"
+                                    class="detail-btn detail-btn-pink">
+
+                                    Selanjutnya →
+
+                                </a>
+
+                            @else
+
+                                <a
+                                    href="{{ route('materi.siswa') }}"
+                                    class="detail-btn detail-btn-pink">
+
+                                    Selesai →
+
+                                </a>
+
+                            @endif
+
+                        </div>
+
+
+                    @else
+
+                        <!-- JIKA BELUM ADA SUBBAB -->
+                        <div class="detail-kosong">
+
+                            <h2>
+                                Belum Ada Subbab
+                            </h2>
+
+                            <p>
+                                Guru belum menambahkan isi
+                                untuk materi ini.
+                            </p>
+
+                            <a
+                                href="{{ route('materi.siswa') }}"
+                                class="detail-btn">
+
+                                Kembali ke Materi
+
+                            </a>
+
+                        </div>
+
+                    @endif
+
+                </section>
 
             </div>
 
-
-            <!-- RINGKASAN MATERI -->
-            @if($materi->ringkasan)
-
-                <div class="ringkasan-materi">
-
-                    <h2>Ringkasan Materi</h2>
-
-                    <p>{{ $materi->ringkasan }}</p>
-
-                </div>
-
-            @endif
-
         </div>
 
-    </div>
-
-</div>
+    </main>
 
 
-<style>
+    <!-- BOOTSTRAP JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
 
-/*  HALAMAN DETAIL MATERI */
+</body>
 
-.detail-materi {
-    padding: 10px 0 30px;
-}
-
-
-/* TOMBOL KEMBALI */
-.btn-kembali {
-    display: inline-block;
-    text-decoration: none;
-    color: #2d6a4f;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.btn-kembali:hover {
-    color: #1b4332;
-}
-
-
-/* KARTU DETAIL */
-.detail-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-
-/* GAMBAR MATERI */
-
-.detail-gambar {
-    width: 100%;
-    height: 320px;
-    background: #d8f3dc;
-}
-
-.detail-gambar img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* TAMPILAN JIKA TIDAK ADA GAMBAR */
-.detail-tanpa-gambar {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #e8f5e9;
-    color: #2d6a4f;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-
-/* INFORMASI MATERI */
-
-.detail-content {
-    padding: 30px;
-}
-
-/* LABEL KELAS */
-.detail-label {
-    display: inline-block;
-    background: #d8f3dc;
-    color: #2d6a4f;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-/* JUDUL MATERI */
-.detail-content h1 {
-    color: #1b4332;
-    font-size: 28px;
-    margin: 20px 0 10px;
-}
-
-/* DESKRIPSI */
-.detail-deskripsi {
-    color: #666;
-    line-height: 1.7;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
-}
-
-/* DURASI */
-.detail-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    color: #52796f;
-    font-size: 14px;
-    margin: 20px 0;
-}
-
-/* JUDUL BAGIAN */
-.detail-content h2 {
-    color: #2d6a4f;
-    font-size: 21px;
-}
-
-
-/* DAFTAR SUBBAB MATERI */
-
-.daftar-subbab {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-
-/* KARTU SETIAP SUBBAB */
-.subbab-card {
-    background: #f8fbf8;
-    border: 1px solid #dce7df;
-    border-radius: 12px;
-    padding: 25px;
-}
-
-
-/* NOMOR SUBBAB */
-.subbab-label {
-    display: inline-block;
-    background: #d8f3dc;
-    color: #2d6a4f;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-
-
-/* JUDUL SUBBAB */
-.subbab-card h3 {
-    color: #1b4332;
-    font-size: 20px;
-    margin: 5px 0 15px;
-    overflow-wrap: anywhere;
-}
-
-
-/* PENGANTAR SUBBAB */
-.subbab-pengantar {
-    color: #52796f;
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 18px;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
-}
-
-
-/* ISI SUBBAB */
-.subbab-isi {
-    color: #444;
-    font-size: 15px;
-    line-height: 1.9;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
-}
-
-
-/* CONTOH SEDERHANA */
-
-.subbab-contoh {
-    background: #e8f5e9;
-    padding: 18px;
-    border-left: 4px solid #2d6a4f;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-.subbab-contoh strong {
-    color: #1b4332;
-    font-size: 14px;
-}
-
-.subbab-contoh p {
-    margin: 10px 0 0;
-    color: #444;
-    line-height: 1.8;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
-}
-
-
-/* RINGKASAN MATERI */
-
-.ringkasan-materi {
-    margin-top: 30px;
-    padding: 25px;
-    background: #f0f8f1;
-    border-radius: 12px;
-}
-
-.ringkasan-materi h2 {
-    margin-top: 0;
-}
-
-.ringkasan-materi p {
-    color: #444;
-    line-height: 1.8;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
-}
-
-
-/* KONDISI BELUM ADA SUBBAB */
-
-.subbab-kosong {
-    padding: 20px;
-    background: #f8faf9;
-    border-radius: 10px;
-    color: #777;
-    text-align: center;
-}
-
-
-/* RESPONSIVE HP DAN TABLET */
-
-@media (max-width: 768px) {
-
-    .detail-gambar {
-        height: 220px;
-    }
-
-    .detail-content {
-        padding: 20px;
-    }
-
-    .detail-content h1 {
-        font-size: 23px;
-    }
-
-    .detail-content h2 {
-        font-size: 19px;
-    }
-
-    .subbab-card {
-        padding: 18px;
-    }
-
-    .subbab-card h3 {
-        font-size: 18px;
-    }
-
-    .ringkasan-materi {
-        padding: 18px;
-    }
-
-}
-
-</style>
-
-@endsection
+</html>
