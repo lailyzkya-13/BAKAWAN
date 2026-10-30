@@ -1,3 +1,4 @@
+
 <header class="main-header">
     <nav class="navbar navbar-expand-lg navbar-bakawan">
 
@@ -15,8 +16,7 @@
                 >
             </a>
 
-
-            <!-- TOGGLE MOBILE -->
+            <!-- TOMBOL MENU MOBILE -->
             <button
                 class="navbar-toggler"
                 type="button"
@@ -29,8 +29,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
-            <!-- MENU -->
+            <!-- MENU NAVIGASI -->
             <div
                 class="collapse navbar-collapse"
                 id="navbarBakawan"
@@ -48,6 +47,15 @@
                         </a>
                     </li>
 
+                    <!-- MATERI -->
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ request()->routeIs('materi*') ? 'active' : '' }}"
+                            href="{{ route('materi') }}"
+                        >
+                            Materi
+                        </a>
+                    </li>
 
                     <!-- AKTIVITAS -->
                     <li class="nav-item">
@@ -59,18 +67,6 @@
                         </a>
                     </li>
 
-
-                    <!-- MATERI -->
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {{ request()->routeIs('materi*') ? 'active' : '' }}"
-                            href="{{ route('materi') }}"
-                        >
-                            Materi
-                        </a>
-                    </li>
-
-
                     <!-- EVALUASI -->
                     <li class="nav-item">
                         <a
@@ -80,7 +76,6 @@
                             Evaluasi
                         </a>
                     </li>
-
 
                     <!-- TENTANG -->
                     <li class="nav-item">
@@ -93,7 +88,6 @@
                     </li>
 
                 </ul>
-
 
                 <!-- LOGIN GURU -->
                 <div class="login-area">

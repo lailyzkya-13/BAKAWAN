@@ -1,0 +1,5 @@
+{
+  "coordinateSystem": "percent-of-game-world",
+  "surfaceOnly": true,
+  "note": "Collision platform dirender transparan tepat pada permukaan platform yang menyatu dengan background."
+}

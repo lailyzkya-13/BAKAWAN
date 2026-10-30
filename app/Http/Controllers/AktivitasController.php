@@ -42,4 +42,9 @@ class AktivitasController extends Controller
             compact('hubunganEkosistem', 'pasanganKanan')
         );
     }
+
+    public function petualanganBangau()
+    {
+        return view('petualangan-bangau');
+    }
 }
