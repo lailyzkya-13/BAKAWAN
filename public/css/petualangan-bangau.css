@@ -1,0 +1,1199 @@
+
+/* =====================================================
+   BAKAWAN - PETUALANGAN SI BANGAU
+   CSS LENGKAP + PERBAIKAN SCROLL HORIZONTAL
+   ===================================================== */
+
+/* RESET DAN PEMBATAS LEBAR HALAMAN */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+}
+
+/* Hanya mengatur game, tidak mengubah desain navbar */
+
+.bangau-game {
+    --green: #214b40;
+    --pink: #e95b7c;
+    --cream: #fffaf4;
+    --light-green: #e8f5ed;
+
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 85vh;
+
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+
+    overflow-x: clip;
+
+    background: var(--cream);
+    color: var(--green);
+    font-family: 'Poppins', sans-serif;
+}
+
+.bangau-game,
+.bangau-game *,
+.bangau-game *::before,
+.bangau-game *::after {
+    box-sizing: border-box;
+}
+
+.bangau-game button,
+.bangau-game input {
+    font-family: inherit;
+}
+
+.bangau-game [hidden] {
+    display: none !important;
+}
+
+/* LAYAR GAME */
+
+.bangau-screen {
+    display: none;
+    width: 100%;
+    max-width: 1120px;
+    min-width: 0;
+    margin: 0 auto;
+}
+
+.bangau-screen.active {
+    display: block;
+}
+
+/* =====================================================
+   HALAMAN AWAL
+   ===================================================== */
+
+.bangau-home {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(0, .9fr);
+    align-items: center;
+    gap: 35px;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 520px;
+    padding: 50px;
+
+    background: linear-gradient(
+        125deg,
+        #ffffff,
+        #e6f7ed
+    );
+
+    border-radius: 28px;
+    box-shadow: 0 12px 35px #214b4015;
+}
+
+.bangau-home-content {
+    min-width: 0;
+}
+
+.bangau-home-content h1 {
+    margin: 15px 0;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1.12;
+}
+
+.bangau-home-content h2 {
+    margin: 0 0 15px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #3e8b72;
+}
+
+.bangau-home-content p {
+    max-width: 500px;
+    margin: 15px 0;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.bangau-tag {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 30px;
+
+    background: #ffe3eb;
+    color: #b83d60;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .3px;
+}
+
+/* TOMBOL */
+
+.bangau-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.bangau-actions.center {
+    justify-content: center;
+}
+
+.bangau-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 45px;
+    padding: 12px 22px;
+
+    border: 0;
+    border-radius: 13px;
+
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        background .15s;
+}
+
+.bangau-btn:hover {
+    transform: translateY(-2px);
+}
+
+.bangau-btn.primary {
+    background: var(--pink);
+    color: #ffffff;
+}
+
+.bangau-btn.primary:hover {
+    background: #d94b70;
+}
+
+.bangau-btn.secondary {
+    background: #e2f1e9;
+    color: var(--green);
+}
+
+.bangau-btn.secondary:hover {
+    background: #d4e9dd;
+}
+
+.bangau-btn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* PENGATURAN SUARA TIDAK DITAMPILKAN */
+
+.bangau-audio-settings {
+    display: none !important;
+}
+
+/* ILUSTRASI BERANDA GAME */
+
+.bangau-home-art {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    height: 370px;
+    overflow: hidden;
+
+    border-radius: 48% 48% 24% 24%;
+
+    background:
+        radial-gradient(
+            circle at 80% 15%,
+            #ffe89d 0 30px,
+            transparent 31px
+        ),
+        linear-gradient(
+            #b9e9f6 0 62%,
+            #8dd5aa 62% 100%
+        );
+}
+
+.bangau-home-art::before {
+    content: '';
+
+    position: absolute;
+    left: -10%;
+    bottom: 0;
+
+    width: 120%;
+    height: 105px;
+
+    background: #4d9e7a;
+    border-radius: 50% 50% 0 0;
+}
+
+.bangau-home-bird {
+    position: absolute;
+    z-index: 2;
+
+    inset: 12% 20% 15%;
+
+    background-image:
+        url('../assets/game-bangau/characters/bangau-sprite-sheet.png');
+
+    background-position: left center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    filter: drop-shadow(0 10px 7px #0002);
+}
+
+/* =====================================================
+   KARTU GAMEPLAY
+   ===================================================== */
+
+.bangau-game-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+
+    border-radius: 24px;
+    background: #ffffff;
+
+    box-shadow: 0 12px 35px #214b401a;
+}
+
+/* HUD */
+
+.bangau-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    gap: 12px;
+    padding: 14px 18px;
+
+    background: #ffffff;
+}
+
+.bangau-hud-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.bangau-hud-heading strong {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.bangau-level-label {
+    color: #d94e72;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.bangau-hud-targets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+}
+
+.bangau-target {
+    padding: 8px 12px;
+    border-radius: 30px;
+
+    background: #eaf6ef;
+    color: var(--green);
+
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.bangau-target.complete {
+    background: #d4f4df;
+    color: #23754a;
+}
+
+.bangau-hud-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-width: 0;
+}
+
+.bangau-score {
+    padding: 7px 11px;
+    border-radius: 20px;
+
+    background: #fff0d7;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.bangau-lives {
+    color: #ed557b;
+    font-size: 25px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.bangau-pause-btn {
+    padding: 8px 13px;
+    border: 0;
+    border-radius: 10px;
+
+    background: #e6f3eb;
+    color: var(--green);
+
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* =====================================================
+   AREA GAME
+   ===================================================== */
+
+.bangau-world {
+    position: relative;
+    isolation: isolate;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 460px;
+
+    overflow: hidden;
+
+    background: #9adcf0;
+    outline: none;
+    touch-action: none;
+}
+
+.bangau-background-layer {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    pointer-events: none;
+}
+
+.bangau-world-objects {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* TANAH */
+
+.bangau-ground {
+    position: absolute;
+    z-index: 1;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 14%;
+
+    background: linear-gradient(
+        to bottom,
+        #a3d967 0 12%,
+        #5ca94d 12% 23%,
+        #79543b 23% 100%
+    );
+
+    border-top: 4px solid #74bd4c;
+}
+
+/* PLATFORM */
+
+.bangau-platform {
+    position: absolute;
+    z-index: 2;
+
+    height: 18px;
+    border-radius: 8px 8px 4px 4px;
+
+    background: linear-gradient(
+        #b4e36e 0 25%,
+        #5fa84c 25% 45%,
+        #876043 45% 100%
+    );
+
+    border-bottom: 3px solid #674832;
+    box-shadow: 0 4px 5px #0002;
+}
+
+/* =====================================================
+   OBJEK GAME
+   ===================================================== */
+
+.bangau-object {
+    position: absolute;
+    z-index: 4;
+
+    width: 46px;
+    height: 46px;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.bangau-object img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter: drop-shadow(0 3px 3px #0003);
+}
+
+.bangau-object.collectible {
+    animation: bangauFloat 1.2s ease-in-out
+               infinite alternate;
+}
+
+@keyframes bangauFloat {
+    to {
+        transform: translate(-50%, -58%);
+    }
+}
+
+/* RINTANGAN */
+
+.bangau-object.hazard::after {
+    content: '!';
+
+    position: absolute;
+    top: -9px;
+    right: -9px;
+
+    width: 21px;
+    height: 21px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #ee4f72;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+/* BENDERA */
+
+.bangau-object.goal {
+    width: 62px;
+    height: 75px;
+}
+
+/* LABEL OBJEK */
+
+.bangau-object-label {
+    position: absolute;
+
+    bottom: calc(100% + 7px);
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: none;
+
+    padding: 5px 9px;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: var(--green);
+
+    box-shadow: 0 3px 9px #0002;
+
+    white-space: nowrap;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.bangau-object.near .bangau-object-label {
+    display: block;
+}
+
+/* =====================================================
+   KARAKTER BANGAU
+   ===================================================== */
+
+.bangau-player {
+    position: absolute;
+    z-index: 8;
+
+    width: 65px;
+    height: 78px;
+
+    transform: translate(-50%, -100%);
+    pointer-events: none;
+}
+
+.bangau-player-image {
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        url('../assets/game-bangau/characters/bangau-sprite-sheet.png');
+
+    background-size: 400% 200%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+
+    filter: drop-shadow(0 5px 4px #0003);
+}
+
+.bangau-player.left .bangau-player-image {
+    transform: scaleX(-1);
+}
+
+.bangau-player.walk .bangau-player-image {
+    animation: bangauWalk .4s steps(1) infinite;
+}
+
+@keyframes bangauWalk {
+    0%, 49% {
+        background-position: 33.333% 0;
+    }
+
+    50%, 100% {
+        background-position: 66.666% 0;
+    }
+}
+
+.bangau-player.hurt {
+    animation: bangauHurt .15s steps(1) infinite;
+}
+
+@keyframes bangauHurt {
+    50% {
+        opacity: .2;
+    }
+}
+
+.bangau-player-name {
+    position: absolute;
+
+    bottom: -16px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 3px 8px;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    white-space: nowrap;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* PETUNJUK */
+
+.bangau-nearby-hint {
+    position: absolute;
+    z-index: 10;
+
+    bottom: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    max-width: 90%;
+    padding: 9px 14px;
+    border-radius: 12px;
+
+    background: #ffffffee;
+
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+
+    pointer-events: none;
+}
+
+/* PESAN */
+
+.bangau-world-message {
+    position: absolute;
+    z-index: 11;
+
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    max-width: 80%;
+    padding: 12px 20px;
+
+    border-radius: 13px;
+
+    background: #fffaf4;
+    color: var(--green);
+
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+
+    box-shadow: 0 5px 15px #0002;
+}
+
+/* =====================================================
+   TOMBOL KONTROL
+   ===================================================== */
+
+.bangau-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    gap: 15px;
+    padding: 18px 25px;
+
+    background: #ffffff;
+}
+
+.bangau-control-group {
+    display: flex;
+    gap: 14px;
+}
+
+.bangau-control-btn {
+    width: 64px;
+    height: 64px;
+
+    border: 3px solid #ffc3d1;
+    border-radius: 50%;
+
+    background: var(--pink);
+    color: #ffffff;
+
+    font-size: 29px;
+    font-weight: 800;
+
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+
+    box-shadow: 0 5px 0 #c94165;
+}
+
+.bangau-control-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #c94165;
+}
+
+.bangau-control-help {
+    font-size: 12px;
+    color: #6c8079;
+    text-align: center;
+}
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.bangau-modal {
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: #123f36b8;
+}
+
+.bangau-modal.open {
+    display: flex;
+}
+
+.bangau-modal-card {
+    width: min(520px, 100%);
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 32px;
+    border-radius: 25px;
+
+    background: var(--cream);
+    text-align: center;
+
+    box-shadow: 0 20px 60px #0003;
+}
+
+.bangau-modal-card h2 {
+    margin: 14px 0;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.bangau-modal-card p {
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* =====================================================
+   TUTORIAL
+   ===================================================== */
+
+.bangau-tutorial-scene {
+    position: relative;
+
+    height: 155px;
+    margin: 18px 0;
+
+    overflow: hidden;
+    border-radius: 16px;
+
+    background: linear-gradient(
+        #b9e9f6 0 75%,
+        #7fc76b 75%
+    );
+}
+
+.bangau-tutorial-character {
+    position: absolute;
+    z-index: 2;
+
+    width: 60px;
+    height: 75px;
+
+    left: 10%;
+    bottom: 20%;
+
+    background-image:
+        url('../assets/game-bangau/characters/bangau-sprite-sheet.png');
+
+    background-position: 0 0;
+    background-size: 400% 200%;
+    background-repeat: no-repeat;
+
+    animation: bangauTutorial 5s ease-in-out infinite;
+}
+
+@keyframes bangauTutorial {
+    0% {
+        left: 10%;
+        bottom: 20%;
+    }
+
+    35% {
+        left: 40%;
+        bottom: 20%;
+    }
+
+    50% {
+        left: 50%;
+        bottom: 52%;
+    }
+
+    70% {
+        left: 70%;
+        bottom: 20%;
+    }
+
+    100% {
+        left: 85%;
+        bottom: 20%;
+    }
+}
+
+.bangau-tutorial-ground {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 20%;
+
+    background: #5ca94d;
+}
+
+.bangau-tutorial-note {
+    color: #58766b;
+    font-size: 12px !important;
+}
+
+/* =====================================================
+   PERTANYAAN
+   ===================================================== */
+
+.bangau-answer-list {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.bangau-answer {
+    width: 100%;
+    padding: 13px;
+
+    border: 2px solid #dbe9e1;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: var(--green);
+
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.bangau-answer:hover {
+    background: #eaf6ee;
+}
+
+.bangau-answer.correct {
+    background: #d8f4df;
+    border-color: #6ebf82;
+}
+
+.bangau-feedback {
+    min-height: 25px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =====================================================
+   HASIL MISI
+   ===================================================== */
+
+.bangau-result-icon {
+    margin: 10px auto;
+
+    color: #f2b33e;
+    font-size: 75px;
+    line-height: 1;
+}
+
+.bangau-result-icon.sad {
+    color: #ed6383;
+}
+
+.bangau-result-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.bangau-result-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 14px;
+    border-radius: 14px;
+
+    background: #e9f5ed;
+}
+
+.bangau-result-stats strong {
+    font-size: 25px;
+}
+
+.bangau-result-stats span {
+    font-size: 12px;
+}
+
+.bangau-fact {
+    padding: 13px;
+    border-radius: 12px;
+
+    background: #fff0d6;
+    font-size: 13px;
+}
+
+/* =====================================================
+   BANGAU SEDIH GAME OVER
+   ===================================================== */
+
+.bangau-sad-stork {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 140px;
+    height: 155px;
+    margin: 0 auto 15px;
+}
+
+.sad-stork-character {
+    width: 120px;
+    height: 145px;
+
+    background-image:
+        url('../assets/game-bangau/characters/bangau-sprite-sheet.png');
+
+    background-repeat: no-repeat;
+    background-size: 400% 200%;
+    background-position: 100% 100%;
+
+    filter: drop-shadow(0 5px 5px #0002);
+}
+
+.sad-stork-tear {
+    position: absolute;
+
+    width: 10px;
+    height: 15px;
+
+    background: #75c9eb;
+
+    border-radius: 60% 10% 60% 60%;
+    transform: rotate(-30deg);
+
+    animation: storkTear 1.5s ease-in-out infinite;
+}
+
+.tear-one {
+    top: 42px;
+    right: 9px;
+}
+
+.tear-two {
+    top: 65px;
+    right: 0;
+    animation-delay: .5s;
+}
+
+@keyframes storkTear {
+    0% {
+        opacity: 0;
+        transform: translateY(-5px) rotate(-30deg);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(18px) rotate(-30deg);
+    }
+}
+
+/* =====================================================
+   KEMENANGAN AKHIR
+   ===================================================== */
+
+.bangau-finish {
+    padding: 70px 25px;
+
+    border-radius: 26px;
+    background: #ffffff;
+
+    text-align: center;
+    box-shadow: 0 10px 35px #214b4015;
+}
+
+.bangau-finish-medal {
+    color: #f0b13b;
+    font-size: 95px;
+}
+
+.bangau-finish h1 {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.bangau-finish p {
+    max-width: 600px;
+    margin: 15px auto;
+    line-height: 1.8;
+}
+
+/* =====================================================
+   PERBAIKAN KHUSUS SCROLL HORIZONTAL
+   ===================================================== */
+
+#bangauGame {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+}
+
+#bangauGame .bangau-screen {
+    width: 100%;
+    max-width: 1120px;
+    min-width: 0;
+    margin-inline: auto;
+}
+
+#bangauGame .bangau-game-card,
+#bangauGame .bangau-world,
+#bangauGame .bangau-hud,
+#bangauGame .bangau-controls {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+#bangauGame .bangau-world {
+    position: relative;
+    overflow: hidden;
+}
+
+#bangauGame .bangau-world-objects {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+/* =====================================================
+   RESPONSIVE TABLET
+   ===================================================== */
+
+@media (max-width: 850px) {
+    .bangau-home {
+        grid-template-columns: minmax(0,1fr);
+        gap: 25px;
+        padding: 30px;
+    }
+
+    .bangau-home-art {
+        height: 260px;
+    }
+
+    .bangau-hud {
+        justify-content: center;
+    }
+
+    .bangau-hud-heading {
+        width: 100%;
+        text-align: center;
+    }
+
+    .bangau-hud-right {
+        justify-content: center;
+    }
+
+    .bangau-world {
+        height: 390px;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE HP
+   ===================================================== */
+
+@media (max-width: 520px) {
+    .bangau-game {
+        padding: 16px 8px 35px;
+    }
+
+    .bangau-home {
+        padding: 25px 18px;
+    }
+
+    .bangau-home-content h1 {
+        font-size: 36px;
+    }
+
+    .bangau-home-content h2 {
+        font-size: 17px;
+    }
+
+    .bangau-home-content p {
+        font-size: 13px;
+    }
+
+    .bangau-world {
+        height: 330px;
+    }
+
+    .bangau-object {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bangau-player {
+        width: 52px;
+        height: 65px;
+    }
+
+    .bangau-controls {
+        padding: 13px;
+    }
+
+    .bangau-control-btn {
+        width: 54px;
+        height: 54px;
+        font-size: 25px;
+    }
+
+    .bangau-control-help {
+        display: none;
+    }
+
+    .bangau-modal-card {
+        padding: 23px 17px;
+    }
+
+    .bangau-finish {
+        padding: 40px 20px;
+    }
+
+    .bangau-finish h1 {
+        font-size: 26px;
+    }
+}

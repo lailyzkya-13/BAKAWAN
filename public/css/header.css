@@ -1,9 +1,11 @@
+
 /* =========================================
    HEADER BAKAWAN
 ========================================= */
 
 .main-header {
     width: 100%;
+    max-width: 100%;
     height: 92px;
 
     background: #ffffff;
@@ -15,6 +17,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.main-header,
+.main-header *,
+.main-header *::before,
+.main-header *::after {
+    box-sizing: border-box;
+}
 
 /* =========================================
    NAVBAR
@@ -22,6 +30,7 @@
 
 .navbar-bakawan {
     width: 100%;
+    max-width: 100%;
     height: 92px;
 
     padding: 0;
@@ -42,8 +51,10 @@
 
     display: flex;
     align-items: center;
-}
+    flex-wrap: nowrap;
 
+    min-width: 0;
+}
 
 /* =========================================
    LOGO
@@ -60,7 +71,7 @@
     align-items: center;
 
     overflow: visible;
-    flex-shrink: 0;
+    flex: 0 0 210px;
 }
 
 .logo-bakawan {
@@ -68,54 +79,66 @@
     height: 76px !important;
 
     object-fit: contain;
-
     display: block;
 
     transform: scale(1.18);
     transform-origin: left center;
 }
 
-
 /* =========================================
    NAVBAR COLLAPSE
+   PERBAIKAN UTAMA
 ========================================= */
 
-.navbar-collapse {
+.navbar-bakawan .navbar-collapse {
     height: 100%;
 
     display: flex;
     align-items: center;
-}
 
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100%;
+
+    margin-left: 0;
+    padding: 0;
+}
 
 /* =========================================
    MENU
 ========================================= */
 
-.nav-menu {
+.navbar-bakawan .nav-menu {
     height: 100%;
 
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    padding: 0;
 
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
 
     gap: 42px;
+
+    min-width: 0;
+    list-style: none;
 }
 
-.nav-item {
+.navbar-bakawan .nav-item {
     height: 100%;
 
     display: flex;
     align-items: center;
+
+    flex-shrink: 0;
 }
 
-.nav-link {
+.navbar-bakawan .nav-link {
     position: relative;
 
     height: 100%;
-
     padding: 0 2px !important;
 
     display: flex;
@@ -123,13 +146,11 @@
 
     color: #3f514c !important;
 
-    /* DIBESARKAN */
     font-size: 17px;
     font-weight: 500;
     line-height: 1;
 
     text-decoration: none;
-
     white-space: nowrap;
 
     transition:
@@ -137,22 +158,20 @@
         font-weight 0.2s ease;
 }
 
-.nav-link:hover {
+.navbar-bakawan .nav-link:hover {
     color: #f15d7a !important;
 }
 
-.nav-link.active {
+.navbar-bakawan .nav-link.active {
     color: #f15d7a !important;
-
     font-weight: 700;
 }
-
 
 /* =========================================
    GARIS MENU AKTIF
 ========================================= */
 
-.nav-link.active::after {
+.navbar-bakawan .nav-link.active::after {
     content: "";
 
     position: absolute;
@@ -167,25 +186,25 @@
     margin: auto;
 
     background: #f15d7a;
-
     border-radius: 50px;
 }
 
-
 /* =========================================
-   LOGIN
+   LOGIN GURU
 ========================================= */
 
-.login-area {
+.navbar-bakawan .login-area {
     margin-left: 25px;
 
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    min-width: 0;
 }
 
-.btn-login {
+.navbar-bakawan .btn-login {
     min-width: 140px;
     height: 46px;
 
@@ -196,13 +215,11 @@
     justify-content: center;
 
     background: #216b57;
-
     color: #ffffff;
 
     border: none;
     border-radius: 12px;
 
-    /* DIBESARKAN */
     font-size: 15px;
     font-weight: 600;
     line-height: 1;
@@ -218,9 +235,8 @@
         box-shadow 0.2s ease;
 }
 
-.btn-login:hover {
+.navbar-bakawan .btn-login:hover {
     background: #185744;
-
     color: #ffffff;
 
     transform: translateY(-1px);
@@ -229,14 +245,12 @@
         0 5px 12px rgba(24, 87, 68, 0.16);
 }
 
-
 /* =========================================
    HAMBURGER
 ========================================= */
 
-.navbar-toggler {
+.navbar-bakawan .navbar-toggler {
     margin-left: auto;
-
     padding: 7px;
 
     border: none !important;
@@ -245,61 +259,99 @@
     box-shadow: none !important;
 }
 
-.navbar-toggler:focus {
+.navbar-bakawan .navbar-toggler:focus {
     box-shadow: none !important;
 }
 
-.navbar-toggler-icon {
+.navbar-bakawan .navbar-toggler-icon {
     width: 24px;
     height: 24px;
 }
 
+/* =========================================
+   LAPTOP MENENGAH
+========================================= */
+
+@media (max-width: 1400px) {
+
+    .header-container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .logo-area {
+        width: 190px;
+        flex-basis: 190px;
+    }
+
+    .logo-bakawan {
+        width: 170px !important;
+        height: 72px !important;
+        transform: scale(1.12);
+    }
+
+    .navbar-bakawan .nav-menu {
+        gap: 26px;
+    }
+
+    .navbar-bakawan .nav-link {
+        font-size: 15px;
+    }
+
+    .navbar-bakawan .login-area {
+        margin-left: 18px;
+    }
+
+    .navbar-bakawan .btn-login {
+        min-width: 125px;
+        padding: 0 17px;
+        font-size: 14px;
+    }
+}
 
 /* =========================================
    LAPTOP KECIL
 ========================================= */
 
-@media (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1200px) {
 
     .header-container {
-        padding-left: 35px;
-        padding-right: 35px;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
     .logo-area {
-        width: 180px;
+        width: 165px;
+        flex-basis: 165px;
     }
 
     .logo-bakawan {
-        width: 165px !important;
-        height: 70px !important;
-
-        transform: scale(1.12);
+        width: 150px !important;
+        height: 68px !important;
+        transform: scale(1.08);
     }
 
-    .nav-menu {
-        gap: 25px;
+    .navbar-bakawan .nav-menu {
+        gap: 18px;
     }
 
-    .nav-link {
-        /* Tetap mudah dibaca */
-        font-size: 15px;
-    }
-
-    .btn-login {
-        min-width: 125px;
-        height: 43px;
-
-        padding: 0 18px;
-
+    .navbar-bakawan .nav-link {
         font-size: 14px;
     }
 
+    .navbar-bakawan .login-area {
+        margin-left: 12px;
+    }
+
+    .navbar-bakawan .btn-login {
+        min-width: 115px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
 }
 
-
 /* =========================================
-   TABLET & HP
+   TABLET DAN HP
 ========================================= */
 
 @media (max-width: 991.98px) {
@@ -321,57 +373,68 @@
         position: relative;
     }
 
-
     /* LOGO */
 
     .logo-area {
         width: 165px;
         height: 70px;
+        flex: 0 0 165px;
     }
 
     .logo-bakawan {
         width: 150px !important;
         height: 65px !important;
-
         transform: scale(1.08);
     }
 
+    /* HAMBURGER */
 
-    /* DROPDOWN MENU */
+    .navbar-bakawan .navbar-toggler {
+        display: block;
+        margin-left: auto;
+    }
 
-    .navbar-collapse {
+    /* DROPDOWN */
+
+    .navbar-bakawan .navbar-collapse {
         position: absolute;
 
         top: 78px;
         left: 0;
+        right: 0;
 
         width: 100%;
+        max-width: 100%;
         height: auto;
 
+        margin: 0;
         padding: 18px 22px 23px;
 
         display: block;
 
         background: #ffffff;
-
         border-top: 1px solid #eeeeee;
 
         box-shadow:
             0 10px 25px rgba(27, 71, 56, 0.10);
     }
 
-    .navbar-collapse:not(.show) {
+    .navbar-bakawan .navbar-collapse:not(.show) {
         display: none;
     }
 
+    .navbar-bakawan .navbar-collapse.show {
+        display: block;
+    }
 
     /* MENU */
 
-    .nav-menu {
+    .navbar-bakawan .nav-menu {
         width: 100%;
         height: auto;
 
         margin: 0;
+        padding: 0;
 
         display: flex;
         flex-direction: column;
@@ -380,14 +443,13 @@
         gap: 4px;
     }
 
-    .nav-item {
+    .navbar-bakawan .nav-item {
         width: 100%;
         height: auto;
-
         display: block;
     }
 
-    .nav-link {
+    .navbar-bakawan .nav-link {
         width: 100%;
         height: 48px;
 
@@ -398,51 +460,41 @@
 
         border-radius: 9px;
 
-        /* DIBESARKAN */
         font-size: 16px;
         font-weight: 500;
     }
 
-    .nav-link:hover {
+    .navbar-bakawan .nav-link:hover {
         background: #f8fbf9;
     }
 
-
     /* MENU AKTIF */
 
-    .nav-link.active {
+    .navbar-bakawan .nav-link.active {
         background: #fff0f3;
-
         color: #ed6480 !important;
-
         font-weight: 700;
     }
 
-    .nav-link.active::after {
+    .navbar-bakawan .nav-link.active::after {
         display: none;
     }
 
-
     /* LOGIN */
 
-    .login-area {
+    .navbar-bakawan .login-area {
         width: 100%;
-
         margin: 14px 0 0;
     }
 
-    .btn-login {
+    .navbar-bakawan .btn-login {
         width: 100%;
         height: 47px;
 
-        /* DIBESARKAN */
         font-size: 15px;
-
         border-radius: 10px;
     }
-
 }
-
 
 /* =========================================
    HP
@@ -461,85 +513,69 @@
         padding-right: 16px;
     }
 
-
-    /* LOGO */
-
     .logo-area {
         width: 145px;
         height: 64px;
+        flex-basis: 145px;
     }
 
     .logo-bakawan {
         width: 135px !important;
         height: 58px !important;
-
         transform: scale(1.05);
     }
 
-
-    /* HAMBURGER */
-
-    .navbar-toggler {
+    .navbar-bakawan .navbar-toggler {
         padding: 6px;
     }
 
-    .navbar-toggler-icon {
+    .navbar-bakawan .navbar-toggler-icon {
         width: 24px;
         height: 24px;
     }
 
-
-    /* DROPDOWN */
-
-    .navbar-collapse {
+    .navbar-bakawan .navbar-collapse {
         top: 72px;
-
         padding: 14px 16px 18px;
     }
 
-    .nav-link {
+    .navbar-bakawan .nav-link {
         height: 47px;
-
-        /*
-           Jangan terlalu kecil di HP.
-           15px masih nyaman dibaca.
-        */
         font-size: 15px;
     }
 
-    .btn-login {
+    .navbar-bakawan .btn-login {
         height: 46px;
-
         font-size: 14px;
     }
-
 }
-
 
 /* =========================================
    HP KECIL
 ========================================= */
 
 @media (max-width: 380px) {
+
     .header-container {
         padding-left: 12px;
         padding-right: 12px;
     }
+
     .logo-area {
         width: 130px;
+        flex-basis: 130px;
     }
+
     .logo-bakawan {
         width: 122px !important;
         height: 55px !important;
     }
-    /*
-       Tetap 15px agar tidak terlalu kecil
-       walaupun layar HP sempit.
-    */
-    .nav-link {
+
+    .navbar-bakawan .nav-link {
         font-size: 15px;
     }
-    .btn-login {
+
+    .navbar-bakawan .btn-login {
         font-size: 14px;
     }
 }

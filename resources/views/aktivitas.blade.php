@@ -551,14 +551,13 @@
                         >
                     </div>
 
-                    <button
-                        type="button"
+                    <a
+                        href="{{ route('aktivitas.bangau') }}"
                         class="aktivitas-button"
-                        onclick="tampilkanPengembangan()"
                     >
                         <span>Mulai Bermain</span>
                         <span class="button-arrow">→</span>
-                    </button>
+                    </a>
 
                 </article>
 

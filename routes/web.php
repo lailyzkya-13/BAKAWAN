@@ -54,11 +54,22 @@ Route::get('/aktivitas', [
 ])->name('aktivitas');
 
 
+
 // Aktivitas 1
 Route::get('/aktivitas/klasifikasi-biotik-abiotik', [
     AktivitasController::class,
     'aktivitasSatu'
 ])->name('aktivitas.satu');
+
+Route::get(
+    '/aktivitas/petualangan-bangau',
+    [AktivitasController::class, 'petualanganBangau']
+)->name('aktivitas.bangau');
+
+
+// ==========================================
+// MATERI
+// ==========================================
 
 
 // Aktivitas 2
@@ -562,14 +573,11 @@ Route::get('/hasil-evaluasi/export/excel', [
     'exportExcel'
 ])->name('hasil.evaluasi.excel');
 
+
+
 /* ==========================================
    PROFIL GURU
 ========================================== */
-
-
-// ==========================================
-// CRUD PROFIL GURU
-// ==========================================
 
 // READ - Menampilkan profil
 Route::get('/profil', [
@@ -594,3 +602,4 @@ Route::delete('/profil', [
     ProfilGuruController::class,
     'destroy'
 ])->name('profil.destroy');
+
