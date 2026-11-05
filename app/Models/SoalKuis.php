@@ -16,11 +16,15 @@ class SoalKuis extends Model
         'pilihan_c',
         'pilihan_d',
         'jawaban_benar',
+        'pembahasan',
     ];
 
-    // Setiap soal terhubung dengan satu materi
+    // Relasi materi tetap dipertahankan
     public function materi()
     {
-        return $this->belongsTo(Materi::class, 'materi_id');
+        return $this->belongsTo(
+            Materi::class,
+            'materi_id'
+        );
     }
 }

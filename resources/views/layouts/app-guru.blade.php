@@ -267,7 +267,7 @@
             <!-- Menu Soal Kuis -->
             <div class="menu-card {{ request()->is('soal-kuis*') ? 'active' : '' }}">
                 <a href="/soal-kuis">
-                    Soal Kuis
+                    Soal Evaluasi
                 </a>
             </div>
 

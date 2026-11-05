@@ -12,6 +12,9 @@ use App\Http\Controllers\HasilEvaluasiController;
 use App\Http\Controllers\ProfilGuruController;
 use App\Http\Controllers\AuthGuruController;
 
+use App\Models\SoalKuis;
+use Illuminate\Validation\Rule;
+
 
 use App\Models\Materi;
 use App\Models\Siswa;
@@ -232,13 +235,16 @@ Route::post('/evaluasi/mulai', function (Request $request) {
    MENYIMPAN HASIL EVALUASI SISWA
 ========================================== */
 
-// Menyimpan jawaban dan nilai siswa
+
+// ==========================================
+// MENYIMPAN HASIL EVALUASI SISWA
+// ==========================================
+
 Route::post('/evaluasi/simpan', function (Request $request) {
 
-    // 1. Mengambil ID siswa dari session
+    // 1. Memeriksa identitas siswa
     $siswaId = session('evaluasi_siswa_id');
 
-    // Memastikan siswa sudah mengisi identitas
     if (!$siswaId || !Siswa::whereKey($siswaId)->exists()) {
 
         return response()->json([
@@ -246,72 +252,138 @@ Route::post('/evaluasi/simpan', function (Request $request) {
         ], 401);
     }
 
-    // 2. Memeriksa jawaban yang dikirim siswa
-    $data = $request->validate([
-        'jawaban' => 'required|array|size:5',
-        'jawaban.*.id' => 'required|integer|between:1,5',
-        'jawaban.*.pilihan' => 'nullable|string|max:255',
-    ]);
+    // 2. Mengambil ID soal yang diberikan kepada siswa
+    $idsSoal = session('evaluasi_daftar_soal_ids', []);
 
-    // 3. Kunci jawaban evaluasi
-    $kunciJawaban = [
-        1 => 'Ikan gabus',
-        2 => 'Air',
-        3 => 'Katak dan serangga',
-        4 => 'Untuk melakukan fotosintesis',
-        5 => 'Sebagai tempat hidup'
-    ];
-
-    // Memastikan ID soal tidak berulang
-    $daftarId = array_column($data['jawaban'], 'id');
-
-    if (count(array_unique($daftarId)) !== 5) {
+    if (empty($idsSoal)) {
 
         return response()->json([
-            'message' => 'Data jawaban tidak valid.'
+            'message' => 'Daftar soal evaluasi tidak ditemukan.'
         ], 422);
     }
 
-    // 4. Menghitung jawaban benar
+    $jumlahSoal = count($idsSoal);
+
+    // 3. Validasi jawaban secara dinamis
+    $data = $request->validate([
+
+        'jawaban' => [
+            'required',
+            'array',
+            'size:' . $jumlahSoal
+        ],
+
+        'jawaban.*.id' => [
+            'required',
+            'integer',
+            'distinct',
+            Rule::in($idsSoal)
+        ],
+
+        'jawaban.*.pilihan' => [
+            'nullable',
+            'string',
+            'max:255'
+        ],
+
+    ]);
+
+    // 4. Memastikan semua soal dijawab sesuai daftar
+    $idDikirim = array_map(
+        'intval',
+        array_column($data['jawaban'], 'id')
+    );
+
+    $idSeharusnya = array_map('intval', $idsSoal);
+
+    sort($idDikirim);
+    sort($idSeharusnya);
+
+    if ($idDikirim !== $idSeharusnya) {
+
+        return response()->json([
+            'message' => 'Daftar jawaban tidak sesuai.'
+        ], 422);
+    }
+
+    // 5. Mengambil soal dari database
+    $daftarSoal = SoalKuis::whereIn('id', $idsSoal)
+        ->get()
+        ->keyBy('id');
+
+    if ($daftarSoal->count() !== $jumlahSoal) {
+
+        return response()->json([
+            'message' => 'Ada soal yang sudah tidak tersedia.'
+        ], 422);
+    }
+
+    // 6. Menghitung jawaban benar
     $jumlahBenar = 0;
 
     foreach ($data['jawaban'] as $jawaban) {
 
-        $id = $jawaban['id'];
+        $soal = $daftarSoal->get(
+            (int) $jawaban['id']
+        );
 
-        $pilihan = $jawaban['pilihan'] ?? null;
+        $kolomJawabanBenar = 'pilihan_' .
+            strtolower($soal->jawaban_benar);
 
-        if ($pilihan === $kunciJawaban[$id]) {
+        if (
+            !in_array($kolomJawabanBenar, [
+                'pilihan_a',
+                'pilihan_b',
+                'pilihan_c',
+                'pilihan_d'
+            ], true)
+        ) {
+            continue;
+        }
+
+        $jawabanBenar = $soal->{$kolomJawabanBenar};
+
+        $jawabanSiswa = $jawaban['pilihan'] ?? null;
+
+        if (
+            $jawabanSiswa !== null &&
+            $jawabanSiswa === $jawabanBenar
+        ) {
             $jumlahBenar++;
         }
     }
 
-    // 5. Menghitung nilai siswa
-    $jumlahSoal = count($kunciJawaban);
+    // 7. Menghitung nilai
+    $nilai = round(
+        ($jumlahBenar / $jumlahSoal) * 100
+    );
 
-    $nilai = round(($jumlahBenar / $jumlahSoal) * 100);
-
-    // 6. Menyimpan nilai ke database
+    // 8. Menyimpan hasil ke database
     $hasil = HasilKuis::create([
+
         'siswa_id' => $siswaId,
         'jumlah_benar' => $jumlahBenar,
         'jumlah_soal' => $jumlahSoal,
         'nilai' => $nilai
+
     ]);
 
-    // 7. Menyimpan ID hasil ke session
+    // 9. Menyimpan ID hasil ke session
     session([
         'evaluasi_hasil_id' => $hasil->id
     ]);
 
-    // 8. Mengirim hasil ke JavaScript
+    // 10. Mengirim hasil ke JavaScript
     return response()->json([
+
         'nilai' => $hasil->nilai,
         'jumlahBenar' => $hasil->jumlah_benar,
         'jumlahSoal' => $hasil->jumlah_soal
+
     ]);
 
 })->name('evaluasi.simpan');
+
 
 
 /* ==========================================
@@ -334,18 +406,39 @@ Route::get('/evaluasi/petunjuk', function () {
 
 
 // Soal Evaluasi
+
+// ==========================================
+// SOAL EVALUASI SISWA
+// ==========================================
+
+
+// ==========================================
+// MENAMPILKAN SOAL EVALUASI SISWA
+// ==========================================
+
 Route::get('/evaluasi/soal', function () {
 
-    if (
-        !session()->has('evaluasi_nama') ||
-        !session()->has('evaluasi_kelas')
-    ) {
-        return redirect()->route('evaluasi');
+    // Mengambil semua soal dari database
+    $daftarSoal = \App\Models\SoalKuis::orderBy('id', 'asc')
+        ->get();
+
+    // Memeriksa apakah soal tersedia
+    if ($daftarSoal->isEmpty()) {
+        return redirect()
+            ->route('evaluasi')
+            ->with('error', 'Belum ada soal evaluasi.');
     }
 
-    return view('evaluasi-soal');
+    // Menyimpan daftar ID soal untuk proses penilaian
+    session([
+        'evaluasi_daftar_soal_ids' => $daftarSoal->pluck('id')->all()
+    ]);
+
+    // Mengirim data soal ke halaman siswa
+    return view('evaluasi-soal', compact('daftarSoal'));
 
 })->name('evaluasi.soal');
+
 
 
 // Hasil Evaluasi Siswa

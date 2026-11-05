@@ -8,12 +8,12 @@
         <div class="page-header">
 
             <div>
-                <h1>Soal Kuis</h1>
-                <p>Kelola soal kuis untuk pembelajaran BAKAWAN.</p>
+                <h1>Soal Evaluasi</h1>
+                <p>Kelola soal evaluasi untuk pembelajaran BAKAWAN.</p>
             </div>
 
             <button type="button" class="btn-tambah" onclick="openModal()">
-                + Tambah Soal
+                + Tambah Soal Evaluasi
             </button>
 
         </div>
@@ -51,25 +51,9 @@
                 </div>
 
                 <div>
-                    <p>Total Soal</p>
+                    <p>Total Soal Evaluasi</p>
                     <h2>{{ $daftarSoal->count() }}</h2>
-                    <span>Soal kuis tersedia</span>
-                </div>
-
-            </div>
-
-
-            <!-- TOTAL MATERI -->
-            <div class="summary-card">
-
-                <div class="summary-icon">
-                    <i class="bi bi-book"></i>
-                </div>
-
-                <div>
-                    <p>Total Materi</p>
-                    <h2>{{ $daftarMateri->count() }}</h2>
-                    <span>Total materi pembelajaran</span>
+                    <span>Soal evaluasi tersedia</span>
                 </div>
 
             </div>
@@ -81,11 +65,12 @@
         <div class="soal-box">
 
             <div class="box-header">
-                <h2>Daftar Soal</h2>
-                <p>Soal yang akan digunakan dalam kuis siswa.</p>
+                <h2>Daftar Soal Evaluasi</h2>
+                <p>Soal yang akan digunakan dalam evaluasi siswa.</p>
             </div>
 
             <div class="table-container">
+
 
                 <table>
 
@@ -93,7 +78,6 @@
                         <tr>
                             <th>No</th>
                             <th>Pertanyaan</th>
-                            <th>Materi</th>
                             <th>Jawaban Benar</th>
                             <th>Aksi</th>
                         </tr>
@@ -108,12 +92,6 @@
                                 <td>{{ $loop->iteration }}</td>
 
                                 <td>{{ $soal->pertanyaan }}</td>
-
-                                <td>
-                                    <span class="materi-badge">
-                                        {{ $soal->materi->judul ?? '-' }}
-                                    </span>
-                                </td>
 
                                 <td>
                                     <span class="jawaban-badge">
@@ -153,8 +131,9 @@
                         @empty
 
                             <tr>
-                                <td colspan="5" class="soal-kosong">
-                                    Belum ada soal kuis. Silakan tambahkan soal terlebih dahulu.
+                                <td colspan="4" class="soal-kosong">
+                                    Belum ada soal evaluasi.
+                                    Silakan tambahkan soal terlebih dahulu.
                                 </td>
                             </tr>
 
@@ -163,6 +142,7 @@
                     </tbody>
 
                 </table>
+
 
             </div>
 
@@ -181,7 +161,7 @@
             <div class="modal-header">
 
                 <div>
-                    <h2 id="modalTitle">Tambah Soal</h2>
+                    <h2 id="modalTitle">Tambah Soal Evaluasi</h2>
                     <p>Masukkan pertanyaan dan pilihan jawaban.</p>
                 </div>
 
@@ -206,35 +186,8 @@
 
                     <label for="pertanyaan">Pertanyaan</label>
 
-                    <textarea id="pertanyaan" name="pertanyaan" placeholder="Masukkan pertanyaan kuis" required></textarea>
-
-                </div>
-
-
-                <!-- PILIH MATERI -->
-                <div class="form-group">
-
-                    <label for="materi">Materi</label>
-
-                    <select id="materi" name="materi_id" required>
-
-                        <option value="">-- Pilih Materi --</option>
-
-                        @forelse($daftarMateri as $materi)
-
-                            <option value="{{ $materi->id }}">
-                                {{ $materi->judul }}
-                            </option>
-
-                        @empty
-
-                            <option value="" disabled>
-                                Belum ada materi tersedia
-                            </option>
-
-                        @endforelse
-
-                    </select>
+                    <textarea id="pertanyaan" name="pertanyaan" placeholder="Masukkan pertanyaan evaluasi"
+                        required></textarea>
 
                 </div>
 
@@ -322,9 +275,7 @@
 
 
 
-    <!-- =====================================
-                         MODAL LIHAT DETAIL SOAL
-                    ===================================== -->
+    <!-- MODAL LIHAT DETAIL SOAL -->
 
     <div class="modal" id="lihatModal">
 
@@ -333,8 +284,8 @@
             <div class="modal-header">
 
                 <div>
-                    <h2>Detail Soal</h2>
-                    <p>Informasi lengkap soal kuis.</p>
+                    <h2>Detail Soal Evaluasi</h2>
+                    <p>Informasi lengkap soal evaluasi.</p>
                 </div>
 
                 <button type="button" class="btn-close" onclick="closeLihatModal()">
@@ -349,11 +300,6 @@
                 <div class="detail-item">
                     <span>Pertanyaan</span>
                     <p id="detailPertanyaan"></p>
-                </div>
-
-                <div class="detail-item">
-                    <span>Materi</span>
-                    <p id="detailMateri"></p>
                 </div>
 
                 <div class="detail-item">
@@ -387,8 +333,9 @@
     <!-- BOOTSTRAP ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+
     <style>
-        /* HALAMAN SOAL KUIS */
+        /* HALAMAN SOAL EVALUASI */
 
         .soal-page {
             padding-bottom: 30px;
@@ -452,10 +399,9 @@
 
 
         /* KARTU RINGKASAN */
-
         .summary-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 18px;
             margin-bottom: 25px;
         }
@@ -470,6 +416,7 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
         }
 
+
         /* KOTAK IKON */
         .summary-icon {
             width: 50px;
@@ -482,6 +429,7 @@
             justify-content: center;
             flex-shrink: 0;
         }
+
 
         /* WARNA DAN UKURAN IKON */
         .summary-icon i {
@@ -595,7 +543,7 @@
         }
 
 
-        /*  TOMBOL AKSI */
+        /* TOMBOL AKSI */
 
         .btn-detail,
         .btn-edit,
@@ -689,9 +637,7 @@
         }
 
 
-        /* =====================================
-                       FORM SOAL
-                    ===================================== */
+        /* FORM SOAL */
 
         .form-group {
             margin-bottom: 18px;
@@ -857,7 +803,7 @@
         function openModal() {
 
             // Mengubah judul
-            document.getElementById('modalTitle').innerText = 'Tambah Soal';
+            document.getElementById('modalTitle').innerText = 'Tambah Soal Evaluasi';
 
             // Mengosongkan form
             document.getElementById('formSoal').reset();
@@ -885,11 +831,10 @@
             }
 
             // Mengubah judul modal
-            document.getElementById('modalTitle').innerText = 'Edit Soal';
+            document.getElementById('modalTitle').innerText = 'Edit Soal Evaluasi';
 
             // Mengisi data soal lama
             document.getElementById('pertanyaan').value = soal.pertanyaan;
-            document.getElementById('materi').value = soal.materi_id;
             document.getElementById('pilihanA').value = soal.pilihan_a;
             document.getElementById('pilihanB').value = soal.pilihan_b;
             document.getElementById('pilihanC').value = soal.pilihan_c;
@@ -927,9 +872,6 @@
             document.getElementById('detailPertanyaan').innerText =
                 soal.pertanyaan;
 
-            document.getElementById('detailMateri').innerText =
-                soal.materi ? soal.materi.judul : '-';
-
             document.getElementById('detailA').innerText = soal.pilihan_a;
             document.getElementById('detailB').innerText = soal.pilihan_b;
             document.getElementById('detailC').innerText = soal.pilihan_c;
@@ -958,9 +900,6 @@
 
                 document.getElementById('pertanyaan').value =
                     @js(old('pertanyaan', ''));
-
-                document.getElementById('materi').value =
-                    @js(old('materi_id', ''));
 
                 document.getElementById('pilihanA').value =
                     @js(old('pilihan_a', ''));

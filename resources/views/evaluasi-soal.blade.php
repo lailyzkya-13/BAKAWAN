@@ -310,10 +310,18 @@
     <!-- DATA DARI LARAVEL KE JAVASCRIPT -->
 
     <script>
+
         window.bakawanEvaluasiUrls = {
             hasil: @json(route('evaluasi.hasil')),
             simpan: @json(route('evaluasi.simpan'))
         };
+
+        // Mengambil soal langsung dari database Laravel
+        window.bakawanDaftarSoal = @json($daftarSoal);
+
+        window.bakawanNamaSiswa =
+            @json(session('evaluasi_nama', 'Siswa'));
+
 
         window.bakawanNamaSiswa =
             @json(session('evaluasi_nama', 'Siswa'));
