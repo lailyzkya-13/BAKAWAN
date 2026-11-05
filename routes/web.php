@@ -151,13 +151,15 @@ Route::get('/materi-siswa/{materi}', function (Materi $materi) {
         : null;
 
     // Menampilkan detail materi siswa
-    return view('materi-detail-siswa', compact(
+
+    return view('materi-biotik', compact(
         'materi',
         'semuaSubbab',
         'subbabAktif',
         'sebelumnya',
         'selanjutnya'
     ));
+
 
 })->name('materi.siswa.show');
 
