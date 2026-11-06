@@ -3,8 +3,8 @@
 @section('content')
 
     <!-- =====================================
-                                         1. CSS HALAMAN EVALUASI GURU
-                                    ===================================== -->
+        1. CSS HALAMAN EVALUASI GURU
+    ===================================== -->
 
     <style>
         /* Judul halaman */
