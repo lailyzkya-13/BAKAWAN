@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -8,18 +7,13 @@
 
     <title>Evaluasi Akhir | BAKAWAN</title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/evaluasi.css') }}">
@@ -48,11 +42,7 @@
             </section>
 
             <!-- FORM IDENTITAS SISWA -->
-            <form
-                action="{{ route('evaluasi.mulai') }}"
-                method="POST"
-                id="formEvaluasi"
-            >
+            <form action="{{ route('evaluasi.mulai') }}" method="POST" id="formEvaluasi">
                 @csrf
 
                 <div class="evaluasi-form-box">
@@ -66,16 +56,8 @@
                                 Nama Lengkap
                             </label>
 
-                            <input
-                                type="text"
-                                id="nama_lengkap"
-                                name="nama_lengkap"
-                                placeholder="Masukkan nama lengkap"
-                                value="{{ old('nama_lengkap') }}"
-                                maxlength="100"
-                                autocomplete="name"
-                                required
-                            >
+                            <input type="text" id="nama_lengkap" name="nama_lengkap" placeholder="Masukkan nama lengkap"
+                                value="{{ old('nama_lengkap') }}" maxlength="100" autocomplete="name" required>
 
                             @error('nama_lengkap')
                                 <small class="error-text">
@@ -92,15 +74,8 @@
                                 Kelas
                             </label>
 
-                            <input
-                                type="text"
-                                id="kelas"
-                                name="kelas"
-                                placeholder="Contoh: V A"
-                                value="{{ old('kelas') }}"
-                                maxlength="30"
-                                required
-                            >
+                            <input type="text" id="kelas" name="kelas" placeholder="Contoh: V A"
+                                value="{{ old('kelas') }}" maxlength="30" required>
 
                             @error('kelas')
                                 <small class="error-text">
@@ -110,17 +85,33 @@
 
                         </div>
 
-                    </div>
 
-                </div>
+                        <!-- TOKEN EVALUASI -->
+                        <div class="form-group" style="grid-column: 1 / -1;">
+
+                            <label for="kode_token">
+                                Token Evaluasi
+                            </label>
+
+                            <input type="text" id="kode_token" name="kode_token" placeholder="Masukkan token dari guru"
+                                value="{{ old('kode_token') }}" maxlength="30" autocomplete="off" required>
+
+                            @error('kode_token')
+                                <small class="error-text">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+
+                        </div>
+
+                    </div> <!-- Penutup form-grid -->
+
+                </div> <!-- Penutup evaluasi-form-box -->
 
                 <!-- TOMBOL MENUJU PETUNJUK -->
                 <div class="evaluasi-action">
 
-                    <button
-                        type="submit"
-                        class="btn-mulai-kuis"
-                    >
+                    <button type="submit" class="btn-mulai-kuis">
                         <span>Mulai Kuis</span>
                         <span class="arrow-icon">→</span>
                     </button>
@@ -133,9 +124,8 @@
 
     </main>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

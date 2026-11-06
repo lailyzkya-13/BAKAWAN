@@ -3,8 +3,8 @@
 @section('content')
 
     <!-- =====================================
-                                     1. CSS HALAMAN EVALUASI GURU
-                                ===================================== -->
+                                         1. CSS HALAMAN EVALUASI GURU
+                                    ===================================== -->
 
     <style>
         /* Judul halaman */
@@ -217,8 +217,8 @@
 
 
     <!-- =====================================
-                                     2. JUDUL HALAMAN
-                                ===================================== -->
+                                         2. JUDUL HALAMAN
+                                    ===================================== -->
 
     <h1 class="judul-halaman">
         Hasil Evaluasi Siswa
@@ -230,8 +230,8 @@
 
 
     <!-- =====================================
-                                     3. TABEL NILAI SISWA
-                                ===================================== -->
+                                         3. TABEL NILAI SISWA
+                                    ===================================== -->
 
 
 
@@ -337,8 +337,8 @@
 
 
                                 <!-- =====================================
-                                                                                                 4. DETAIL NILAI SETIAP SISWA
-                                                                                            ===================================== -->
+                                                                                                         4. DETAIL NILAI SETIAP SISWA
+                                                                                                    ===================================== -->
 
                                 <dialog id="detail-{{ $siswa->id }}" class="modal-detail">
 
@@ -417,7 +417,8 @@
                                             <br>
 
                                             Waktu:
-                                            {{ $hasil->created_at?->format('d/m/Y H:i') ?? '-' }}
+                                            Waktu:
+                                            {{ $hasil->created_at?->copy()->timezone('Asia/Makassar')->format('d/m/Y H:i') ?? '-' }}
 
                                         </p>
 

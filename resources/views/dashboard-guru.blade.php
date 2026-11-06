@@ -96,6 +96,53 @@
 
 </div>
 
+<!-- ==========================================
+     TOKEN EVALUASI SISWA
+========================================== -->
+
+<div class="dashboard-box" style="margin-bottom: 25px;">
+
+    <div class="box-header">
+        <h2>Token Evaluasi Siswa</h2>
+        <p>Buat token untuk dibagikan kepada siswa sebelum evaluasi.</p>
+    </div>
+
+    <form action="{{ route('guru.token.buat') }}" method="POST">
+        @csrf
+
+        <button type="submit"
+            style="
+                background-color: #2d6a4f;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+            ">
+            Buat Token Evaluasi
+        </button>
+    </form>
+
+    @if(session('token_baru'))
+        <div style="margin-top: 20px;">
+            <p>Token berhasil dibuat:</p>
+
+            <h2 style="color: #2d6a4f;">
+                {{ session('token_baru') }}
+            </h2>
+
+            <p>Bagikan token ini kepada siswa.</p>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <p style="color: red; margin-top: 15px;">
+            {{ session('error') }}
+        </p>
+    @endif
+
+</div>
 
 <!-- ==========================================
      3. BAGIAN BAWAH DASHBOARD

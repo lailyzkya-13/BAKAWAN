@@ -203,29 +203,44 @@ Route::get('/evaluasi', function () {
 // Memulai Evaluasi
 Route::post('/evaluasi/mulai', function (Request $request) {
 
-    // 1. Memeriksa nama dan kelas siswa
+    // 1. Memeriksa input siswa
     $data = $request->validate([
         'nama_lengkap' => 'required|string|max:100',
         'kelas' => 'required|string|max:30',
-    ], [
-        'nama_lengkap.required' => 'Nama lengkap wajib diisi.',
-        'kelas.required' => 'Kelas wajib diisi.',
+        'kode_token' => 'required|string|max:30',
     ]);
 
-    // 2. Menyimpan data siswa ke database
+    // 2. Mencari token di database
+    $kodeToken = strtoupper(trim($data['kode_token']));
+
+    $token = \App\Models\EvaluasiToken::where('kode', $kodeToken)
+        ->where('aktif', true)
+        ->first();
+
+    // 3. Jika token salah, siswa tidak boleh lanjut
+    if (!$token) {
+        return back()
+            ->withErrors([
+                'kode_token' => 'Token salah atau sudah tidak aktif.'
+            ])
+            ->withInput();
+    }
+
+    // 4. Jika token benar, simpan identitas siswa
     $siswa = Siswa::firstOrCreate([
         'nama_lengkap' => $data['nama_lengkap'],
         'kelas' => $data['kelas'],
     ]);
 
-    // 3. Menyimpan identitas siswa ke session
+    // 5. Simpan identitas dan token ke session
     session([
         'evaluasi_siswa_id' => $siswa->id,
         'evaluasi_nama' => $siswa->nama_lengkap,
         'evaluasi_kelas' => $siswa->kelas,
+        'evaluasi_token_id' => $token->id,
     ]);
 
-    // 4. Mengarahkan siswa ke halaman petunjuk
+    // 6. Masuk ke petunjuk evaluasi
     return redirect()->route('evaluasi.petunjuk');
 
 })->name('evaluasi.mulai');
@@ -698,3 +713,35 @@ Route::delete('/profil', [
     'destroy'
 ])->name('profil.destroy');
 
+
+// GURU MEMBUAT TOKEN EVALUASI
+Route::post('/guru/token/buat', function () {
+
+    $guru = \Illuminate\Support\Facades\Auth::user();
+
+    $sekolahId = $guru->guruProfile?->sekolah_id;
+
+    if (!$sekolahId) {
+        return back()->with('error', 'Akun guru belum terhubung dengan sekolah.');
+    }
+
+    // Membuat kode token secara otomatis
+    do {
+        $kode = 'BK-' . strtoupper(
+            \Illuminate\Support\Str::random(3)
+        );
+    } while (
+        \App\Models\EvaluasiToken::where('kode', $kode)->exists()
+    );
+
+    // Menyimpan token ke database
+    \App\Models\EvaluasiToken::create([
+        'sekolah_id' => $sekolahId,
+        'user_id' => $guru->id,
+        'kode' => $kode,
+        'aktif' => true,
+    ]);
+
+    return back()->with('token_baru', $kode);
+
+})->middleware('auth')->name('guru.token.buat');

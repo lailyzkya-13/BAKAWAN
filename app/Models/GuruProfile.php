@@ -8,6 +8,7 @@ class GuruProfile extends Model
 {
     protected $fillable = [
         'user_id',
+        'sekolah_id',
         'nip_nuptk',
         'sekolah',
         'mata_pelajaran',
@@ -18,5 +19,11 @@ class GuruProfile extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Menghubungkan guru dengan sekolah
+    public function sekolahData()
+    {
+        return $this->belongsTo(Sekolah::class, 'sekolah_id');
     }
 }
