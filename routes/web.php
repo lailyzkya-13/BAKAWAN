@@ -5,15 +5,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\AktivitasController;
 use App\Http\Controllers\DashboardGuruController;
-use App\Http\Controllers\KelolaGameController;
+use App\Http\Controllers\KelolaObjekAktivitasController;
+
 use App\Http\Controllers\KelolaKuisController;
 use App\Http\Controllers\KelolaMateriGuruController;
 use App\Http\Controllers\HasilEvaluasiController;
 use App\Http\Controllers\ProfilGuruController;
 use App\Http\Controllers\AuthGuruController;
 
+use App\Http\Controllers\KelolaAktivitasController;
+
 use App\Models\SoalKuis;
 use Illuminate\Validation\Rule;
+
 
 
 use App\Models\Materi;
@@ -580,43 +584,6 @@ Route::delete('/materi/{materi}', [
 ])->name('materi.destroy');
 
 
-/* ==========================================
-   KELOLA GAME GURU
-========================================== */
-
-// Daftar Game
-Route::get('/game', [
-    KelolaGameController::class,
-    'index'
-])->name('game');
-
-
-// Tambah Game
-Route::post('/game', [
-    KelolaGameController::class,
-    'store'
-])->name('game.store');
-
-
-// Update Game
-Route::put('/game/{game}', [
-    KelolaGameController::class,
-    'update'
-])->name('game.update');
-
-
-// Hapus Game
-Route::delete('/game/{game}', [
-    KelolaGameController::class,
-    'destroy'
-])->name('game.destroy');
-
-
-// Mainkan Game
-Route::get('/game/{game}/play', [
-    KelolaGameController::class,
-    'play'
-])->name('game.play');
 
 
 /* ==========================================
@@ -745,3 +712,54 @@ Route::post('/guru/token/buat', function () {
     return back()->with('token_baru', $kode);
 
 })->middleware('auth')->name('guru.token.buat');
+
+
+// CRUD AKTIVITAS 1 - GURU
+Route::middleware('auth')->group(function () {
+
+    Route::get('/guru/aktivitas/klasifikasi',
+        [KelolaObjekAktivitasController::class, 'index']
+    )->name('guru.aktivitas.index');
+
+    Route::post('/guru/aktivitas/klasifikasi',
+        [KelolaObjekAktivitasController::class, 'store']
+    )->name('guru.aktivitas.store');
+
+    Route::put('/guru/aktivitas/klasifikasi/{objekAktivitas}',
+        [KelolaObjekAktivitasController::class, 'update']
+    )->name('guru.aktivitas.update');
+
+    Route::delete('/guru/aktivitas/klasifikasi/{objekAktivitas}',
+        [KelolaObjekAktivitasController::class, 'destroy']
+    )->name('guru.aktivitas.destroy');
+
+});
+
+
+// ==========================================
+// CRUD AKTIVITAS PEMBELAJARAN - GURU
+// ==========================================
+
+Route::middleware('auth')->group(function () {
+
+    // Menampilkan aktivitas
+    Route::get('/guru/kelola-aktivitas',
+        [KelolaAktivitasController::class, 'index']
+    )->name('guru.kelola-aktivitas.index');
+
+    // Menambah aktivitas
+    Route::post('/guru/kelola-aktivitas',
+        [KelolaAktivitasController::class, 'store']
+    )->name('guru.kelola-aktivitas.store');
+
+    // Mengedit aktivitas
+    Route::put('/guru/kelola-aktivitas/{id}',
+        [KelolaAktivitasController::class, 'update']
+    )->name('guru.kelola-aktivitas.update');
+
+    // Menghapus aktivitas
+    Route::delete('/guru/kelola-aktivitas/{id}',
+        [KelolaAktivitasController::class, 'destroy']
+    )->name('guru.kelola-aktivitas.destroy');
+
+});

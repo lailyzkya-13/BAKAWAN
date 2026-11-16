@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +36,7 @@
         }
 
         /* =====================================
-           SECTION AKTIVITAS
+           HALAMAN AKTIVITAS
         ===================================== */
 
         .aktivitas-section {
@@ -66,7 +67,7 @@
         }
 
         /* =====================================
-           GRID CARD
+           GRID KARTU AKTIVITAS
         ===================================== */
 
         .aktivitas-grid {
@@ -82,12 +83,17 @@
             border-top: 5px solid var(--accent);
             border-radius: 26px;
             padding: 34px 30px 28px;
+
             display: flex;
             flex-direction: column;
+
             height: 100%;
             min-height: 540px;
+
             box-shadow: 0 10px 30px rgba(28, 70, 58, 0.04);
         }
+
+        /* WARNA KARTU */
 
         .aktivitas-card.green {
             --accent: #2b7b61;
@@ -105,7 +111,7 @@
         }
 
         /* =====================================
-           IKON UTAMA CARD
+           IKON DAN NOMOR AKTIVITAS
         ===================================== */
 
         .card-top {
@@ -120,9 +126,11 @@
             height: 74px;
             border-radius: 21px;
             background: var(--icon-bg);
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             flex-shrink: 0;
         }
 
@@ -139,6 +147,10 @@
             line-height: 1;
         }
 
+        /* =====================================
+           JUDUL DAN DESKRIPSI
+        ===================================== */
+
         .card-type {
             font-size: 13px;
             font-weight: 700;
@@ -147,10 +159,6 @@
             text-transform: uppercase;
             margin-bottom: 14px;
         }
-
-        /* =====================================
-           JUDUL DAN DESKRIPSI SEJAJAR
-        ===================================== */
 
         .aktivitas-card h2 {
             font-size: 23px;
@@ -170,20 +178,22 @@
         }
 
         /* =====================================
-           KOTAK IKON KECIL
+           PREVIEW IKON
         ===================================== */
 
         .preview-icons {
             width: 100%;
             min-height: 70px;
+
             background: #f7f9f8;
             border-radius: 16px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             gap: 20px;
             padding: 14px;
-            margin-top: 0;
             margin-bottom: 30px;
         }
 
@@ -198,7 +208,6 @@
             color: #165446;
             font-size: 22px;
             font-weight: 600;
-            line-height: 1;
         }
 
         /* =====================================
@@ -209,18 +218,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             width: 100%;
             margin-top: auto;
+
             padding: 17px 22px;
             background: var(--accent);
             color: white;
+
             text-decoration: none;
             border: none;
             border-radius: 13px;
+
             font-family: 'Poppins', sans-serif;
             font-size: 15px;
             font-weight: 700;
-            text-align: left;
+
             cursor: pointer;
             transition: transform 0.2s, opacity 0.2s;
         }
@@ -236,17 +249,27 @@
             font-weight: 400;
         }
 
+        /* TOMBOL AKTIVITAS BELUM TERSEDIA */
+
+        .aktivitas-belum-tersedia {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         /* =====================================
-           POP-UP PENGEMBANGAN
+           POPUP PENGEMBANGAN
         ===================================== */
 
         .popup-overlay {
             position: fixed;
             inset: 0;
+
             background: rgba(12, 47, 40, 0.5);
             display: none;
+
             justify-content: center;
             align-items: center;
+
             z-index: 9999;
             padding: 20px;
         }
@@ -258,9 +281,11 @@
         .popup-box {
             width: 100%;
             max-width: 420px;
+
             background: #ffffff;
             border-radius: 24px;
             padding: 36px 30px;
+
             text-align: center;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
@@ -268,9 +293,12 @@
         .popup-icon {
             width: 76px;
             height: 76px;
+
             margin: 0 auto 20px;
             border-radius: 50%;
+
             background: #fde9ef;
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -299,12 +327,16 @@
         .popup-close {
             background: #ef5b7f;
             color: white;
+
             border: none;
             border-radius: 12px;
+
             padding: 12px 35px;
+
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
             font-weight: 700;
+
             cursor: pointer;
         }
 
@@ -362,35 +394,55 @@
                 padding: 30px 22px;
             }
         }
+
     </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
+    <!-- =====================================
+         HEADER BAKAWAN
+    ===================================== -->
+
     @include('components.header')
 
-    <!-- HALAMAN AKTIVITAS -->
+
+    <!-- =====================================
+         HALAMAN DAFTAR AKTIVITAS SISWA
+    ===================================== -->
+
     <main class="aktivitas-section">
+
         <div class="aktivitas-container">
 
+            <!-- JUDUL HALAMAN -->
+
             <div class="aktivitas-heading">
+
                 <h1>Aktivitas Seru BAKAWAN</h1>
+
                 <p>
                     Yuk, belajar tentang ekosistem melalui
                     aktivitas yang seru dan menyenangkan.
                 </p>
+
             </div>
+
+
+            <!-- DAFTAR KARTU AKTIVITAS -->
 
             <div class="aktivitas-grid">
 
+
                 <!-- =====================================
-                     CARD 1: KLASIFIKASI
+                     AKTIVITAS 1
+                     KLASIFIKASI BIOTIK & ABIOTIK
                 ===================================== -->
 
                 <article class="aktivitas-card green">
 
                     <div class="card-top">
+
                         <div class="card-icon">
                             <img
                                 src="{{ asset('images/icons/drag-and-drop.png') }}"
@@ -399,20 +451,28 @@
                         </div>
 
                         <span class="card-number">01</span>
+
                     </div>
+
 
                     <div class="card-type">
                         Drag & Drop
                     </div>
 
-                    <h2>Klasifikasi Biotik & Abiotik</h2>
+
+                    <h2>
+                        Klasifikasi Biotik & Abiotik
+                    </h2>
+
 
                     <p class="card-description">
                         Kelompokkan berbagai objek ke dalam
                         komponen biotik atau abiotik dengan tepat.
                     </p>
 
+
                     <div class="preview-icons">
+
                         <img
                             src="{{ asset('images/icons/fish.png') }}"
                             alt="Ikan"
@@ -432,7 +492,9 @@
                             src="{{ asset('images/icons/sun.png') }}"
                             alt="Matahari"
                         >
+
                     </div>
+
 
                     <a
                         href="{{ route('aktivitas.satu') }}"
@@ -444,13 +506,17 @@
 
                 </article>
 
+
+
                 <!-- =====================================
-                     CARD 2: HUBUNGAN EKOSISTEM
+                     AKTIVITAS 2
+                     HUBUNGAN DALAM EKOSISTEM
                 ===================================== -->
 
                 <article class="aktivitas-card blue">
 
                     <div class="card-top">
+
                         <div class="card-icon">
                             <img
                                 src="{{ asset('images/icons/game.png') }}"
@@ -459,20 +525,28 @@
                         </div>
 
                         <span class="card-number">02</span>
+
                     </div>
+
 
                     <div class="card-type">
                         Mencocokkan
                     </div>
 
-                    <h2>Hubungan dalam Ekosistem</h2>
+
+                    <h2>
+                        Hubungan dalam Ekosistem
+                    </h2>
+
 
                     <p class="card-description">
                         Cocokkan makhluk hidup dengan komponen
                         lingkungan yang memiliki hubungan dengannya.
                     </p>
 
+
                     <div class="preview-icons">
+
                         <img
                             src="{{ asset('images/icons/fish.png') }}"
                             alt="Ikan"
@@ -489,7 +563,9 @@
                             src="{{ asset('images/icons/check.png') }}"
                             alt="Benar"
                         >
+
                     </div>
+
 
                     <a
                         href="{{ route('aktivitas.dua') }}"
@@ -501,13 +577,17 @@
 
                 </article>
 
+
+
                 <!-- =====================================
-                     CARD 3: PETUALANGAN SI BANGAU
+                     AKTIVITAS 3
+                     PETUALANGAN SI BANGAU
                 ===================================== -->
 
                 <article class="aktivitas-card pink">
 
                     <div class="card-top">
+
                         <div class="card-icon">
                             <img
                                 src="{{ asset('images/icons/stork.png') }}"
@@ -516,20 +596,28 @@
                         </div>
 
                         <span class="card-number">03</span>
+
                     </div>
+
 
                     <div class="card-type">
-                        Game Utama
+                        Aktivitas Utama
                     </div>
 
-                    <h2>Petualangan Si Bangau</h2>
+
+                    <h2>
+                        Petualangan Si Bangau
+                    </h2>
+
 
                     <p class="card-description">
                         Ikuti petualangan Si Bangau sambil
                         mengenali ekosistem lahan basah Banua.
                     </p>
 
+
                     <div class="preview-icons">
+
                         <img
                             src="{{ asset('images/icons/stork.png') }}"
                             alt="Bangau"
@@ -549,7 +637,9 @@
                             src="{{ asset('images/icons/flag.png') }}"
                             alt="Bendera selesai"
                         >
+
                     </div>
+
 
                     <a
                         href="{{ route('aktivitas.bangau') }}"
@@ -561,12 +651,118 @@
 
                 </article>
 
+
+
+                <!-- =====================================
+                     AKTIVITAS BARU DARI GURU
+                     DATA DIAMBIL DARI DATABASE
+                ===================================== -->
+
+                @foreach ($daftarAktivitas as $aktivitas)
+
+                    <article
+                        class="aktivitas-card {{ $aktivitas->jenis == 'drag_drop' ? 'green' : 'blue' }}"
+                    >
+
+                        <!-- IKON DAN NOMOR -->
+
+                        <div class="card-top">
+
+                            <div class="card-icon">
+
+                                @if ($aktivitas->gambar)
+
+                                    <img
+                                        src="{{ asset('images/aktivitas/' . $aktivitas->gambar) }}"
+                                        alt="{{ $aktivitas->judul }}"
+                                    >
+
+                                @else
+
+                                    <img
+                                        src="{{ asset('images/icons/game.png') }}"
+                                        alt="Aktivitas Pembelajaran"
+                                    >
+
+                                @endif
+
+                            </div>
+
+
+                            <!-- NOMOR MULAI DARI 04 -->
+
+                            <span class="card-number">
+                                {{ str_pad($loop->iteration + 3, 2, '0', STR_PAD_LEFT) }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- JENIS AKTIVITAS -->
+
+                        <div class="card-type">
+
+                            @if ($aktivitas->jenis == 'drag_drop')
+
+                                Drag & Drop
+
+                            @else
+
+                                Mencocokkan
+
+                            @endif
+
+                        </div>
+
+
+                        <!-- JUDUL AKTIVITAS -->
+
+                        <h2>
+                            {{ $aktivitas->judul }}
+                        </h2>
+
+
+                        <!-- DESKRIPSI AKTIVITAS -->
+
+                        <p class="card-description">
+                            {{ $aktivitas->deskripsi }}
+                        </p>
+
+
+                        <!-- PREVIEW -->
+
+                        <div class="preview-icons">
+
+                            <span class="symbol">
+                                🌱
+                            </span>
+
+                        </div>
+
+
+                        <!-- TOMBOL AKTIVITAS BARU -->
+
+                        <div
+                            class="aktivitas-button aktivitas-belum-tersedia"
+                        >
+                            <span>Permainan belum tersedia</span>
+                        </div>
+
+                    </article>
+
+                @endforeach
+
+
             </div>
+
         </div>
+
     </main>
 
+
+
     <!-- =====================================
-         POP-UP MASIH DALAM PENGEMBANGAN
+         POPUP PETUALANGAN SI BANGAU
     ===================================== -->
 
     <div
@@ -578,6 +774,7 @@
         aria-hidden="true"
         onclick="tutupJikaKlikLuar(event)"
     >
+
         <div class="popup-box">
 
             <div class="popup-icon">
@@ -587,15 +784,18 @@
                 >
             </div>
 
+
             <h3 id="judulPopup">
                 Petualangan Si Bangau
             </h3>
+
 
             <p>
                 Masih dalam tahap pengembangan.
                 Nantikan petualangan seru Si Bangau
                 di BAKAWAN!
             </p>
+
 
             <button
                 type="button"
@@ -606,10 +806,17 @@
             </button>
 
         </div>
+
     </div>
 
-    <!-- JAVASCRIPT POP-UP -->
+
+
+    <!-- =====================================
+         JAVASCRIPT POPUP
+    ===================================== -->
+
     <script>
+
         const popupPengembangan =
             document.getElementById('popupPengembangan');
 
@@ -640,6 +847,7 @@
                 tutupPengembangan();
             }
         });
+
     </script>
 
 </body>
