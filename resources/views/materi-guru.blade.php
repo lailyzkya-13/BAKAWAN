@@ -132,16 +132,6 @@
                     <!-- TOMBOL AKSI -->
                     <div class="materi-action">
 
-                        <!-- LIHAT -->
-                        <a
-                            href="{{ route('materi.show', $item->id) }}"
-                            class="btn-lihat">
-
-                            Lihat
-
-                        </a>
-
-
                         <!-- EDIT -->
                         <a
                             href="{{ route('materi.edit', $item->id) }}"
@@ -367,7 +357,6 @@
         margin: 0;
     }
 
-    .btn-lihat,
     .btn-edit,
     .btn-hapus {
         display: inline-block;
@@ -380,18 +369,6 @@
         border: none;
         cursor: pointer;
         transition: 0.2s;
-    }
-
-
-    /* LIHAT */
-    .btn-lihat {
-        background: #e8f5e9;
-        color: #2d6a4f;
-    }
-
-    .btn-lihat:hover {
-        background: #d8f3dc;
-        color: #1b4332;
     }
 
 

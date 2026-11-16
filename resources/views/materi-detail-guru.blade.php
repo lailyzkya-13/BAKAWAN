@@ -1,33 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $materi->judul }} | BAKAWAN</title>
 
     <!-- BOOTSTRAP -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- GOOGLE FONT -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- CSS HEADER BAKAWAN -->
-    <link
-        rel="stylesheet"
-        href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
     <style>
-
         /* HALAMAN UTAMA */
         body {
             margin: 0;
@@ -352,7 +343,6 @@
                 font-size: 12px;
             }
         }
-
     </style>
 </head>
 
@@ -369,9 +359,7 @@
 
 
             <!-- TOMBOL KEMBALI -->
-            <a
-                href="{{ route('materi.siswa') }}"
-                class="detail-kembali">
+            <a href="{{ route('materi.siswa') }}" class="detail-kembali">
 
                 ← Kembali ke Daftar Materi
 
@@ -387,7 +375,7 @@
 
                 <p>
                     {{ $materi->deskripsi
-                        ?: 'Materi pembelajaran IPAS untuk siswa kelas V.' }}
+    ?: 'Materi pembelajaran IPAS untuk siswa kelas V.' }}
                 </p>
 
             </div>
@@ -398,9 +386,7 @@
 
                 <div class="detail-cover">
 
-                    <img
-                        src="{{ asset('storage/' . $materi->gambar) }}"
-                        alt="{{ $materi->judul }}">
+                    <img src="{{ asset('storage/' . $materi->gambar) }}" alt="{{ $materi->judul }}">
 
                 </div>
 
@@ -420,20 +406,19 @@
 
                     @forelse ($semuaSubbab as $index => $item)
 
-                        <a
-                            href="{{ route('materi.siswa.show', [
-                                'materi' => $materi->id,
-                                'subbab' => $item->id
-                            ]) }}"
+                                        <a href="{{ route('materi.show', [
+                            'materi' => $materi->id,
+                            'subbab' => $item->id
+                        ]) }}""
 
-                            class="{{ $subbabAktif && $subbabAktif->id == $item->id
-                                ? 'active'
-                                : '' }}">
+                                                class=" {{ $subbabAktif && $subbabAktif->id == $item->id
+                            ? 'active'
+                            : '' }}">
 
-                            {{ $index + 1 }}.
-                            {{ $item->judul }}
+                                            {{ $index + 1 }}.
+                                            {{ $item->judul }}
 
-                        </a>
+                                        </a>
 
                     @empty
 
@@ -512,9 +497,9 @@
 
                         <!-- RINGKASAN DI AKHIR MATERI -->
                         @if (
-                            !$selanjutnya &&
-                            $materi->ringkasan
-                        )
+                                !$selanjutnya &&
+                                $materi->ringkasan
+                            )
 
                             <div class="detail-ringkasan">
 
@@ -538,16 +523,14 @@
                             <!-- TOMBOL SEBELUMNYA -->
                             @if ($sebelumnya)
 
-                                <a
-                                    href="{{ route('materi.siswa.show', [
-                                        'materi' => $materi->id,
-                                        'subbab' => $sebelumnya->id
-                                    ]) }}"
-                                    class="detail-btn">
+                                                <a href="{{ route('materi.siswa.show', [
+                                    'materi' => $materi->id,
+                                    'subbab' => $sebelumnya->id
+                                ]) }}" class="detail-btn">
 
-                                    ← Sebelumnya
+                                                    ← Sebelumnya
 
-                                </a>
+                                                </a>
 
                             @else
 
@@ -559,22 +542,18 @@
                             <!-- TOMBOL SELANJUTNYA -->
                             @if ($selanjutnya)
 
-                                <a
-                                    href="{{ route('materi.siswa.show', [
-                                        'materi' => $materi->id,
-                                        'subbab' => $selanjutnya->id
-                                    ]) }}"
-                                    class="detail-btn detail-btn-pink">
+                                                <a href="{{ route('materi.siswa.show', [
+                                    'materi' => $materi->id,
+                                    'subbab' => $selanjutnya->id
+                                ]) }}" class="detail-btn detail-btn-pink">
 
-                                    Selanjutnya →
+                                                    Selanjutnya →
 
-                                </a>
+                                                </a>
 
                             @else
 
-                                <a
-                                    href="{{ route('materi.siswa') }}"
-                                    class="detail-btn detail-btn-pink">
+                                <a href="{{ route('materi.siswa') }}" class="detail-btn detail-btn-pink">
 
                                     Selesai →
 
@@ -599,9 +578,7 @@
                                 untuk materi ini.
                             </p>
 
-                            <a
-                                href="{{ route('materi.siswa') }}"
-                                class="detail-btn">
+                            <a href="{{ route('materi.siswa') }}" class="detail-btn">
 
                                 Kembali ke Materi
 
@@ -621,8 +598,7 @@
 
 
     <!-- BOOTSTRAP JS -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
     </script>
 
 </body>

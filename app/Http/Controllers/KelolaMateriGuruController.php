@@ -86,20 +86,65 @@ class KelolaMateriGuruController extends Controller
     // 4. MELIHAT DETAIL MATERI
     // ========================================
 
+
     public function show(Materi $materi)
     {
-        // Mengambil subbab secara berurutan
+        // Mengambil semua subbab sesuai urutan
         $materi->load([
             'subbab' => function ($query) {
                 $query->orderBy('urutan');
             }
         ]);
 
-        return view(
-            'materi-detail-guru',
-            compact('materi')
-        );
+        // Daftar seluruh subbab
+        $semuaSubbab = $materi->subbab->values();
+
+        // Mengambil ID subbab yang dipilih
+        $idSubbab = request()->query('subbab');
+
+        // Secara default tampilkan subbab pertama
+        $subbabAktif = $semuaSubbab->first();
+
+        // Jika guru memilih subbab tertentu
+        if ($idSubbab !== null) {
+
+            $subbabAktif = $semuaSubbab->first(function ($item) use ($idSubbab) {
+                return (string) $item->id === (string) $idSubbab;
+            });
+
+            // Jika subbab tidak ditemukan
+            if (!$subbabAktif) {
+                abort(404);
+            }
+        }
+
+        // Mencari posisi subbab aktif
+        $posisi = $subbabAktif
+            ? $semuaSubbab->search(function ($item) use ($subbabAktif) {
+                return $item->id === $subbabAktif->id;
+            })
+            : false;
+
+        // Subbab sebelumnya
+        $sebelumnya = ($posisi !== false && $posisi > 0)
+            ? $semuaSubbab->get($posisi - 1)
+            : null;
+
+        // Subbab selanjutnya
+        $selanjutnya = ($posisi !== false)
+            ? $semuaSubbab->get($posisi + 1)
+            : null;
+
+        // Mengirim semua data ke halaman detail guru
+        return view('materi-biotik', compact(
+            'materi',
+            'semuaSubbab',
+            'subbabAktif',
+            'sebelumnya',
+            'selanjutnya'
+        ));
     }
+
 
 
     // ========================================
