@@ -18,6 +18,8 @@ use App\Http\Controllers\KelolaAktivitasController;
 use App\Models\SoalKuis;
 use Illuminate\Validation\Rule;
 
+use App\Http\Controllers\KelolaHubunganEkosistemController;
+
 
 
 use App\Models\Materi;
@@ -775,3 +777,34 @@ Route::middleware('auth')->group(function () {
     )->name('guru.kelola-aktivitas.destroy');
 
 });
+
+
+// ==========================================
+// CRUD AKTIVITAS 2 - GURU
+// HUBUNGAN DALAM EKOSISTEM
+// ==========================================
+
+Route::middleware('auth')->group(function () {
+
+    // READ
+    Route::get('/guru/aktivitas/hubungan',
+        [KelolaHubunganEkosistemController::class, 'index']
+    )->name('guru.aktivitas.dua.index');
+
+    // CREATE
+    Route::post('/guru/aktivitas/hubungan',
+        [KelolaHubunganEkosistemController::class, 'store']
+    )->name('guru.aktivitas.dua.store');
+
+    // UPDATE
+    Route::put('/guru/aktivitas/hubungan/{hubunganEkosistem}',
+        [KelolaHubunganEkosistemController::class, 'update']
+    )->name('guru.aktivitas.dua.update');
+
+    // DELETE
+    Route::delete('/guru/aktivitas/hubungan/{hubunganEkosistem}',
+        [KelolaHubunganEkosistemController::class, 'destroy']
+    )->name('guru.aktivitas.dua.destroy');
+
+});
+
