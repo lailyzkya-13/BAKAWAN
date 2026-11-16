@@ -257,12 +257,14 @@
                 </a>
             </div>
 
-            <!-- Menu Game -->
-            <div class="menu-card {{ request()->is('game*') ? 'active' : '' }}">
-                <a href="/game">
-                    Game
-                </a>
-            </div>
+            
+<!-- Menu Aktivitas -->
+<div class="menu-card {{ request()->is('guru/aktivitas*') ? 'active' : '' }}">
+    <a href="{{ route('guru.aktivitas.beranda') }}">
+        Aktivitas
+    </a>
+</div>
+
 
             <!-- Menu Soal Kuis -->
             <div class="menu-card {{ request()->is('soal-kuis*') ? 'active' : '' }}">

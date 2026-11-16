@@ -717,22 +717,30 @@ Route::post('/guru/token/buat', function () {
 // CRUD AKTIVITAS 1 - GURU
 Route::middleware('auth')->group(function () {
 
-    Route::get('/guru/aktivitas/klasifikasi',
+    Route::get(
+        '/guru/aktivitas/klasifikasi',
         [KelolaObjekAktivitasController::class, 'index']
     )->name('guru.aktivitas.index');
 
-    Route::post('/guru/aktivitas/klasifikasi',
+    Route::post(
+        '/guru/aktivitas/klasifikasi',
         [KelolaObjekAktivitasController::class, 'store']
     )->name('guru.aktivitas.store');
 
-    Route::put('/guru/aktivitas/klasifikasi/{objekAktivitas}',
+    Route::put(
+        '/guru/aktivitas/klasifikasi/{objekAktivitas}',
         [KelolaObjekAktivitasController::class, 'update']
     )->name('guru.aktivitas.update');
 
-    Route::delete('/guru/aktivitas/klasifikasi/{objekAktivitas}',
+    Route::delete(
+        '/guru/aktivitas/klasifikasi/{objekAktivitas}',
         [KelolaObjekAktivitasController::class, 'destroy']
     )->name('guru.aktivitas.destroy');
 
+    // Halaman daftar 3 aktivitas guru
+    Route::get('/guru/aktivitas', function () {
+        return view('kelola-aktivitas');
+    })->name('guru.aktivitas.beranda');
 });
 
 
@@ -743,22 +751,26 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
 
     // Menampilkan aktivitas
-    Route::get('/guru/kelola-aktivitas',
+    Route::get(
+        '/guru/kelola-aktivitas',
         [KelolaAktivitasController::class, 'index']
     )->name('guru.kelola-aktivitas.index');
 
     // Menambah aktivitas
-    Route::post('/guru/kelola-aktivitas',
+    Route::post(
+        '/guru/kelola-aktivitas',
         [KelolaAktivitasController::class, 'store']
     )->name('guru.kelola-aktivitas.store');
 
     // Mengedit aktivitas
-    Route::put('/guru/kelola-aktivitas/{id}',
+    Route::put(
+        '/guru/kelola-aktivitas/{id}',
         [KelolaAktivitasController::class, 'update']
     )->name('guru.kelola-aktivitas.update');
 
     // Menghapus aktivitas
-    Route::delete('/guru/kelola-aktivitas/{id}',
+    Route::delete(
+        '/guru/kelola-aktivitas/{id}',
         [KelolaAktivitasController::class, 'destroy']
     )->name('guru.kelola-aktivitas.destroy');
 

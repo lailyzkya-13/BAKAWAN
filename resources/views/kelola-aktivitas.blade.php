@@ -4,400 +4,306 @@
 @section('content')
 
 <style>
-    .kelola-aktivitas {
-        max-width: 1100px;
-        margin: 30px auto;
-        padding: 20px;
-        font-family: 'Poppins', sans-serif;
-        color: #185543;
+    .guru-aktivitas {
+        max-width: 1200px;
+        margin: 0 auto;
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #145545;
     }
 
-    .kelola-aktivitas h1 {
-        font-size: 28px;
-        font-weight: 700;
-        margin-bottom: 8px;
+    .guru-aktivitas .judul-halaman {
+        text-align: center;
+        margin-bottom: 38px;
     }
 
-    .kelola-aktivitas h2 {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 18px;
-    }
-
-    .kotak {
-        background: white;
-        border: 1px solid #dce8e1;
-        border-radius: 15px;
-        padding: 25px;
-        margin-top: 25px;
-    }
-
-    .form-aktivitas {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-    }
-
-    .form-aktivitas label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 7px;
-    }
-
-    .form-aktivitas input:not([type="checkbox"]),
-    .form-aktivitas select,
-    .form-aktivitas textarea {
-        width: 100%;
-        padding: 11px;
-        border: 1px solid #cadbd3;
-        border-radius: 8px;
-        font-family: inherit;
-    }
-
-    .full {
-        grid-column: 1 / -1;
-    }
-
-    .tombol {
-        border: none;
-        border-radius: 8px;
-        padding: 11px 18px;
-        color: white;
-        background: #287558;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .tombol-hapus {
-        background: #d34c55;
-    }
-
-    .pesan {
-        padding: 14px;
-        border-radius: 8px;
-        margin-top: 15px;
-        background: #e3f5e9;
-    }
-
-    .pesan-error {
-        background: #ffe8e8;
-        color: #a42d2d;
-    }
-
-    .item-aktivitas {
-        border-bottom: 1px solid #e0e9e3;
-        padding: 20px 0;
-    }
-
-    .info-aktivitas {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .info-aktivitas img {
-        width: 90px;
-        height: 90px;
-        border-radius: 12px;
-        object-fit: cover;
-    }
-
-    .info-aktivitas p {
-        margin: 5px 0;
-    }
-
-    .edit-form {
-        background: #f6faf7;
-        border-radius: 10px;
-        padding: 15px;
+    .guru-aktivitas .judul-halaman h1 {
+        font-size: 30px;
+        font-weight: 800;
+        color: #145545;
         margin-bottom: 12px;
     }
 
-    .edit-form summary {
-        cursor: pointer;
-        font-weight: 600;
+    .guru-aktivitas .judul-halaman p {
+        color: #67827d;
+        font-size: 14px;
     }
 
-    @media (max-width: 650px) {
-        .form-aktivitas {
+    .guru-aktivitas .aktivitas-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .guru-aktivitas .aktivitas-card {
+        background: white;
+        border: 1px solid #dce8e4;
+        border-top: 4px solid var(--accent);
+        border-radius: 22px;
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+        min-height: 425px;
+        box-shadow: 0 5px 20px rgba(28,70,58,0.04);
+    }
+
+    .guru-aktivitas .green {
+        --accent: #2b7b61;
+        --icon-bg: #e5f4eb;
+    }
+
+    .guru-aktivitas .blue {
+        --accent: #50a4bf;
+        --icon-bg: #e6f5f9;
+    }
+
+    .guru-aktivitas .pink {
+        --accent: #ef5b7f;
+        --icon-bg: #fde9ef;
+    }
+
+    .guru-aktivitas .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .guru-aktivitas .card-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--icon-bg);
+        border-radius: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .guru-aktivitas .card-icon img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+    }
+
+    .guru-aktivitas .card-number {
+        font-size: 27px;
+        font-weight: 800;
+        color: #d2dfdc;
+    }
+
+    .guru-aktivitas .card-type {
+        font-size: 12px;
+        font-weight: bold;
+        color: #718b84;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    .guru-aktivitas .aktivitas-card h2 {
+        font-size: 19px;
+        line-height: 1.5;
+        font-weight: 800;
+        color: #105244;
+        min-height: 58px;
+    }
+
+    .guru-aktivitas .card-description {
+        font-size: 13px;
+        line-height: 1.8;
+        color: #67827d;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        flex-grow: 1;
+    }
+
+    .guru-aktivitas .preview-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        background: #f7f9f8;
+        padding: 14px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .guru-aktivitas .preview-icons img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+    .guru-aktivitas .aktivitas-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--accent);
+        padding: 15px;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .guru-aktivitas .aktivitas-button:hover {
+        filter: brightness(0.93);
+        color: white;
+    }
+
+    .guru-aktivitas .button-disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
+    @media (max-width: 1100px) {
+        .guru-aktivitas .aktivitas-grid {
             grid-template-columns: 1fr;
         }
 
-        .info-aktivitas {
-            align-items: flex-start;
+        .guru-aktivitas .aktivitas-card {
+            min-height: 0;
+        }
+
+        .guru-aktivitas .aktivitas-card h2 {
+            min-height: 0;
         }
     }
 </style>
 
-<div class="kelola-aktivitas">
+<div class="guru-aktivitas">
 
-    <h1>Kelola Aktivitas Pembelajaran</h1>
-    <p>Tambah, edit, dan hapus aktivitas yang akan ditampilkan kepada siswa.</p>
-
-    <!-- PESAN BERHASIL -->
-    @if(session('success'))
-        <div class="pesan">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <!-- PESAN ERROR -->
-    @if(session('error'))
-        <div class="pesan pesan-error">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    @if($errors->any())
-        <div class="pesan pesan-error">
-            @foreach($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
-    @endif
-
-
-    <!-- ===================================
-         CREATE - TAMBAH AKTIVITAS
-    =================================== -->
-
-    <div class="kotak">
-
-        <h2>Tambah Aktivitas Baru</h2>
-
-        <form
-            action="{{ route('guru.kelola-aktivitas.store') }}"
-            method="POST"
-            enctype="multipart/form-data">
-
-            @csrf
-
-            <div class="form-aktivitas">
-
-                <div>
-                    <label>Judul Aktivitas</label>
-                    <input
-                        type="text"
-                        name="judul"
-                        value="{{ old('judul') }}"
-                        placeholder="Contoh: Mengenal Rantai Makanan"
-                        required>
-                </div>
-
-                <div>
-                    <label>Jenis Aktivitas</label>
-                    <select name="jenis" required>
-
-                        <option value="drag_drop"
-                            @selected(old('jenis') == 'drag_drop')>
-                            Drag & Drop
-                        </option>
-
-                        <option value="mencocokkan"
-                            @selected(old('jenis') == 'mencocokkan')>
-                            Mencocokkan
-                        </option>
-
-                    </select>
-                </div>
-
-                <div class="full">
-                    <label>Deskripsi Aktivitas</label>
-                    <textarea
-                        name="deskripsi"
-                        rows="3"
-                        placeholder="Tuliskan penjelasan singkat aktivitas">{{ old('deskripsi') }}</textarea>
-                </div>
-
-                <div>
-                    <label>Gambar Aktivitas</label>
-                    <input
-                        type="file"
-                        name="gambar"
-                        accept=".jpg,.jpeg,.png,.webp">
-                </div>
-
-                <div>
-                    <label>Status Aktivitas</label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="aktif"
-                            value="1"
-                            @checked(old('aktif', false))>
-                        Aktif
-                    </label>
-                    <small>Aktifkan setelah isi permainan siap.</small>
-                </div>
-
-                <div class="full">
-                    <button type="submit" class="tombol">
-                        + Tambah Aktivitas
-                    </button>
-                </div>
-
-            </div>
-        </form>
+    <!-- JUDUL -->
+    <div class="judul-halaman">
+        <h1>Kelola Aktivitas BAKAWAN</h1>
+        <p>
+            Pilih aktivitas yang ingin dikelola.
+            Objek yang ditambahkan akan digunakan
+            dalam permainan siswa.
+        </p>
     </div>
 
+    <!-- TIGA KARTU AKTIVITAS -->
+    <div class="aktivitas-grid">
 
-    <!-- ===================================
-         READ - DAFTAR AKTIVITAS
-    =================================== -->
+        <!-- AKTIVITAS 1 -->
+        <article class="aktivitas-card green">
 
-    <div class="kotak">
-
-        <h2>Daftar Aktivitas Pembelajaran</h2>
-
-        @forelse($daftarAktivitas as $aktivitas)
-
-            <div class="item-aktivitas">
-
-                <div class="info-aktivitas">
-
-                    @if($aktivitas->gambar)
-                        <img
-                            src="{{ asset('images/aktivitas/' . $aktivitas->gambar) }}"
-                            alt="{{ $aktivitas->judul }}">
-                    @endif
-
-                    <div>
-                        <strong>{{ $aktivitas->judul }}</strong>
-
-                        <p>
-                            Jenis:
-                            {{ $aktivitas->jenis == 'drag_drop'
-                                ? 'Drag & Drop'
-                                : 'Mencocokkan' }}
-                        </p>
-
-                        <p>
-                            {{ $aktivitas->deskripsi }}
-                        </p>
-
-                        <p>
-                            Status:
-                            <strong>
-                                {{ $aktivitas->aktif
-                                    ? 'Aktif'
-                                    : 'Nonaktif' }}
-                            </strong>
-                        </p>
-                    </div>
-
+            <div class="card-top">
+                <div class="card-icon">
+                    <img
+                        src="{{ asset('images/icons/drag-and-drop.png') }}"
+                        alt="Drag and Drop"
+                    >
                 </div>
 
-
-                <!-- ===================================
-                     UPDATE - EDIT AKTIVITAS
-                =================================== -->
-
-                <details class="edit-form">
-
-                    <summary>Edit Aktivitas</summary>
-
-                    <form
-                        action="{{ route('guru.kelola-aktivitas.update', $aktivitas->id) }}"
-                        method="POST"
-                        enctype="multipart/form-data">
-
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-aktivitas"
-                             style="margin-top: 15px;">
-
-                            <div>
-                                <label>Judul Aktivitas</label>
-                                <input
-                                    type="text"
-                                    name="judul"
-                                    value="{{ $aktivitas->judul }}"
-                                    required>
-                            </div>
-
-                            <div>
-                                <label>Jenis Aktivitas</label>
-                                <select name="jenis">
-
-                                    <option value="drag_drop"
-                                        @selected($aktivitas->jenis == 'drag_drop')>
-                                        Drag & Drop
-                                    </option>
-
-                                    <option value="mencocokkan"
-                                        @selected($aktivitas->jenis == 'mencocokkan')>
-                                        Mencocokkan
-                                    </option>
-
-                                </select>
-                            </div>
-
-                            <div class="full">
-                                <label>Deskripsi Aktivitas</label>
-                                <textarea
-                                    name="deskripsi"
-                                    rows="3">{{ $aktivitas->deskripsi }}</textarea>
-                            </div>
-
-                            <div>
-                                <label>Ganti Gambar (Opsional)</label>
-                                <input
-                                    type="file"
-                                    name="gambar"
-                                    accept=".jpg,.jpeg,.png,.webp">
-                            </div>
-
-                            <div>
-                                <label>Status</label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="aktif"
-                                        value="1"
-                                        @checked($aktivitas->aktif)>
-                                    Aktif
-                                </label>
-                            </div>
-
-                            <div class="full">
-                                <button type="submit" class="tombol">
-                                    Simpan Perubahan
-                                </button>
-                            </div>
-
-                        </div>
-                    </form>
-                </details>
-
-
-                <!-- ===================================
-                     DELETE - HAPUS AKTIVITAS
-                =================================== -->
-
-                <form
-                    action="{{ route('guru.kelola-aktivitas.destroy', $aktivitas->id) }}"
-                    method="POST"
-                    onsubmit="return confirm('Yakin ingin menghapus aktivitas ini?')">
-
-                    @csrf
-                    @method('DELETE')
-
-                    <button
-                        type="submit"
-                        class="tombol tombol-hapus">
-                        Hapus Aktivitas
-                    </button>
-                </form>
-
+                <span class="card-number">01</span>
             </div>
 
-        @empty
+            <div class="card-type">Drag & Drop</div>
 
-            <p>Belum ada aktivitas yang dibuat oleh guru.</p>
+            <h2>Klasifikasi Biotik & Abiotik</h2>
 
-        @endforelse
+            <p class="card-description">
+                Kelola objek biotik dan abiotik,
+                gambar, kategori, serta penjelasan
+                jawaban yang akan ditampilkan kepada siswa.
+            </p>
+
+            <div class="preview-icons">
+                <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
+                <img src="{{ asset('images/icons/plant.png') }}" alt="Tumbuhan">
+                <img src="{{ asset('images/icons/drop.png') }}" alt="Air">
+                <img src="{{ asset('images/icons/sun.png') }}" alt="Matahari">
+            </div>
+
+            <a
+                href="{{ route('guru.aktivitas.index') }}"
+                class="aktivitas-button"
+            >
+                <span>Kelola Aktivitas 1</span>
+                <span>→</span>
+            </a>
+
+        </article>
+
+
+        <!-- AKTIVITAS 2 -->
+        <article class="aktivitas-card blue">
+
+            <div class="card-top">
+                <div class="card-icon">
+                    <img
+                        src="{{ asset('images/icons/game.png') }}"
+                        alt="Mencocokkan"
+                    >
+                </div>
+
+                <span class="card-number">02</span>
+            </div>
+
+            <div class="card-type">Mencocokkan</div>
+
+            <h2>Hubungan dalam Ekosistem</h2>
+
+            <p class="card-description">
+                Kelola pasangan objek, gambar,
+                hubungan dalam ekosistem,
+                serta petunjuk jawaban untuk siswa.
+            </p>
+
+            <div class="preview-icons">
+                <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
+                <span>+</span>
+                <img src="{{ asset('images/icons/drop.png') }}" alt="Air">
+                <img src="{{ asset('images/icons/check.png') }}" alt="Benar">
+            </div>
+
+            <div class="aktivitas-button button-disabled">
+                <span>CRUD belum dibuat</span>
+                <span>02</span>
+            </div>
+
+        </article>
+
+
+        <!-- AKTIVITAS 3 -->
+        <article class="aktivitas-card pink">
+
+            <div class="card-top">
+                <div class="card-icon">
+                    <img
+                        src="{{ asset('images/icons/stork.png') }}"
+                        alt="Si Bangau"
+                    >
+                </div>
+
+                <span class="card-number">03</span>
+            </div>
+
+            <div class="card-type">Aktivitas Utama</div>
+
+            <h2>Petualangan Si Bangau</h2>
+
+            <p class="card-description">
+                Kelola konten petualangan
+                Si Bangau agar siswa dapat belajar
+                tentang ekosistem lahan basah.
+            </p>
+
+            <div class="preview-icons">
+                <img src="{{ asset('images/icons/stork.png') }}" alt="Bangau">
+                <img src="{{ asset('images/icons/wetland.png') }}" alt="Rawa">
+                <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
+                <img src="{{ asset('images/icons/flag.png') }}" alt="Selesai">
+            </div>
+
+            <div class="aktivitas-button button-disabled">
+                <span>CRUD belum dibuat</span>
+                <span>03</span>
+            </div>
+
+        </article>
 
     </div>
 

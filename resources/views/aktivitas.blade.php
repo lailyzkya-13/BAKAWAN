@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -9,16 +8,11 @@
     <title>Aktivitas - BAKAWAN</title>
 
     <!-- GOOGLE FONT -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- BOOTSTRAP -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HEADER CSS -->
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -394,7 +388,6 @@
                 padding: 30px 22px;
             }
         }
-
     </style>
 </head>
 
@@ -444,10 +437,7 @@
                     <div class="card-top">
 
                         <div class="card-icon">
-                            <img
-                                src="{{ asset('images/icons/drag-and-drop.png') }}"
-                                alt="Ikon klasifikasi"
-                            >
+                            <img src="{{ asset('images/icons/drag-and-drop.png') }}" alt="Ikon klasifikasi">
                         </div>
 
                         <span class="card-number">01</span>
@@ -473,33 +463,18 @@
 
                     <div class="preview-icons">
 
-                        <img
-                            src="{{ asset('images/icons/fish.png') }}"
-                            alt="Ikan"
-                        >
+                        <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
 
-                        <img
-                            src="{{ asset('images/icons/plant.png') }}"
-                            alt="Tumbuhan"
-                        >
+                        <img src="{{ asset('images/icons/plant.png') }}" alt="Tumbuhan">
 
-                        <img
-                            src="{{ asset('images/icons/drop.png') }}"
-                            alt="Air"
-                        >
+                        <img src="{{ asset('images/icons/drop.png') }}" alt="Air">
 
-                        <img
-                            src="{{ asset('images/icons/sun.png') }}"
-                            alt="Matahari"
-                        >
+                        <img src="{{ asset('images/icons/sun.png') }}" alt="Matahari">
 
                     </div>
 
 
-                    <a
-                        href="{{ route('aktivitas.satu') }}"
-                        class="aktivitas-button"
-                    >
+                    <a href="{{ route('aktivitas.satu') }}" class="aktivitas-button">
                         <span>Mulai Aktivitas</span>
                         <span class="button-arrow">→</span>
                     </a>
@@ -518,10 +493,7 @@
                     <div class="card-top">
 
                         <div class="card-icon">
-                            <img
-                                src="{{ asset('images/icons/game.png') }}"
-                                alt="Ikon mencocokkan"
-                            >
+                            <img src="{{ asset('images/icons/game.png') }}" alt="Ikon mencocokkan">
                         </div>
 
                         <span class="card-number">02</span>
@@ -547,30 +519,18 @@
 
                     <div class="preview-icons">
 
-                        <img
-                            src="{{ asset('images/icons/fish.png') }}"
-                            alt="Ikan"
-                        >
+                        <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
 
                         <span class="symbol">+</span>
 
-                        <img
-                            src="{{ asset('images/icons/drop.png') }}"
-                            alt="Air"
-                        >
+                        <img src="{{ asset('images/icons/drop.png') }}" alt="Air">
 
-                        <img
-                            src="{{ asset('images/icons/check.png') }}"
-                            alt="Benar"
-                        >
+                        <img src="{{ asset('images/icons/check.png') }}" alt="Benar">
 
                     </div>
 
 
-                    <a
-                        href="{{ route('aktivitas.dua') }}"
-                        class="aktivitas-button"
-                    >
+                    <a href="{{ route('aktivitas.dua') }}" class="aktivitas-button">
                         <span>Mulai Aktivitas</span>
                         <span class="button-arrow">→</span>
                     </a>
@@ -589,10 +549,7 @@
                     <div class="card-top">
 
                         <div class="card-icon">
-                            <img
-                                src="{{ asset('images/icons/stork.png') }}"
-                                alt="Ikon petualangan Si Bangau"
-                            >
+                            <img src="{{ asset('images/icons/stork.png') }}" alt="Ikon petualangan Si Bangau">
                         </div>
 
                         <span class="card-number">03</span>
@@ -618,33 +575,18 @@
 
                     <div class="preview-icons">
 
-                        <img
-                            src="{{ asset('images/icons/stork.png') }}"
-                            alt="Bangau"
-                        >
+                        <img src="{{ asset('images/icons/stork.png') }}" alt="Bangau">
 
-                        <img
-                            src="{{ asset('images/icons/wetland.png') }}"
-                            alt="Tumbuhan rawa"
-                        >
+                        <img src="{{ asset('images/icons/wetland.png') }}" alt="Tumbuhan rawa">
 
-                        <img
-                            src="{{ asset('images/icons/fish.png') }}"
-                            alt="Ikan"
-                        >
+                        <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
 
-                        <img
-                            src="{{ asset('images/icons/flag.png') }}"
-                            alt="Bendera selesai"
-                        >
+                        <img src="{{ asset('images/icons/flag.png') }}" alt="Bendera selesai">
 
                     </div>
 
 
-                    <a
-                        href="{{ route('aktivitas.bangau') }}"
-                        class="aktivitas-button"
-                    >
+                    <a href="{{ route('aktivitas.bangau') }}" class="aktivitas-button">
                         <span>Mulai Bermain</span>
                         <span class="button-arrow">→</span>
                     </a>
@@ -653,104 +595,7 @@
 
 
 
-                <!-- =====================================
-                     AKTIVITAS BARU DARI GURU
-                     DATA DIAMBIL DARI DATABASE
-                ===================================== -->
 
-                @foreach ($daftarAktivitas as $aktivitas)
-
-                    <article
-                        class="aktivitas-card {{ $aktivitas->jenis == 'drag_drop' ? 'green' : 'blue' }}"
-                    >
-
-                        <!-- IKON DAN NOMOR -->
-
-                        <div class="card-top">
-
-                            <div class="card-icon">
-
-                                @if ($aktivitas->gambar)
-
-                                    <img
-                                        src="{{ asset('images/aktivitas/' . $aktivitas->gambar) }}"
-                                        alt="{{ $aktivitas->judul }}"
-                                    >
-
-                                @else
-
-                                    <img
-                                        src="{{ asset('images/icons/game.png') }}"
-                                        alt="Aktivitas Pembelajaran"
-                                    >
-
-                                @endif
-
-                            </div>
-
-
-                            <!-- NOMOR MULAI DARI 04 -->
-
-                            <span class="card-number">
-                                {{ str_pad($loop->iteration + 3, 2, '0', STR_PAD_LEFT) }}
-                            </span>
-
-                        </div>
-
-
-                        <!-- JENIS AKTIVITAS -->
-
-                        <div class="card-type">
-
-                            @if ($aktivitas->jenis == 'drag_drop')
-
-                                Drag & Drop
-
-                            @else
-
-                                Mencocokkan
-
-                            @endif
-
-                        </div>
-
-
-                        <!-- JUDUL AKTIVITAS -->
-
-                        <h2>
-                            {{ $aktivitas->judul }}
-                        </h2>
-
-
-                        <!-- DESKRIPSI AKTIVITAS -->
-
-                        <p class="card-description">
-                            {{ $aktivitas->deskripsi }}
-                        </p>
-
-
-                        <!-- PREVIEW -->
-
-                        <div class="preview-icons">
-
-                            <span class="symbol">
-                                🌱
-                            </span>
-
-                        </div>
-
-
-                        <!-- TOMBOL AKTIVITAS BARU -->
-
-                        <div
-                            class="aktivitas-button aktivitas-belum-tersedia"
-                        >
-                            <span>Permainan belum tersedia</span>
-                        </div>
-
-                    </article>
-
-                @endforeach
 
 
             </div>
@@ -765,23 +610,13 @@
          POPUP PETUALANGAN SI BANGAU
     ===================================== -->
 
-    <div
-        class="popup-overlay"
-        id="popupPengembangan"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="judulPopup"
-        aria-hidden="true"
-        onclick="tutupJikaKlikLuar(event)"
-    >
+    <div class="popup-overlay" id="popupPengembangan" role="dialog" aria-modal="true" aria-labelledby="judulPopup"
+        aria-hidden="true" onclick="tutupJikaKlikLuar(event)">
 
         <div class="popup-box">
 
             <div class="popup-icon">
-                <img
-                    src="{{ asset('images/icons/stork.png') }}"
-                    alt="Si Bangau"
-                >
+                <img src="{{ asset('images/icons/stork.png') }}" alt="Si Bangau">
             </div>
 
 
@@ -797,11 +632,7 @@
             </p>
 
 
-            <button
-                type="button"
-                class="popup-close"
-                onclick="tutupPengembangan()"
-            >
+            <button type="button" class="popup-close" onclick="tutupPengembangan()">
                 Mengerti
             </button>
 
@@ -839,7 +670,7 @@
             }
         }
 
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (
                 event.key === 'Escape' &&
                 popupPengembangan.classList.contains('active')
@@ -851,4 +682,5 @@
     </script>
 
 </body>
+
 </html>
