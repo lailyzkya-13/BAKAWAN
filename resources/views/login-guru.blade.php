@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -6,12 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Guru BAKAWAN</title>
 
+    <!-- FONT POPPINS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -190,7 +197,9 @@
     <div class="overlay">
 
         <div class="top-bar">
-            <img src="{{ asset('images/logo-bakawan.png') }}" alt="Logo BAKAWAN" class="logo-kecil">
+            <img src="{{ asset('images/logo-bakawan.png') }}"
+                alt="Logo BAKAWAN"
+                class="logo-kecil">
 
             <div class="guru-badge">
                 <div class="guru-icon">👤</div>
@@ -199,7 +208,9 @@
         </div>
 
         <div class="login-wrapper">
-            <img src="{{ asset('images/logo-bakawan.png') }}" alt="Logo BAKAWAN" class="logo-kecil">
+            <img src="{{ asset('images/logo-bakawan.png') }}"
+                alt="Logo BAKAWAN"
+                class="logo-kecil">
 
             <div class="login-card">
                 <h2>Login Guru</h2>
@@ -211,23 +222,39 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login.guru.proses') }}">
+                <form method="POST"
+                    action="{{ route('login.guru.proses') }}">
+
                     @csrf
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Masukkan email"
-                            value="{{ old('email') }}" required>
+
+                        <input type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Masukkan email"
+                            value="{{ old('email') }}"
+                            required>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+
+                        <input type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Masukkan password"
+                            required>
                     </div>
 
-                    <button type="submit" class="btn-login">Masuk</button>
+                    <button type="submit" class="btn-login">
+                        Masuk
+                    </button>
 
-                    <a href="#" class="forgot-link">Lupa Password?</a>
+                    <a href="#" class="forgot-link">
+                        Lupa Password?
+                    </a>
                 </form>
             </div>
         </div>

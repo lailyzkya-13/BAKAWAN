@@ -335,6 +335,23 @@
 
 
     <style>
+        /* FONT POPPINS UNTUK SELURUH HALAMAN SOAL EVALUASI */
+        .soal-page,
+        #soalModal,
+        #lihatModal {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* FONT POPPINS UNTUK TOMBOL DAN FORM */
+        .soal-page button,
+        #soalModal button,
+        #lihatModal button,
+        #soalModal input,
+        #soalModal textarea,
+        #soalModal select {
+            font-family: 'Poppins', sans-serif;
+        }
+
         /* HALAMAN SOAL EVALUASI */
 
         .soal-page {
@@ -651,6 +668,7 @@
             font-weight: 600;
         }
 
+
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -661,9 +679,10 @@
             border-radius: 9px;
             outline: none;
             font-size: 14px;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: white;
         }
+
 
         .form-group textarea {
             height: 100px;

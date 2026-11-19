@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BAKAWAN - Portal Guru</title>
+    <!-- FONT POPPINS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         /* Pengaturan dasar */
@@ -13,11 +16,21 @@
             box-sizing: border-box;
         }
 
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f5f5f5;
         }
+
+        /* Font untuk tombol dan formulir */
+        button,
+        input,
+        select,
+        textarea {
+            font-family: 'Poppins', sans-serif;
+        }
+
 
         /* ================= HEADER ================= */
 
@@ -69,16 +82,11 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
             transition: 0.2s;
-        }
-
-        .header-menu .btn-logout:hover {
-            background-color: #cc0000;
-            color: white;
         }
 
 
@@ -257,13 +265,13 @@
                 </a>
             </div>
 
-            
-<!-- Menu Aktivitas -->
-<div class="menu-card {{ request()->is('guru/aktivitas*') ? 'active' : '' }}">
-    <a href="{{ route('guru.aktivitas.beranda') }}">
-        Aktivitas
-    </a>
-</div>
+
+            <!-- Menu Aktivitas -->
+            <div class="menu-card {{ request()->is('guru/aktivitas*') ? 'active' : '' }}">
+                <a href="{{ route('guru.aktivitas.beranda') }}">
+                    Aktivitas
+                </a>
+            </div>
 
 
             <!-- Menu Soal Kuis -->
