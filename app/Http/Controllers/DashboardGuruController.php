@@ -11,6 +11,22 @@ class DashboardGuruController extends Controller
     {
         // 1. Menghitung jumlah siswa terdaftar
         $jumlahMurid = Siswa::count();
+        // Mengambil seluruh siswa yang terdaftar
+
+        $daftarSiswa = Siswa::query()
+            ->select('siswa.*')
+            ->addSelect([
+                'nilai_terakhir' => HasilKuis::query()
+                    ->select('nilai')
+                    ->whereColumn('hasil_kuis.siswa_id', 'siswa.id')
+                    ->orderByDesc('hasil_kuis.created_at')
+                    ->orderByDesc('hasil_kuis.id')
+                    ->limit(1)
+            ])
+            ->orderBy('kelas')
+            ->orderBy('nama_lengkap')
+            ->get();
+
 
         // 2. Menghitung jumlah kelas yang berbeda
         $jumlahKelas = Siswa::query()
@@ -22,20 +38,6 @@ class DashboardGuruController extends Controller
         // 3. Menghitung rata-rata nilai seluruh hasil kuis
         $rataRataNilai = HasilKuis::avg('nilai');
 
-        // 4. Mengambil lima aktivitas kuis terbaru
-        $aktivitasTerbaru = HasilKuis::query()
-            ->join('siswa', 'hasil_kuis.siswa_id', '=', 'siswa.id')
-            ->select(
-                'hasil_kuis.id',
-                'hasil_kuis.nilai',
-                'hasil_kuis.created_at',
-                'siswa.nama_lengkap',
-                'siswa.kelas'
-            )
-            ->orderByDesc('hasil_kuis.created_at')
-            ->orderByDesc('hasil_kuis.id')
-            ->limit(5)
-            ->get();
 
         // 5. Menghitung rata-rata nilai masing-masing kelas
         $rekapNilaiPerKelas = Siswa::query()
@@ -54,8 +56,9 @@ class DashboardGuruController extends Controller
             'jumlahMurid',
             'jumlahKelas',
             'rataRataNilai',
-            'aktivitasTerbaru',
-            'rekapNilaiPerKelas'
+            'rekapNilaiPerKelas',
+            'daftarSiswa'
         ));
+
     }
 }

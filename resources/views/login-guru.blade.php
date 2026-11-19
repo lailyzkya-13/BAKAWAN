@@ -163,18 +163,6 @@
             font-size: 14px;
         }
 
-        .forgot-link {
-            display: block;
-            text-align: center;
-            margin-top: 12px;
-            font-size: 12px;
-            color: #6c63ff;
-            text-decoration: none;
-        }
-
-        .forgot-link:hover {
-            text-decoration: underline;
-        }
 
         @media (max-width: 600px) {
             .logo-besar {
@@ -251,10 +239,6 @@
                     <button type="submit" class="btn-login">
                         Masuk
                     </button>
-
-                    <a href="#" class="forgot-link">
-                        Lupa Password?
-                    </a>
                 </form>
             </div>
         </div>
