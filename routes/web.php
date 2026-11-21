@@ -534,6 +534,13 @@ Route::post('/logout-guru', [
     'logout'
 ])->middleware('auth')->name('logout.guru');
 
+
+// Dashboard Guru - Wajib Login
+Route::get('/dashboard', [
+    DashboardGuruController::class,
+    'index'
+])->middleware('auth')->name('dashboard');
+
 /* ==========================================
    CRUD MATERI GURU
 ========================================== */

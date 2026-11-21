@@ -81,8 +81,8 @@
         }
 
         .kelola-dua .gambar-pasangan img {
-            width: 90px;
-            height: 90px;
+            width: 500px;
+            height: 500px;
             object-fit: cover;
             border-radius: 10px;
         }

@@ -230,9 +230,7 @@ a {
 
     display: grid;
     grid-template-columns:
-        minmax(260px, 1fr)
-        minmax(100px, 0.5fr)
-        minmax(260px, 1fr);
+        minmax(260px, 1fr) minmax(100px, 0.5fr) minmax(260px, 1fr);
 
     gap: 20px;
 
@@ -384,26 +382,26 @@ a {
     box-shadow: 0 7px 18px rgba(73, 112, 96, 0.08);
 }
 
-.card-picture {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card-picture img {
+    width: 100%;
+    height: 100%;
 
-    flex: 0 0 82px;
+    max-width: 100%;
+    max-height: 100%;
 
-    width: 82px;
-    height: 82px;
+    object-fit: cover;
+    border-radius: 10px;
 
-    border-radius: 14px;
-
-    background: #f7faf7;
+    display: block;
+    user-select: none;
+    pointer-events: none;
 }
 
 .card-picture img {
     display: block;
 
-    max-width: 72px;
-    max-height: 72px;
+    max-width: 200px;
+    max-height: 200px;
 
     object-fit: contain;
 
@@ -443,6 +441,7 @@ a {
 }
 
 @keyframes shake {
+
     0%,
     100% {
         transform: translateX(0);
@@ -872,9 +871,7 @@ a {
 
     .matching-board {
         grid-template-columns:
-            minmax(220px, 1fr)
-            80px
-            minmax(220px, 1fr);
+            minmax(220px, 1fr) 80px minmax(220px, 1fr);
 
         gap: 12px;
 
@@ -962,9 +959,7 @@ a {
 
     .matching-board {
         grid-template-columns:
-            minmax(120px, 1fr)
-            48px
-            minmax(120px, 1fr);
+            minmax(120px, 1fr) 48px minmax(120px, 1fr);
 
         gap: 5px;
 
@@ -1090,9 +1085,7 @@ a {
 
     .matching-board {
         grid-template-columns:
-            minmax(105px, 1fr)
-            38px
-            minmax(105px, 1fr);
+            minmax(105px, 1fr) 38px minmax(105px, 1fr);
 
         padding-left: 7px;
         padding-right: 7px;

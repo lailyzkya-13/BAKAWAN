@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,45 +8,51 @@
     <title>Klasifikasi Biotik dan Abiotik | BAKAWAN</title>
 
     <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Google Font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/aktivitas-satu.css') }}">
 
     <!-- Tambahan agar gambar terlihat rapi -->
+
     <style>
+        /* Mengatur posisi kartu */
+        #objekList {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Mengatur ukuran kartu */
+        .objek-card {
+            width: 300px;
+            flex: 0 0 300px;
+            position: relative;
+        }
+
+        /* Mengatur tempat gambar */
         .objek-image {
             width: 100%;
-            height: 85px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 270px;
             overflow: hidden;
             border-radius: 10px;
         }
 
+        /* Mengatur ukuran gambar */
         .objek-image img {
-            display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
         }
-
-        .objek-card {
-            overflow: hidden;
-        }
     </style>
+
 </head>
 
 <body>
@@ -56,10 +63,7 @@
         <div class="container-aktivitas">
 
             <!-- KEMBALI -->
-            <a
-                href="{{ route('aktivitas') }}"
-                class="btn-kembali-atas"
-            >
+            <a href="{{ route('aktivitas') }}" class="btn-kembali-atas">
                 ← Kembali
             </a>
 
@@ -115,10 +119,7 @@
                 </div>
 
                 <div class="progress-track">
-                    <div
-                        class="progress-fill"
-                        id="progressFill"
-                    ></div>
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
 
             </section>
@@ -144,10 +145,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="objek-list"
-                    id="objekList"
-                >
+                <div class="objek-list" id="objekList">
 
                     @forelse ($objekAktivitas as $objek)
 
@@ -181,24 +179,13 @@
                             );
                         @endphp
 
-                        <div
-                            class="objek-card"
-                            draggable="true"
-
-                            data-id="{{ $objek->id }}"
-                            data-kategori="{{ $objek->kategori }}"
-                            data-nama="{{ $objek->nama_objek }}"
-                            data-penjelasan="{{ $objek->penjelasan }}"
-                        >
+                        <div class="objek-card" draggable="true" data-id="{{ $objek->id }}"
+                            data-kategori="{{ $objek->kategori }}" data-nama="{{ $objek->nama_objek }}"
+                            data-penjelasan="{{ $objek->penjelasan }}">
 
                             <div class="objek-image">
 
-                                <img
-                                    src="{{ $urlGambar }}"
-                                    alt="{{ $objek->nama_objek }}"
-                                    loading="lazy"
-                                    draggable="false"
-                                >
+                                <img src="{{ $urlGambar }}" alt="{{ $objek->nama_objek }}" loading="lazy" draggable="false">
 
                             </div>
 
@@ -230,10 +217,7 @@
             <section class="drop-section">
 
                 <!-- BIOTIK -->
-                <div
-                    class="drop-box drop-biotik"
-                    data-kategori="biotik"
-                >
+                <div class="drop-box drop-biotik" data-kategori="biotik">
 
                     <div class="drop-title">
 
@@ -248,10 +232,7 @@
 
                     </div>
 
-                    <div
-                        class="drop-area"
-                        id="dropBiotik"
-                    >
+                    <div class="drop-area" id="dropBiotik">
 
                         <div class="drop-placeholder">
                             <span>↓</span>
@@ -266,10 +247,7 @@
                 </div>
 
                 <!-- ABIOTIK -->
-                <div
-                    class="drop-box drop-abiotik"
-                    data-kategori="abiotik"
-                >
+                <div class="drop-box drop-abiotik" data-kategori="abiotik">
 
                     <div class="drop-title">
 
@@ -284,10 +262,7 @@
 
                     </div>
 
-                    <div
-                        class="drop-area"
-                        id="dropAbiotik"
-                    >
+                    <div class="drop-area" id="dropAbiotik">
 
                         <div class="drop-placeholder">
                             <span>↓</span>
@@ -304,15 +279,9 @@
             </section>
 
             <!-- FEEDBACK / CLUE -->
-            <section
-                class="feedback-area"
-                id="feedbackArea"
-            >
+            <section class="feedback-area" id="feedbackArea">
 
-                <div
-                    class="feedback-icon"
-                    id="feedbackIcon"
-                >
+                <div class="feedback-icon" id="feedbackIcon">
                     🌱
                 </div>
 
@@ -334,30 +303,18 @@
             <!-- TOMBOL CEK -->
             <section class="button-area">
 
-                <button
-                    type="button"
-                    class="btn-reset"
-                    id="btnReset"
-                >
+                <button type="button" class="btn-reset" id="btnReset">
                     ↻ Ulangi
                 </button>
 
-                <button
-                    type="button"
-                    class="btn-cek"
-                    id="btnCek"
-                    disabled
-                >
+                <button type="button" class="btn-cek" id="btnCek" disabled>
                     Cek Jawaban
                 </button>
 
             </section>
 
             <!-- HASIL AKHIR -->
-            <section
-                class="hasil-section"
-                id="hasilSection"
-            >
+            <section class="hasil-section" id="hasilSection">
 
                 <div class="hasil-header">
 
@@ -384,10 +341,7 @@
 
                 </div>
 
-                <div
-                    class="penjelasan-list"
-                    id="penjelasanList"
-                ></div>
+                <div class="penjelasan-list" id="penjelasanList"></div>
 
                 <!-- KESIMPULAN -->
                 <div class="kesimpulan-box">
@@ -414,18 +368,11 @@
 
                 <div class="hasil-button">
 
-                    <button
-                        type="button"
-                        class="btn-main-lagi"
-                        id="btnMainLagi"
-                    >
+                    <button type="button" class="btn-main-lagi" id="btnMainLagi">
                         ↻ Main Lagi
                     </button>
 
-                    <a
-                        href="{{ route('aktivitas') }}"
-                        class="btn-aktivitas-lain"
-                    >
+                    <a href="{{ route('aktivitas') }}" class="btn-aktivitas-lain">
                         Aktivitas Lain →
                     </a>
 
@@ -437,12 +384,11 @@
     </main>
 
     <!-- Bootstrap -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JavaScript Aktivitas -->
     <script src="{{ asset('js/aktivitas-satu.js') }}"></script>
 
 </body>
+
 </html>
