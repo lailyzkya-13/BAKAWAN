@@ -20,7 +20,7 @@ use Illuminate\Validation\Rule;
 
 use App\Http\Controllers\KelolaHubunganEkosistemController;
 
-
+use App\Http\Controllers\KelolaPetualanganBangauController;
 
 use App\Models\Materi;
 use App\Models\Siswa;
@@ -507,6 +507,10 @@ Route::get('/tentang', function () {
    HALAMAN GURU
 ========================================== */
 
+// ==========================================
+// HALAMAN LOGIN GURU
+// ==========================================
+
 // Menampilkan halaman login guru
 Route::get('/login-guru', [
     AuthGuruController::class,
@@ -519,19 +523,16 @@ Route::post('/login-guru', [
     'login'
 ])->name('login.guru.proses');
 
+// Alias untuk middleware auth Laravel
+Route::get('/login', function () {
+    return redirect()->route('login.guru');
+})->name('login');
+
 // Logout guru
 Route::post('/logout-guru', [
     AuthGuruController::class,
     'logout'
 ])->middleware('auth')->name('logout.guru');
-
-
-// Dashboard Guru - Wajib Login
-Route::get('/dashboard', [
-    DashboardGuruController::class,
-    'index'
-])->middleware('auth')->name('dashboard');
-
 
 /* ==========================================
    CRUD MATERI GURU
@@ -787,24 +788,80 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
 
     // READ
-    Route::get('/guru/aktivitas/hubungan',
+    Route::get(
+        '/guru/aktivitas/hubungan',
         [KelolaHubunganEkosistemController::class, 'index']
     )->name('guru.aktivitas.dua.index');
 
     // CREATE
-    Route::post('/guru/aktivitas/hubungan',
+    Route::post(
+        '/guru/aktivitas/hubungan',
         [KelolaHubunganEkosistemController::class, 'store']
     )->name('guru.aktivitas.dua.store');
 
     // UPDATE
-    Route::put('/guru/aktivitas/hubungan/{hubunganEkosistem}',
+    Route::put(
+        '/guru/aktivitas/hubungan/{hubunganEkosistem}',
         [KelolaHubunganEkosistemController::class, 'update']
     )->name('guru.aktivitas.dua.update');
 
     // DELETE
-    Route::delete('/guru/aktivitas/hubungan/{hubunganEkosistem}',
+    Route::delete(
+        '/guru/aktivitas/hubungan/{hubunganEkosistem}',
         [KelolaHubunganEkosistemController::class, 'destroy']
     )->name('guru.aktivitas.dua.destroy');
 
 });
 
+
+// ==========================================
+// CRUD AKTIVITAS 3 - PETUALANGAN SI BANGAU
+// ==========================================
+
+Route::middleware('auth')
+    ->prefix('guru/aktivitas/petualangan-bangau')
+    ->name('guru.aktivitas.tiga.')
+    ->group(function () {
+
+        // READ
+        Route::get(
+            '/',
+            [KelolaPetualanganBangauController::class, 'index']
+        )->name('index');
+
+        // CREATE MISI
+        Route::post(
+            '/misi',
+            [KelolaPetualanganBangauController::class, 'storeMisi']
+        )->name('misi.store');
+
+        // UPDATE MISI
+        Route::put(
+            '/misi/{misi}',
+            [KelolaPetualanganBangauController::class, 'updateMisi']
+        )->name('misi.update');
+
+        // DELETE MISI
+        Route::delete(
+            '/misi/{misi}',
+            [KelolaPetualanganBangauController::class, 'destroyMisi']
+        )->name('misi.destroy');
+
+        // CREATE ITEM
+        Route::post(
+            '/misi/{misi}/item',
+            [KelolaPetualanganBangauController::class, 'storeItem']
+        )->name('item.store');
+
+        // UPDATE ITEM
+        Route::put(
+            '/item/{item}',
+            [KelolaPetualanganBangauController::class, 'updateItem']
+        )->name('item.update');
+
+        // DELETE ITEM
+        Route::delete(
+            '/item/{item}',
+            [KelolaPetualanganBangauController::class, 'destroyItem']
+        )->name('item.destroy');
+    });
