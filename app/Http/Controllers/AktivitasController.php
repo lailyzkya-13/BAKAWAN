@@ -55,8 +55,19 @@ class AktivitasController extends Controller
 
     // AKTIVITAS 3
     // Petualangan Si Bangau
+
+    // AKTIVITAS 3
+    // Petualangan Si Bangau
     public function petualanganBangau()
     {
-        return view('petualangan-bangau');
+        // Mengambil misi yang aktif dari database
+        $daftarMisi = \App\Models\MisiPetualangan::with('items.pertanyaan')
+            ->where('aktif', true)
+            ->orderBy('urutan')
+            ->get();
+
+        // Mengirim data misi ke halaman permainan siswa
+        return view('petualangan-bangau', compact('daftarMisi'));
     }
+
 }

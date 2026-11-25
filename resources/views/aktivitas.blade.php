@@ -64,12 +64,14 @@
            GRID KARTU AKTIVITAS
         ===================================== */
 
+
         .aktivitas-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 28px;
             align-items: stretch;
         }
+
 
         .aktivitas-card {
             background: #ffffff;
@@ -102,6 +104,12 @@
         .aktivitas-card.pink {
             --accent: #ef5b7f;
             --icon-bg: #fde9ef;
+        }
+
+        /* AKTIVITAS 4 - KEWIRAUSAHAAN */
+        .aktivitas-card.orange {
+            --accent: #d99035;
+            --icon-bg: #fff1dc;
         }
 
         /* =====================================
@@ -592,6 +600,59 @@
                     </a>
 
                 </article>
+
+
+                <!-- =====================================
+     AKTIVITAS 4
+     WIRAUSAHA LAHAN BASAH
+===================================== -->
+
+                <article class="aktivitas-card orange">
+
+                    <div class="card-top">
+
+                        <div class="card-icon">
+                            <img src="{{ asset('images/icons/wetland.png') }}" alt="Ikon lahan basah">
+                        </div>
+
+                        <span class="card-number">04</span>
+
+                    </div>
+
+                    <div class="card-type">
+                        Simulasi Kewirausahaan
+                    </div>
+
+                    <h2>
+                        Wirausaha Lahan Basah
+                    </h2>
+
+                    <p class="card-description">
+                        Kenali potensi lahan basah, pilih produk,
+                        dan belajar menghitung modal serta keuntungan
+                        melalui permainan interaktif.
+                    </p>
+
+                    <div class="preview-icons">
+
+                        <img src="{{ asset('images/icons/plant.png') }}" alt="Tumbuhan">
+
+                        <img src="{{ asset('images/icons/fish.png') }}" alt="Ikan">
+
+                        <img src="{{ asset('images/icons/drop.png') }}" alt="Air">
+
+                    </div>
+
+                    <a href="{{ route('aktivitas.empat') }}" class="aktivitas-button">
+
+                        <span>Mulai Aktivitas</span>
+
+                        <span class="button-arrow">→</span>
+
+                    </a>
+
+                </article>
+
 
 
 

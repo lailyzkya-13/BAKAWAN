@@ -3,8 +3,8 @@
 @section('content')
 
     <!-- ==========================================
-             1. HEADER DASHBOARD
-        ========================================== -->
+                 1. HEADER DASHBOARD
+            ========================================== -->
 
     <div class="dashboard-background">
 
@@ -17,8 +17,8 @@
 
 
     <!-- ==========================================
-             2. RINGKASAN DATA
-        ========================================== -->
+                 2. RINGKASAN DATA
+            ========================================== -->
 
     <div class="summary-container">
 
@@ -96,8 +96,8 @@
     </div>
 
     <!-- ==========================================
-             TOKEN EVALUASI SISWA
-        ========================================== -->
+                 TOKEN EVALUASI SISWA
+            ========================================== -->
 
     <div class="dashboard-box" style="margin-bottom: 25px;">
 
@@ -110,14 +110,14 @@
             @csrf
 
             <button type="submit" style="
-                        background-color: #2d6a4f;
-                        color: white;
-                        border: none;
-                        padding: 12px 20px;
-                        border-radius: 8px;
-                        cursor: pointer;
-                        font-weight: 600;
-                    ">
+                            background-color: #2d6a4f;
+                            color: white;
+                            border: none;
+                            padding: 12px 20px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: 600;
+                        ">
                 Buat Token Evaluasi
             </button>
         </form>
@@ -143,15 +143,15 @@
     </div>
 
     <!-- ==========================================
-             3. BAGIAN BAWAH DASHBOARD
-        ========================================== -->
+                 3. BAGIAN BAWAH DASHBOARD
+            ========================================== -->
 
     <div class="dashboard-grid">
 
 
         <!-- ======================================
-                 AKTIVITAS MURID
-            ======================================= -->
+                     AKTIVITAS MURID
+                ======================================= -->
         <div class="dashboard-box">
 
             <div class="box-header">
@@ -212,8 +212,8 @@
 
 
         <!-- ======================================
-                 REKAP NILAI KUIS PER KELAS
-            ======================================= -->
+                     REKAP NILAI KUIS PER KELAS
+                ======================================= -->
 
         <div class="dashboard-box">
 
@@ -297,15 +297,18 @@
 
 
     <!-- ==========================================
-             4. CSS DASHBOARD GURU
-        ========================================== -->
+                 4. CSS DASHBOARD GURU
+            ========================================== -->
 
 
     <style>
         /* Background Bagian Atas */
+
+        /* BACKGROUND BANNER DASHBOARD */
         .dashboard-background {
             position: relative;
-            background-image: url('{{ asset('images/background.jpg') }}');
+
+            background-image: url('{{ asset('images/background-beranda.png') }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -314,44 +317,67 @@
             padding: 30px;
             margin-bottom: 25px;
 
-            min-height: 350px;
+            min-height: 280px;
             overflow: hidden;
         }
 
+        /* Gradasi transparan agar tulisan terbaca */
         .dashboard-background::before {
             content: "";
             position: absolute;
+            inset: 0;
 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-
-            background-color: rgba(255, 255, 255, 0.30);
+            background: linear-gradient(90deg,
+                    rgba(15, 55, 40, 0.70) 0%,
+                    rgba(15, 55, 40, 0.35) 40%,
+                    rgba(15, 55, 40, 0.05) 75%);
         }
 
+        /* Posisi tulisan */
         .dashboard-background>* {
             position: relative;
             z-index: 1;
         }
 
-
         /* Judul Dashboard */
-        .dashboard-header h1 {
-            margin-bottom: 5px;
-            color: #1b4332;
+        .dashboard-header {
+            display: block;
+            max-width: 520px;
+
+            padding: 10px 0;
+
+            background: transparent;
+            box-shadow: none;
+            backdrop-filter: none;
         }
 
+        /* Tulisan judul */
+        .dashboard-header h1 {
+            margin-bottom: 10px;
+
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: 800;
+
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Tulisan deskripsi */
         .dashboard-header p {
             margin: 0;
-            color: #6b7280;
-            font-size: 15px;
+
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
         }
+
 
 
         /* ======================================
-               KARTU RINGKASAN
-            ====================================== */
+                   KARTU RINGKASAN
+                ====================================== */
 
         .summary-container {
             display: grid;
@@ -418,8 +444,8 @@
 
 
         /* ======================================
-               BAGIAN BAWAH DASHBOARD
-            ====================================== */
+                   BAGIAN BAWAH DASHBOARD
+                ====================================== */
 
         .dashboard-grid {
             display: grid;
@@ -453,8 +479,8 @@
 
 
         /* ======================================
-               AKTIVITAS MURID
-            ====================================== */
+                   AKTIVITAS MURID
+                ====================================== */
 
         .activity-item {
             display: flex;
@@ -508,8 +534,8 @@
 
 
         /* ======================================
-               REKAP NILAI KUIS
-            ====================================== */
+                   REKAP NILAI KUIS
+                ====================================== */
 
         .score-item {
             margin-bottom: 20px;
@@ -561,8 +587,8 @@
 
 
         /* ======================================
-               RESPONSIVE
-            ====================================== */
+                   RESPONSIVE
+                ====================================== */
 
         @media (max-width: 1000px) {
 
@@ -587,8 +613,8 @@
 
 
     <!-- ==========================================
-             5. ICON DASHBOARD
-        ========================================== -->
+                 5. ICON DASHBOARD
+            ========================================== -->
 
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
 

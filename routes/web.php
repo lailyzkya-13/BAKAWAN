@@ -872,3 +872,13 @@ Route::middleware('auth')
             [KelolaPetualanganBangauController::class, 'destroyItem']
         )->name('item.destroy');
     });
+
+
+
+// Aktivitas 4 - Wirausaha Lahan Basah
+
+Route::get('/aktivitas/wirausaha-lahan-basah', function () {
+
+    return view('aktivitas-empat');
+
+})->name('aktivitas.empat');
