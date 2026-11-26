@@ -1,35 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $materi->judul }} | BAKAWAN</title>
 
     <!-- Font -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS BAKAWAN yang sudah ada -->
-    <link rel="stylesheet"
-          href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
-    <link rel="stylesheet"
-          href="{{ asset('css/materi-biotik.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/materi-biotik.css') }}">
 
     <style>
         /* Menampilkan baris baru pada teks database */
@@ -160,8 +152,7 @@
             <div class="sidebar-content">
 
                 <!-- Kembali ke daftar materi siswa -->
-                <a href="{{ route('materi.siswa') }}"
-                   class="btn-kembali-materi">
+                <a href="{{ route('materi.siswa') }}" class="btn-kembali-materi">
 
                     <span class="back-arrow">←</span>
                     <span>Kembali</span>
@@ -186,29 +177,21 @@
 
                     <div class="menu-group">
 
-                        <button
-                            type="button"
-                            class="menu-item menu-materi active"
-                            id="menuMateri">
+                        <button type="button" class="menu-item menu-materi active" id="menuMateri">
 
                             <span>Materi</span>
 
-                            <span
-                                class="menu-arrow open"
-                                id="materiArrow">▾</span>
+                            <span class="menu-arrow open" id="materiArrow">▾</span>
 
                         </button>
 
 
                         <!-- DAFTAR SUBBAB OTOMATIS -->
-                        <div class="submenu-materi show"
-                             id="submenuMateri">
+                        <div class="submenu-materi show" id="submenuMateri">
 
                             @foreach ($daftarSubbab as $index => $item)
 
-                                <button
-                                    type="button"
-                                    class="submenu-item {{ $index === 0 ? 'active' : '' }}"
+                                <button type="button" class="submenu-item {{ $index === 0 ? 'active' : '' }}"
                                     data-target="subbab-{{ $item->id }}">
 
                                     <span class="submenu-number">
@@ -229,11 +212,7 @@
 
 
                     <!-- Menu Ringkasan -->
-                    <button
-                        type="button"
-                        class="menu-item"
-                        id="menuRingkasan"
-                        data-target="ringkasan">
+                    <button type="button" class="menu-item" id="menuRingkasan" data-target="ringkasan">
 
                         <span>Ringkasan</span>
 
@@ -241,11 +220,7 @@
 
 
                     <!-- Menu Latihan -->
-                    <button
-                        type="button"
-                        class="menu-item"
-                        id="menuLatihan"
-                        data-target="latihan">
+                    <button type="button" class="menu-item" id="menuLatihan" data-target="latihan">
 
                         <span>Latihan</span>
 
@@ -260,8 +235,7 @@
 
         <!-- ================= KONTEN MATERI ================= -->
 
-        <section class="materi-content"
-                 id="materiContent">
+        <section class="materi-content" id="materiContent">
 
             <div class="content-wrapper">
 
@@ -269,9 +243,7 @@
                 <!-- MENAMPILKAN SELURUH SUBBAB -->
                 @forelse ($daftarSubbab as $index => $item)
 
-                    <section
-                        class="content-section {{ $index === 0 ? 'active' : '' }}"
-                        id="subbab-{{ $item->id }}">
+                    <section class="content-section {{ $index === 0 ? 'active' : '' }}" id="subbab-{{ $item->id }}">
 
 
                         <!-- Nomor subbab -->
@@ -332,61 +304,61 @@
                             <!-- Jika hanya satu contoh -->
                             @if (count($daftarContoh) === 1)
 
-                                @php
-                                    $bagian = explode(
-                                        ': ',
-                                        $daftarContoh[0],
-                                        2
-                                    );
-                                @endphp
+                                    @php
+                                        $bagian = explode(
+                                            ': ',
+                                            $daftarContoh[0],
+                                            2
+                                        );
+                                    @endphp
 
-                                <div class="contoh-box">
+                                    <div class="contoh-box">
 
-                                    <strong>
-                                        {{ count($bagian) === 2
-                                            ? $bagian[0]
-                                            : 'Contoh Materi' }}
-                                    </strong>
+                                        <strong>
+                                            {{ count($bagian) === 2
+                                ? $bagian[0]
+                                : 'Contoh Materi' }}
+                                        </strong>
 
-                                    <p class="teks-materi">
-                                        {{ count($bagian) === 2
-                                            ? $bagian[1]
-                                            : $bagian[0] }}
-                                    </p>
+                                        <p class="teks-materi">
+                                            {{ count($bagian) === 2
+                                ? $bagian[1]
+                                : $bagian[0] }}
+                                        </p>
 
-                                </div>
+                                    </div>
 
 
-                            <!-- Jika ada banyak contoh -->
+                                    <!-- Jika ada banyak contoh -->
                             @else
 
                                 <div class="contoh-grid">
 
                                     @foreach ($daftarContoh as $contoh)
 
-                                        @php
-                                            $bagian = explode(
-                                                ': ',
-                                                $contoh,
-                                                2
-                                            );
-                                        @endphp
+                                            @php
+                                                $bagian = explode(
+                                                    ': ',
+                                                    $contoh,
+                                                    2
+                                                );
+                                            @endphp
 
-                                        <div class="contoh-card">
+                                            <div class="contoh-card">
 
-                                            <strong>
-                                                {{ count($bagian) === 2
-                                                    ? $bagian[0]
-                                                    : 'Contoh Materi' }}
-                                            </strong>
+                                                <strong>
+                                                    {{ count($bagian) === 2
+                                        ? $bagian[0]
+                                        : 'Contoh Materi' }}
+                                                </strong>
 
-                                            <p class="teks-materi">
-                                                {{ count($bagian) === 2
-                                                    ? $bagian[1]
-                                                    : $bagian[0] }}
-                                            </p>
+                                                <p class="teks-materi">
+                                                    {{ count($bagian) === 2
+                                        ? $bagian[1]
+                                        : $bagian[0] }}
+                                                </p>
 
-                                        </div>
+                                            </div>
 
                                     @endforeach
 
@@ -415,20 +387,12 @@
 
                                 <div class="video-card">
 
-                                    <div
-                                        class="youtube-player"
-                                        id="videoHubungan"
-                                        data-video-id="msXml9wII8A">
+                                    <div class="youtube-player" id="videoHubungan" data-video-id="msXml9wII8A">
 
-                                        <button
-                                            type="button"
-                                            class="youtube-thumbnail"
-                                            aria-label="Putar video pembelajaran">
+                                        <button type="button" class="youtube-thumbnail" aria-label="Putar video pembelajaran">
 
-                                            <img
-                                                src="https://img.youtube.com/vi/msXml9wII8A/hqdefault.jpg"
-                                                alt="Video Pembelajaran"
-                                                loading="lazy">
+                                            <img src="https://img.youtube.com/vi/msXml9wII8A/hqdefault.jpg"
+                                                alt="Video Pembelajaran" loading="lazy">
 
                                             <span class="youtube-play"></span>
 
@@ -461,9 +425,7 @@
 
                             @if ($index > 0)
 
-                                <button
-                                    type="button"
-                                    class="btn-sebelumnya"
+                                <button type="button" class="btn-sebelumnya"
                                     data-target="subbab-{{ $daftarSubbab[$index - 1]->id }}">
 
                                     ← Sebelumnya
@@ -479,9 +441,7 @@
 
                             @if ($index < $daftarSubbab->count() - 1)
 
-                                <button
-                                    type="button"
-                                    class="btn-selanjutnya"
+                                <button type="button" class="btn-selanjutnya"
                                     data-target="subbab-{{ $daftarSubbab[$index + 1]->id }}">
 
                                     Selanjutnya →
@@ -490,10 +450,7 @@
 
                             @else
 
-                                <button
-                                    type="button"
-                                    class="btn-selanjutnya"
-                                    data-target="ringkasan">
+                                <button type="button" class="btn-selanjutnya" data-target="ringkasan">
 
                                     Ringkasan →
 
@@ -508,8 +465,7 @@
 
                 @empty
 
-                    <section class="content-section active"
-                             id="belum-ada-materi">
+                    <section class="content-section active" id="belum-ada-materi">
 
                         <h1>Materi Belum Tersedia</h1>
 
@@ -525,8 +481,7 @@
 
                 <!-- ================= RINGKASAN ================= -->
 
-                <section class="content-section"
-                         id="ringkasan">
+                <section class="content-section" id="ringkasan">
 
                     <span class="materi-label">
                         Ringkasan Materi
@@ -581,9 +536,7 @@
 
                         @if ($daftarSubbab->isNotEmpty())
 
-                            <button
-                                type="button"
-                                class="btn-sebelumnya"
+                            <button type="button" class="btn-sebelumnya"
                                 data-target="subbab-{{ $daftarSubbab->last()->id }}">
 
                                 ← Sebelumnya
@@ -596,10 +549,7 @@
 
                         @endif
 
-                        <button
-                            type="button"
-                            class="btn-selanjutnya"
-                            data-target="latihan">
+                        <button type="button" class="btn-selanjutnya" data-target="latihan">
 
                             Latihan →
 
@@ -612,8 +562,7 @@
 
                 <!-- ================= LATIHAN ================= -->
 
-                <section class="content-section"
-                         id="latihan">
+                <section class="content-section" id="latihan">
 
                     <span class="materi-label">
                         Latihan
@@ -630,39 +579,57 @@
                     </p>
 
 
+
                     <div class="latihan-card">
 
                         <span class="latihan-label">
                             AKTIVITAS INTERAKTIF
                         </span>
 
-                        <h2>
-                            Klasifikasi Biotik dan Abiotik
-                        </h2>
 
-                        <p>
-                            Kelompokkan ikan, bangau, teratai,
-                            air, tanah, dan cahaya matahari
-                            ke dalam kategori biotik atau
-                            abiotik.
-                        </p>
+                        @if (trim($materi->judul) === 'Hubungan dalam Ekosistem')
 
-                        <a href="{{ route('aktivitas.satu') }}"
-                           class="btn-mulai-latihan">
+                            <h2>Hubungan dalam Ekosistem</h2>
 
-                            Mulai Aktivitas →
+                            <p>
+                                Cocokkan makhluk hidup dengan komponen
+                                lingkungan yang memiliki hubungan dengannya.
+                            </p>
 
-                        </a>
+                            <a href="{{ route('aktivitas.dua') }}" class="btn-mulai-latihan">
+                                Mulai Aktivitas →
+                            </a>
+
+                        @elseif (trim($materi->judul) === 'Komponen Biotik dan Abiotik')
+
+                            <h2>Klasifikasi Biotik dan Abiotik</h2>
+
+                            <p>
+                                Kelompokkan ikan, bangau, teratai,
+                                air, tanah, dan cahaya matahari
+                                ke dalam kategori biotik atau abiotik.
+                            </p>
+
+                            <a href="{{ route('aktivitas.satu') }}" class="btn-mulai-latihan">
+                                Mulai Aktivitas →
+                            </a>
+
+                        @else
+
+                            <h2>Aktivitas belum tersedia</h2>
+
+                            <p>Aktivitas untuk materi ini belum tersedia.</p>
+
+                        @endif
+
 
                     </div>
 
 
+
                     <div class="navigasi-materi">
 
-                        <button
-                            type="button"
-                            class="btn-sebelumnya"
-                            data-target="ringkasan">
+                        <button type="button" class="btn-sebelumnya" data-target="ringkasan">
 
                             ← Sebelumnya
 
@@ -881,4 +848,5 @@
     </script>
 
 </body>
+
 </html>

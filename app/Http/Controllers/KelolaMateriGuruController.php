@@ -17,7 +17,7 @@ class KelolaMateriGuruController extends Controller
     public function index()
     {
         // Mengambil semua materi dari database
-        $materi = Materi::latest()->get();
+        $materi = Materi::oldest()->get();
 
         // Menampilkan halaman guru
         return view('materi-guru', compact('materi'));

@@ -103,8 +103,8 @@ Route::get('/aktivitas/mencocokkan', function () {
 // Daftar Materi Siswa
 Route::get('/materi-siswa', function () {
 
-    // Mengambil semua materi dari database
-    $materi = Materi::latest()->get();
+    // Mengambil materi dari yang paling lama dibuat
+    $materi = Materi::oldest()->get();
 
     // Mengirim data ke halaman siswa
     return view('materi', compact('materi'));

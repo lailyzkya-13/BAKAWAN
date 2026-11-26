@@ -4,35 +4,25 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Materi Pembelajaran | BAKAWAN</title>
 
     <!-- BOOTSTRAP -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- GOOGLE FONT -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- CSS HEADER -->
-    <link
-        rel="stylesheet"
-        href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
     <style>
-
         /* ==============================
            HALAMAN MATERI
         ============================== */
@@ -226,94 +216,6 @@
         }
 
 
-        /* ==============================
-           POP-UP PENGEMBANGAN
-        ============================== */
-
-        .pengembangan-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: rgba(20, 45, 37, 0.55);
-            padding: 20px;
-        }
-
-        .pengembangan-overlay[hidden] {
-            display: none;
-        }
-
-        .pengembangan-modal {
-            width: 100%;
-            max-width: 480px;
-
-            background: #fffaf4;
-            border-radius: 26px;
-
-            padding: 38px 32px;
-            text-align: center;
-
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .pengembangan-icon {
-            width: 76px;
-            height: 76px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            margin: 0 auto 20px;
-
-            background: #f9e3e9;
-            border-radius: 50%;
-            font-size: 34px;
-        }
-
-        .pengembangan-modal h2 {
-            color: #214b40;
-            font-size: 24px;
-            font-weight: 800;
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .pengembangan-modal p {
-            color: #64776c;
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .btn-tutup-pengembangan {
-            min-width: 170px;
-            min-height: 52px;
-
-            border: none;
-            border-radius: 13px;
-
-            background: #e95b7c;
-            color: white;
-
-            font-family: 'Poppins', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-
-            cursor: pointer;
-        }
-
-        .btn-tutup-pengembangan:hover {
-            background: #d94c6e;
-        }
-
-        body.modal-terbuka {
-            overflow: hidden;
-        }
 
 
         /* ==============================
@@ -351,16 +253,7 @@
             .materi-card-content {
                 padding: 20px 23px;
             }
-
-            .pengembangan-modal {
-                padding: 32px 22px;
-            }
-
-            .pengembangan-modal h2 {
-                font-size: 21px;
-            }
         }
-
     </style>
 </head>
 
@@ -369,24 +262,6 @@
     <!-- HEADER BAKAWAN -->
     @include('components.header')
 
-
-    <!-- =====================================
-         MENGAMBIL DATA DARI DATABASE
-    ====================================== -->
-
-    @php
-
-        // Mengambil materi Biotik dan Abiotik
-        // berdasarkan ID yang sudah diketahui
-        $materiBiotik = $materi->firstWhere('id', 7);
-
-        // Mengambil semua materi selain ID 7
-        // supaya tidak ada kartu duplikat
-        $materiLain = $materi
-            ->where('id', '!=', 7)
-            ->values();
-
-    @endphp
 
 
     <!-- =====================================
@@ -416,165 +291,24 @@
                  DAFTAR KARTU MATERI
             ================================== -->
 
+
             <div class="materi-grid">
 
-
-                <!-- =============================
-                     MATERI 1
-                     BIOTIK DAN ABIOTIK
-                ============================== -->
-
-                @if ($materiBiotik)
+                @forelse ($materi as $item)
 
                     <article class="materi-card">
 
-                        <!-- GAMBAR DARI DATABASE -->
-                        <div class="materi-card-image">
-
-                            @if ($materiBiotik->gambar)
-
-                                <img
-                                    src="{{ asset('storage/' . $materiBiotik->gambar) }}"
-                                    alt="{{ $materiBiotik->judul }}">
-
-                            @else
-
-                                <img
-                                    src="{{ asset('images/materi-biotik.png') }}"
-                                    alt="{{ $materiBiotik->judul }}">
-
-                            @endif
-
-                        </div>
-
-
-                        <!-- ISI KARTU -->
-                        <div class="materi-card-content">
-
-                            <!-- NOMOR -->
-                            <div class="materi-number">
-                                1
-                            </div>
-
-
-                            <!-- JUDUL DATABASE -->
-                            <h2>
-                                {{ $materiBiotik->judul }}
-                            </h2>
-
-
-                            <!-- DESKRIPSI DATABASE -->
-                            <p>
-                                {{ $materiBiotik->deskripsi
-                                    ?: 'Kenali makhluk hidup dan benda tidak hidup di lahan basah.' }}
-                            </p>
-
-
-                            <!-- TOMBOL MATERI -->
-                            <div class="materi-card-action">
-
-                                <a
-                                    href="{{ route('materi.biotik') }}"
-                                    class="btn-pelajari-materi">
-
-                                    Pelajari Materi
-
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                @endif
-
-
-                <!-- =============================
-                     MATERI 2
-                     HUBUNGAN DALAM EKOSISTEM
-                     MASIH DALAM PENGEMBANGAN
-                ============================== -->
-
-                <article class="materi-card">
-
-                    <!-- GAMBAR -->
-                    <div class="materi-card-image">
-
-                        <img
-                            src="{{ asset('images/materi-ekosistem.png') }}"
-                            alt="Hubungan dalam Ekosistem">
-
-                    </div>
-
-
-                    <!-- ISI KARTU -->
-                    <div class="materi-card-content">
-
-                        <!-- NOMOR -->
-                        <div class="materi-number pink">
-                            2
-                        </div>
-
-
-                        <!-- JUDUL -->
-                        <h2>
-                            Hubungan dalam Ekosistem
-                        </h2>
-
-
-                        <!-- DESKRIPSI -->
-                        <p>
-                            Pelajari bagaimana komponen
-                            ekosistem saling berhubungan.
-                        </p>
-
-
-                        <!-- TOMBOL POP-UP -->
-                        <div class="materi-card-action">
-
-                            <button
-                                type="button"
-                                class="btn-pelajari-materi"
-                                id="btnMateriDua">
-
-                                Pelajari Materi
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- =============================
-                     MATERI TAMBAHAN DARI GURU
-                     OTOMATIS DARI DATABASE
-                ============================== -->
-
-                @foreach ($materiLain as $item)
-
-                    <article class="materi-card">
-
-                        <!-- GAMBAR MATERI -->
+                        {{-- GAMBAR MATERI --}}
                         <div class="materi-card-image">
 
                             @if ($item->gambar)
 
-                                <!-- GAMBAR UPLOAD GURU -->
-                                <img
-                                    src="{{ asset('storage/' . $item->gambar) }}"
-                                    alt="{{ $item->judul }}">
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
 
                             @else
 
-                                <!-- JIKA BELUM ADA GAMBAR -->
                                 <div class="materi-no-image">
-
                                     Tidak Ada Gambar
-
                                 </div>
 
                             @endif
@@ -582,37 +316,33 @@
                         </div>
 
 
-                        <!-- ISI KARTU -->
+                        {{-- ISI KARTU --}}
                         <div class="materi-card-content">
 
-                            <!-- NOMOR MATERI -->
-                            <div
-                                class="materi-number {{ $loop->iteration % 2 == 0 ? 'pink' : '' }}">
+                            {{-- NOMOR MATERI OTOMATIS --}}
+                            <div class="materi-number {{ $loop->iteration % 2 == 0 ? 'pink' : '' }}">
 
-                                {{ $loop->iteration + 2 }}
+                                {{ $loop->iteration }}
 
                             </div>
 
 
-                            <!-- JUDUL DARI DATABASE -->
+                            {{-- JUDUL --}}
                             <h2>
                                 {{ $item->judul }}
                             </h2>
 
 
-                            <!-- DESKRIPSI DARI DATABASE -->
+                            {{-- DESKRIPSI --}}
                             <p>
-                                {{ $item->deskripsi
-                                    ?: 'Belum ada deskripsi materi.' }}
+                                {{ $item->deskripsi ?: 'Belum ada deskripsi materi.' }}
                             </p>
 
 
-                            <!-- TOMBOL DETAIL MATERI -->
+                            {{-- TOMBOL PELAJARI --}}
                             <div class="materi-card-action">
 
-                                <a
-                                    href="{{ route('materi.siswa.show', $item->id) }}"
-                                    class="btn-pelajari-materi">
+                                <a href="{{ route('materi.siswa.show', $item->id) }}" class="btn-pelajari-materi">
 
                                     Pelajari Materi
 
@@ -624,165 +354,31 @@
 
                     </article>
 
-                @endforeach
+                @empty
 
+                    <div class="materi-kosong">
+                        <h3>Belum ada materi pembelajaran.</h3>
+                        <p>Silakan tunggu guru menambahkan materi.</p>
+                    </div>
+
+                @endforelse
 
             </div>
+
+
 
         </div>
 
     </main>
 
 
-    <!-- =====================================
-         POP-UP MATERI 2
-    ====================================== -->
-
-    <div
-        class="pengembangan-overlay"
-        id="modalPengembangan"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="judulPengembangan"
-        aria-describedby="deskripsiPengembangan"
-        hidden>
-
-        <div class="pengembangan-modal">
-
-            <!-- ICON -->
-            <div class="pengembangan-icon">
-                🌱
-            </div>
 
 
-            <!-- JUDUL -->
-            <h2 id="judulPengembangan">
-                Masih dalam Tahap Pengembangan
-            </h2>
 
-
-            <!-- DESKRIPSI -->
-            <p id="deskripsiPengembangan">
-
-                Materi Hubungan dalam Ekosistem
-                sedang kami siapkan.
-
-                Nantikan pembelajaran seru
-                berikutnya di BAKAWAN, ya!
-
-            </p>
-
-
-            <!-- TOMBOL TUTUP -->
-            <button
-                type="button"
-                class="btn-tutup-pengembangan"
-                id="btnTutupPengembangan">
-
-                Mengerti
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================
-         JAVASCRIPT POP-UP
-    ====================================== -->
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // Mengambil elemen pop-up
-            const btnMateriDua =
-                document.getElementById('btnMateriDua');
-
-            const modalPengembangan =
-                document.getElementById('modalPengembangan');
-
-            const btnTutupPengembangan =
-                document.getElementById('btnTutupPengembangan');
-
-
-            // MEMBUKA POP-UP
-            function bukaModal() {
-
-                modalPengembangan.hidden = false;
-
-                document.body.classList.add(
-                    'modal-terbuka'
-                );
-
-                btnTutupPengembangan.focus();
-            }
-
-
-            // MENUTUP POP-UP
-            function tutupModal() {
-
-                modalPengembangan.hidden = true;
-
-                document.body.classList.remove(
-                    'modal-terbuka'
-                );
-
-                btnMateriDua.focus();
-            }
-
-
-            // KLIK TOMBOL MATERI 2
-            btnMateriDua.addEventListener(
-                'click',
-                bukaModal
-            );
-
-
-            // KLIK TOMBOL MENGERTI
-            btnTutupPengembangan.addEventListener(
-                'click',
-                tutupModal
-            );
-
-
-            // KLIK AREA GELAP DI LUAR POP-UP
-            modalPengembangan.addEventListener(
-                'click',
-                function (event) {
-
-                    if (event.target === modalPengembangan) {
-                        tutupModal();
-                    }
-
-                }
-            );
-
-
-            // MENUTUP DENGAN TOMBOL ESCAPE
-            document.addEventListener(
-                'keydown',
-                function (event) {
-
-                    if (
-                        event.key === 'Escape' &&
-                        !modalPengembangan.hidden
-                    ) {
-                        tutupModal();
-                    }
-
-                }
-            );
-
-        });
-
-    </script>
 
 
     <!-- BOOTSTRAP JS -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
     </script>
 
 </body>
