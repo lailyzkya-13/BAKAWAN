@@ -882,3 +882,12 @@ Route::get('/aktivitas/wirausaha-lahan-basah', function () {
     return view('aktivitas-empat');
 
 })->name('aktivitas.empat');
+
+
+// UJI COBA AKTIVITAS 4 VERSI BACKUP
+
+Route::get('/uji-aktivitas-empat', function () {
+
+    return view('aktivitas-empat-backup');
+
+})->name('uji.aktivitas.empat');
